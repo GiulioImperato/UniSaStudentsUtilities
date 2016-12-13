@@ -53,6 +53,7 @@ public class Database {
 			userInfo.put("user", username);
 			userInfo.put("password", password);
 		}
+		openConnection();
 	}
 
 	/**
