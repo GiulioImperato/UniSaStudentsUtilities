@@ -2,14 +2,15 @@ package storageLayer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
 
 /**
  * Connector per il database
  * 
- * @author Tropeano Domenico Antonio
+ * @author Tropeano Domenico Antonio & Antonio Corsuto
  *
  */
 public class Database {
@@ -21,9 +22,10 @@ public class Database {
 	private static String password;
 	private static String dbName;
 	private static Properties userInfo;
-	private static Connection connection;
 	private static String mySqlUrl;
-	//private static final boolean DEBUG = false;
+	private static List<Connection> freeDbConnections;
+	static final String driver = "com.mysql.jdbc.Driver";
+	// private static final boolean DEBUG = false;
 	private static final boolean LOCAL = false;
 
 	static {
@@ -53,89 +55,69 @@ public class Database {
 			userInfo.put("user", username);
 			userInfo.put("password", password);
 		}
-		openConnection();
-	}
 
-	/**
-	 * Controlla se la connessione col db è stata già aperta
-	 * 
-	 * @return {@code true} if the connection is open, {@code false} otherwise.
-	 * @author Domenico Antonio Tropeano
-	 */
-	public static boolean isConnectionOpen() {
-		boolean isOpen = false;
+		freeDbConnections = new LinkedList<Connection>();
 		try {
-			if (connection != null && !connection.isClosed()) {
-				isOpen = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			System.out.println("DB driver not found:" + e.getMessage());
 		}
-		return isOpen;
 	}
 
 	/**
-	 * Tenta di aprire la connessione al db, se la connessione è già aperta non
-	 * ha alcun effetto
+	 * Inizializza le connessioni
 	 * 
-	 * @author Tropeano Domenico Antonio
+	 * @return
+	 * @throws SQLException
+	 * @author Tropeano Domenico Antonio & Antonio Corsuto
 	 */
-	public static void openConnection() {
-		if (!isConnectionOpen()) {
+
+	private static synchronized Connection createDBConnection() throws SQLException {
+
+		Connection newConnection = null;
+		newConnection = DriverManager.getConnection(mySqlUrl, userInfo);
+		newConnection.setAutoCommit(false);
+		return newConnection;
+	}
+
+	/**
+	 * Fornisce una connessione al database
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public static synchronized Connection getConnection() throws SQLException {
+		Connection connection;
+
+		if (!freeDbConnections.isEmpty()) {
+			connection = (Connection) freeDbConnections.get(0);
+			freeDbConnections.remove(0);
+
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				connection = DriverManager.getConnection(mySqlUrl, userInfo);
-				System.out.println("Connection: " + connection);
+				if (connection.isClosed())
+					connection = getConnection();
 			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	/**
-	 * Chiude la connessione
-	 * 
-	 * @return {@code true} se la connessione viene chiusa, {@code false} se non
-	 *         esiste alcuna connessione.
-	 * @author Tropeano Domenico Antonio
-	 */
-	public static boolean closeConnection() {
-		boolean isClosed = false;
-
-		if (isConnectionOpen()) {
-			try {
 				connection.close();
-				isClosed = connection.isClosed();
-			} catch (SQLException e) {
-				e.printStackTrace();
+				connection = getConnection();
 			}
+		} else {
+			connection = createDBConnection();
 		}
 
-		return isClosed;
+		return connection;
 	}
 
 	/**
-	 * Presa una stringa fornisce un prepared statement per la sessione corrente
+	 * Rilascia la connessione
 	 * 
-	 * @param statement
-	 * @return PreparedStatement
-	 * @author Domenico Antonio Tropeano
+	 * @param connection
+	 *            rappresenta la connessione rilasciata e ri-aggiunta al pool di
+	 *            connessioni.
+	 * @author Tropeano Domenico Antonio & Antonio Corsuto
 	 */
-	public static PreparedStatement getPreparedStatement(String statement) {
-		openConnection();
-		PreparedStatement preparedStatement = null;
 
-		if (statement != null && !statement.equals("")) {
-			try {
-				preparedStatement = connection.prepareStatement(statement);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return preparedStatement;
+	public static synchronized void releaseConnection(Connection connection) throws SQLException {
+		if (connection != null)
+			freeDbConnections.add(connection);
 	}
-
 }
