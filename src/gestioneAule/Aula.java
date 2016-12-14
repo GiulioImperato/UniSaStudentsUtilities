@@ -23,7 +23,7 @@ public class Aula {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
 	public double getCoordinateX() {
 		return coordinateX;
 	}
