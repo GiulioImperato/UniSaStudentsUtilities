@@ -8,7 +8,7 @@ import gestioneUtente.Utente;
 
 public class DatabaseGU {
 	/**
-	 * Registra un utente nel database
+	 * <b>Registra un utente nel database</b>
 	 * @param utente
 	 * @return {@code true} se la registrazione è ok, {@code false}  altrimenti.
 	 * @throws SQLException
@@ -43,12 +43,12 @@ public class DatabaseGU {
 
 		return true;
 	}
-/**
- * 
- * @param email
- * @return {@code true}  se l'eliminazione è ok, {@code false}  altrimenti.
- * @throws SQLException
- */
+	/**
+	 * 
+	 * @param email
+	 * @return {@code true}  se l'eliminazione è ok, {@code false}  altrimenti.
+	 * @throws SQLException
+	 */
 	public static boolean deleteUser(String email) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
