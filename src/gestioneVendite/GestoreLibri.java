@@ -11,7 +11,7 @@ import storageLayer.DatabaseGV;
 public class GestoreLibri {
 
 	private ArrayList<Annuncio> listaAnnunci;
-	
+	//fsdfdsfdsfds
 	public GestoreLibri() {}
 	
 	public GestoreLibri(ArrayList<Annuncio> listaAnnunci) {
