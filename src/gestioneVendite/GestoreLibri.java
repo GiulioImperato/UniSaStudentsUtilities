@@ -10,11 +10,10 @@ public class GestoreLibri {
 
 	private ArrayList<Annuncio> listaAnnunci;
 	
+	/**
+	 * <b>Creazione del GestoreLibri senza parametri</b>
+	 */
 	public GestoreLibri() {}
-	
-	public GestoreLibri(ArrayList<Annuncio> listaAnnunci) {
-		this.listaAnnunci = listaAnnunci;
-	}
 	
 	/**
 	 * @author Pasquale Settembre
