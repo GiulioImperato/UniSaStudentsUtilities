@@ -9,27 +9,27 @@ public class OraAula {
 	private Time oraFine;
 	private boolean defaultStatus = false;
 	private boolean feedStatus = false;
-	private String email;				//Far vedere al prof. Gravino
+	private String emailUtente;				//Far vedere al prof. Gravino
 	
 	public OraAula(){
 	}
 	
-	public OraAula(String nome, Giorno giorno, Time oraInizio, Time oraFine, boolean defaultStatus, boolean feedStatus, String email) {
+	public OraAula(String nome, Giorno giorno, Time oraInizio, Time oraFine, boolean defaultStatus, boolean feedStatus, String emailUtente) {
 		this.nome = nome;
 		this.giorno = giorno;
 		this.oraInizio = oraInizio;
 		this.oraFine = oraFine;
 		this.defaultStatus = defaultStatus;
 		this.feedStatus = feedStatus;
-		this.email = email;
+		this.emailUtente = emailUtente;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEmailUtente() {
+		return emailUtente;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailUtente(String emailUtente) {
+		this.emailUtente = emailUtente;
 	}
 
 	public String getNome() {
@@ -72,7 +72,7 @@ public class OraAula {
 		this.defaultStatus = defaultStatus;
 	}
 
-	public boolean isFeedStatus() {
+	public boolean getFeedStatus() {
 		return feedStatus;
 	}
 
@@ -83,6 +83,6 @@ public class OraAula {
 	@Override
 	public String toString() {
 		return "OraAula [nome=" + nome + ", giorno=" + giorno + ", oraInizio=" + oraInizio + ", oraFine=" + oraFine
-				+ ", defaultStatus=" + defaultStatus + ", feedStatus=" + feedStatus + ", email=" + email + "]";
+				+ ", defaultStatus=" + defaultStatus + ", feedStatus=" + feedStatus + ", emailUtente=" + emailUtente + "]";
 	}
 }
