@@ -3,31 +3,41 @@ package gestioneAule;
 import java.sql.Time;
 
 public class OraAula {
-	private String id;
+	private String nome;
 	private Giorno giorno;
 	private Time oraInizio;
 	private Time oraFine;
 	private boolean defaultStatus = false;
 	private boolean feedStatus = false;
+	private String emailUtente;				//Far vedere al prof. Gravino
 	
 	public OraAula(){
 	}
 	
-	public OraAula(String id, Giorno giorno, Time oraInizio, Time oraFine, boolean defaultStatus, boolean feedStatus) {
-		this.id = id;
+	public OraAula(String nome, Giorno giorno, Time oraInizio, Time oraFine, boolean defaultStatus, boolean feedStatus, String emailUtente) {
+		this.nome = nome;
 		this.giorno = giorno;
 		this.oraInizio = oraInizio;
 		this.oraFine = oraFine;
 		this.defaultStatus = defaultStatus;
 		this.feedStatus = feedStatus;
+		this.emailUtente = emailUtente;
 	}
 
-	public String getId() {
-		return id;
+	public String getEmailUtente() {
+		return emailUtente;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setEmailUtente(String emailUtente) {
+		this.emailUtente = emailUtente;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Giorno getGiorno() {
@@ -62,7 +72,7 @@ public class OraAula {
 		this.defaultStatus = defaultStatus;
 	}
 
-	public boolean isFeedStatus() {
+	public boolean getFeedStatus() {
 		return feedStatus;
 	}
 
@@ -72,7 +82,7 @@ public class OraAula {
 
 	@Override
 	public String toString() {
-		return "OraAula [id=" + id + ", giorno=" + giorno + ", oraInizio=" + oraInizio + ", oraFine=" + oraFine
-				+ ", defaultStatus=" + defaultStatus + ", feedStatus=" + feedStatus + "]";
-	}	
+		return "OraAula [nome=" + nome + ", giorno=" + giorno + ", oraInizio=" + oraInizio + ", oraFine=" + oraFine
+				+ ", defaultStatus=" + defaultStatus + ", feedStatus=" + feedStatus + ", emailUtente=" + emailUtente + "]";
+	}
 }
