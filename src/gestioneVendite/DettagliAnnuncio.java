@@ -2,6 +2,9 @@ package gestioneVendite;
 
 import java.util.Date;
 
+/**
+ * @author Francesco Garofalo
+ */
 public class DettagliAnnuncio {
 	private int id;
 	private String editore;
@@ -10,8 +13,19 @@ public class DettagliAnnuncio {
 	private Date data;
 	private String foto;
 	
+	/**
+	 * <b>Costruttore vuoto </b>
+	 */
 	public DettagliAnnuncio() {}
 	
+	/**
+	 * <b>Creazione di un dettaglioAnnuncio</b>
+	 * @param editore
+	 * @param anno
+	 * @param descrizione
+	 * @param data
+	 * @param foto
+	 */
 	public DettagliAnnuncio(String editore, int anno, String descrizione, Date data, String foto) {
 		this.editore = editore;
 		this.anno = anno;

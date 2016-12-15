@@ -1,5 +1,7 @@
 package gestioneVendite;
-
+/**
+ * @author Pasquale Settembre
+ */
 public class Annuncio {
 	private int idAnnuncio;
 	private String titolo;
@@ -10,8 +12,21 @@ public class Annuncio {
 	private double prezzo;
 	private DettagliAnnuncio dettagliAnnuncio;
 	
+	/**
+	 * <b>Creazione annuncio senza parametri</b>
+	 */
 	public Annuncio(){}
 	
+	/**
+	 * <b>Creazione di un annuncio</b>
+	 * @param titolo
+	 * @param autore
+	 * @param corso
+	 * @param proprietario
+	 * @param condizioneLibro
+	 * @param prezzo
+	 * @param dettagliAnnuncio oggetto dettagliAnnuncio collegato all'annuncio
+	 */
 	public Annuncio(String titolo, String autore, String corso, String proprietario,
 			CondizioneLibro condizioneLibro, double prezzo, DettagliAnnuncio dettagliAnnuncio) {
 		this.titolo = titolo;
