@@ -124,7 +124,7 @@ public class DatabaseGU {
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
-
+ 
 		try {
 			connection = Database.getConnection();
 			preparedStatement = connection.prepareStatement(queryCambiaPrivilegiAdmin);
