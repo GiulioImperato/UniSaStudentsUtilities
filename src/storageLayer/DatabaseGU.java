@@ -72,7 +72,7 @@ public class DatabaseGU {
 		}
 		return (result != 0);
 	}
-
+//CONTINUAAAA
 	private static String queryAddUtente;
 	private static String queryEliminaAccount;
 	private static String queryCambiaStatus;
