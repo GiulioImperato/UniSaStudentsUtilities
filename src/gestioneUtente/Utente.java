@@ -5,8 +5,8 @@ public class Utente {
 	public Utente() {
 	}
 
-	public Utente( String nome, String cognome, String email, String password,byte status,
-			byte privilegioAdmin) {
+	public Utente( String nome, String cognome, String email, String password,boolean status,
+			boolean privilegioAdmin) {
 		super();
 		this.nome = nome;
 		this.cognome = cognome;
@@ -48,19 +48,19 @@ public class Utente {
 		this.password = password;
 	}
 
-	public byte isStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(byte status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
-	public byte isPrivilegioAdmin() {
+	public boolean isPrivilegioAdmin() {
 		return privilegioAdmin;
 	}
 
-	public void setPrivilegioAdmin(byte privilegioAdmin) {
+	public void setPrivilegioAdmin(boolean privilegioAdmin) {
 		this.privilegioAdmin = privilegioAdmin;
 	}
 
@@ -86,6 +86,6 @@ public class Utente {
 	private String cognome;
 	private String email;
 	private String password;
-	private byte status;
-	private byte privilegioAdmin;
+	private boolean status;
+	private boolean privilegioAdmin;
 }

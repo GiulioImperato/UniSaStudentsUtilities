@@ -26,8 +26,8 @@ public class DatabaseGU {
 			psAddUtente.setString(2, utente.getCognome());
 			psAddUtente.setString(3, utente.getEmail());
 			psAddUtente.setString(4, utente.getPassword());
-			psAddUtente.setByte(5, utente.isStatus());
-			psAddUtente.setByte(6, utente.isPrivilegioAdmin());
+			psAddUtente.setBoolean(5, utente.isStatus());
+			psAddUtente.setBoolean(6, utente.isPrivilegioAdmin());
 			System.out.println(psAddUtente.toString());
 			psAddUtente.executeUpdate();
 
