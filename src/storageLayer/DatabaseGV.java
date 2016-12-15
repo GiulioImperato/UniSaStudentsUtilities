@@ -2,7 +2,7 @@ package storageLayer;
 
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,10 +17,11 @@ public class DatabaseGV {
 	private static String queryDettagliAnnuncio;
 	
 	/**
+	 * @author Pasquale Settembre
 	 * <b>Permette l'inserimento di un annuncio nel database</b>
-	 * @param annuncio
-	 * @param dett
-	 * @return
+	 * @param annuncio  annuncio che si vuole inserire
+	 * @param dett      dettagliAnnunci 
+	 * @return true		restituisce che l'annuncio è stato inserito correttamente
 	 * @throws SQLException
 	 */
 	public static boolean addAnnuncio(Annuncio annuncio, DettagliAnnuncio dett) throws SQLException {
@@ -44,18 +45,19 @@ public class DatabaseGV {
 			ResultSet rs =psAddAnnuncio.getGeneratedKeys();
 			if(rs.next()){
 				lastID = rs.getInt(1);
-				System.out.println("dsadads"+rs.getInt(1));
+				System.out.println("ID "+rs.getInt(1));
 			}
 			
 			connection.commit();
 			
+			java.sql.Date sqlDate = new java.sql.Date(dett.getData().getTime());
 			
 			psAddDettagliAnnuncio = connection.prepareStatement(queryDettagliAnnuncio); 
 			psAddDettagliAnnuncio.setInt(1, lastID);
 			psAddDettagliAnnuncio.setString(2, dett.getEditore());
 			psAddDettagliAnnuncio.setInt(3, dett.getAnno());
 			psAddDettagliAnnuncio.setString(4, dett.getDescrizione());
-			psAddDettagliAnnuncio.setDate(5, (Date) dett.getData());
+			psAddDettagliAnnuncio.setDate(5, sqlDate);
 			psAddDettagliAnnuncio.setString(6, dett.getFoto());
 			System.out.println(psAddDettagliAnnuncio.toString());
 			
