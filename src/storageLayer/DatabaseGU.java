@@ -172,7 +172,7 @@ public class DatabaseGU {
 				utente.setNome(rs.getString("nome"));
 				utente.setCognome(rs.getString("cognome"));
 				utente.setEmail(rs.getString("email"));
-				utente.setPassword(rs.getString("passworld"));
+				utente.setPassword(rs.getString("password"));
 				utente.setStatus(rs.getBoolean("status"));
 				utente.setPrivilegioAdmin(rs.getBoolean("privilegioAdmin"));				
 			}
