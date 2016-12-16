@@ -17,7 +17,7 @@ public class DatabaseGU {
 	 * @throws SQLException
 	  * @author Domenico Tropeano
 	 */
-	public synchronized static boolean addUser(Utente utente) throws SQLException {
+	public synchronized static boolean AddUser(Utente utente) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement psAddUtente = null;
@@ -54,7 +54,7 @@ public class DatabaseGU {
 	 * @throws SQLException
 	  * @author Domenico Tropeano
 	 */
-	public synchronized static boolean deleteUser(String email) throws SQLException {
+	public synchronized static boolean DeleteUser(String email) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -86,7 +86,7 @@ public class DatabaseGU {
 	 * @throws SQLException
 	  * @author Antonio Corsuto
 	 */
-	public synchronized static boolean changeStatus(String email, boolean newStatus) throws SQLException {
+	public synchronized static boolean ChangeStatus(String email, boolean newStatus) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -119,7 +119,7 @@ public class DatabaseGU {
 	 * @throws SQLException
 	  * @author Antonio Corsuto
 	 */
-	public synchronized static boolean changePrivilegiAdmin(String email, boolean newPrivilegi) throws SQLException {
+	public synchronized static boolean ChangePrivilegiAdmin(String email, boolean newPrivilegi) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -153,7 +153,7 @@ public class DatabaseGU {
 	 */
 
 
-	public synchronized static Utente getUtenteByID(String email) throws SQLException {
+	public synchronized static Utente GetUtenteByID(String email) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -198,7 +198,7 @@ public class DatabaseGU {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized ArrayList<Utente> doRetrieveAll() throws SQLException {
+	public synchronized static ArrayList<Utente> DoRetrieveAll() throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
