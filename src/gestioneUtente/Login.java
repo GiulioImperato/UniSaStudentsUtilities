@@ -1,11 +1,15 @@
 package gestioneUtente;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import storageLayer.DatabaseGU;
 
 /**
  * Servlet implementation class Login
@@ -30,7 +34,20 @@ public class Login extends HttpServlet {
 		String email = request.getParameter("emailLogin");
 		String password = request.getParameter("passwordLogin");
 		
-		System.out.println(email+" "+password);
+		try {
+			
+			Utente u = DatabaseGU.getUtenteByID(email);
+			
+			if(u!=null)
+			{
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
