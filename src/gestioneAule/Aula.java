@@ -1,23 +1,33 @@
 package gestioneAule;
 
+import java.util.ArrayList;
+
 public class Aula {
 	private String nome;
 	private double coordinateX;
 	private double coordinateY;
-	private OraAula oraAula;
+	private ArrayList<OraAula> oraAula;
 	
 	public Aula(){
 	}
 	
-	public Aula(String nome, double coordinateX, double coordinateY, OraAula oraAula) {
+	public Aula(String nome, double coordinateX, double coordinateY) {
 		this.nome = nome;
 		this.coordinateX = coordinateX;
 		this.coordinateY = coordinateY;
-		this.oraAula = oraAula;
+		oraAula = new ArrayList<OraAula>();
 	}
 
 	public String getNome() {
 		return nome;
+	}
+
+	public ArrayList<OraAula> getOraAula() {
+		return oraAula;
+	}
+
+	public void setOraAula(ArrayList<OraAula> oraAula) {
+		this.oraAula = oraAula;
 	}
 
 	public void setNome(String nome) {
@@ -38,14 +48,6 @@ public class Aula {
 
 	public void setCoordinateY(double coordinateY) {
 		this.coordinateY = coordinateY;
-	}
-
-	public OraAula getOraAula() {
-		return oraAula;
-	}
-
-	public void setOraAula(OraAula oraAula) {
-		this.oraAula = oraAula;
 	}
 
 	@Override
