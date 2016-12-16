@@ -3,7 +3,7 @@ package gestioneMaterialeDidattico;
 import java.sql.Date;
 
 public class Risorsa {
-
+//hello
 	private int idRisorsa;
 	private String nome;
 	private String proprietaio;
