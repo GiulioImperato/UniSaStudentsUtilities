@@ -14,7 +14,7 @@ public class DatabaseGU {
 	/**
 	 * <b>Registra un utente nel database</b>
 	 * @param utente
-	 * @return {@code true} se la registrazione è ok, {@code false}  altrimenti.
+	 * @return {@code true} se la registrazione ï¿½ ok, {@code false}  altrimenti.
 	 * @throws SQLException
 	  * @author Domenico Tropeano
 	 */
@@ -51,7 +51,7 @@ public class DatabaseGU {
 	/**
 	 * <b>Elimina un utente dal database</b>
 	 * @param email
-	 * @return {@code true}  se l'eliminazione è ok, {@code false}  altrimenti.
+	 * @return {@code true}  se l'eliminazione ï¿½ ok, {@code false}  altrimenti.
 	 * @throws SQLException
 	  * @author Domenico Tropeano
 	 */
@@ -83,7 +83,7 @@ public class DatabaseGU {
 	 * <b>Cambia lo stato di un utente</b>
 	 * @param email indica l' email dell' utente a cui cambiare stato
 	 * @param newStatus indica il nuovo stato assegnato all' utente
-	 * @return {@code true}  se l'eliminazione è ok, {@code false}  altrimenti.
+	 * @return {@code true}  se l'eliminazione ï¿½ ok, {@code false}  altrimenti.
 	 * @throws SQLException
 	  * @author Antonio Corsuto
 	 */
@@ -116,7 +116,7 @@ public class DatabaseGU {
 	 * <b>Cambia i privilegi di amministratore di un utente</b>
 	 * @param email indica l' email dell' utente a cui cambiare stato
 	 * @param newStatus indica il nuovo stato assegnato all' utente
-	 * @return {@code true}  se l'eliminazione è ok, {@code false}  altrimenti.
+	 * @return {@code true}  se l'eliminazione ï¿½ ok, {@code false}  altrimenti.
 	 * @throws SQLException
 	  * @author Antonio Corsuto
 	 */
@@ -172,7 +172,7 @@ public class DatabaseGU {
 				utente.setNome(rs.getString("nome"));
 				utente.setCognome(rs.getString("cognome"));
 				utente.setEmail(rs.getString("email"));
-				utente.setPassword(rs.getString("passworld"));
+				utente.setPassword(rs.getString("password"));
 				utente.setStatus(rs.getBoolean("status"));
 				utente.setPrivilegioAdmin(rs.getBoolean("privilegioAdmin"));				
 			}
@@ -215,7 +215,7 @@ public class DatabaseGU {
 				utente.setNome(rs.getString("nome"));
 				utente.setCognome(rs.getString("cognome"));
 				utente.setEmail(rs.getString("email"));
-				utente.setPassword(rs.getString("passworld"));
+				utente.setPassword(rs.getString("password"));
 				utente.setStatus(rs.getBoolean("status"));
 				utente.setPrivilegioAdmin(rs.getBoolean("privilegioAdmin"));	
 
