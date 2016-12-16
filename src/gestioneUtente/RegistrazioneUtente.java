@@ -37,7 +37,6 @@ public class RegistrazioneUtente extends HttpServlet {
 		boolean ss = false;
 		boolean pa = false;
 		
-		System.out.println("rall"+e);
 		
 		
 		boolean flag=false;
