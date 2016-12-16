@@ -176,7 +176,7 @@ public class DatabaseGU {
 				utente.setStatus(rs.getBoolean("status"));
 				utente.setPrivilegioAdmin(rs.getBoolean("privilegioAdmin"));				
 			}
-
+ 
 		}finally {
 			try {
 				if (preparedStatement != null)
