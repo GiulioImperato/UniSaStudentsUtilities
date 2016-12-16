@@ -40,7 +40,8 @@ public class RegistrazioneUtente extends HttpServlet {
 		
 		
 		boolean flag=false;
-		try {
+		try 
+		{
 			Utente u = DatabaseGU.getUtenteByID(e);
 			
 			if(u==null)
@@ -67,7 +68,7 @@ public class RegistrazioneUtente extends HttpServlet {
 				//email link
 				System.out.println(flag);
 				
-				response.sendRedirect("www.google.com");
+				response.sendRedirect("http://www.google.com");
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
