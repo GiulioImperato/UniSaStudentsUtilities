@@ -25,8 +25,18 @@ public class TestUnitaUtente {
 	}
 	@Test
 	public void test2() {
-		assertEquals(true, false);
+		
+		
+		try {
+			Boolean aspetto = DatabaseGU.DeleteUser("sdfdsfds");
+			assertEquals(true, aspetto);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		
 	}
+
 	
 }

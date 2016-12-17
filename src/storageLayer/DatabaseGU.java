@@ -165,14 +165,15 @@ public class DatabaseGU {
 			preparedStatement = connection.prepareStatement(queryGetUtente);
 			preparedStatement.setString(1, email);
 
-			ResultSet rs = preparedStatement.executeQuery();
+			ResultSet rs = preparedStatement.executeQuery();			
+			connection.commit();
 
 			while (rs.next()) {
 
 				utente.setNome(rs.getString("nome"));
 				utente.setCognome(rs.getString("cognome"));
 				utente.setEmail(rs.getString("email"));
-				utente.setPassword(rs.getString("passworld"));
+				utente.setPassword(rs.getString("password"));
 				utente.setStatus(rs.getBoolean("status"));
 				utente.setPrivilegioAdmin(rs.getBoolean("privilegioAdmin"));				
 			}
@@ -209,6 +210,7 @@ public class DatabaseGU {
 			preparedStatement = connection.prepareStatement(queryGetAllUtenti);
 
 			ResultSet rs = preparedStatement.executeQuery();
+			connection.commit();
 
 			while (rs.next()) {
 				Utente utente = new Utente();	
@@ -216,7 +218,7 @@ public class DatabaseGU {
 				utente.setNome(rs.getString("nome"));
 				utente.setCognome(rs.getString("cognome"));
 				utente.setEmail(rs.getString("email"));
-				utente.setPassword(rs.getString("passworld"));
+				utente.setPassword(rs.getString("password"));
 				utente.setStatus(rs.getBoolean("status"));
 				utente.setPrivilegioAdmin(rs.getBoolean("privilegioAdmin"));	
 
@@ -251,9 +253,9 @@ public class DatabaseGU {
 	static {
 		queryAddUtente = "INSERT INTO `redteam`.`utente` (`Nome`, `Cognome`, `Email`, `Password`, `Status`, `PrivilegioAdmin`) VALUES (?,?,?,?,?,?);";
 		queryEliminaAccount = "DELETE FROM `redteam`.`utente` WHERE `email`=?;";
-		queryCambiaStatus = "UPDATE `redteam`.`utente` SET `Status`=? WHERE `idUtente`=?;";
+		queryCambiaStatus = "UPDATE `redteam`.`utente` SET `Status`=? WHERE `Email`=?;";
 		queryGetUtente = "SELECT * From redteam.utente WHERE utente.email=?;";
-		queryCambiaPrivilegiAdmin = "UPDATE `redteam`.`utente` SET `privilegioAdmin`=? WHERE `idUtente`=?;";
+		queryCambiaPrivilegiAdmin = "UPDATE `redteam`.`utente` SET `privilegioAdmin`=? WHERE `Email`=?;";
 		queryGetAllUtenti = "SELECT * From redteam.utente";
 	}
 }
