@@ -37,10 +37,9 @@ public class Risorsa {
 	 * @author Antonio Corsuto
 	 */
 
-	public Risorsa(int idRisorsa, String nome, String proprietaio, double dimensione, Date dataUpload, int like,
+	public Risorsa( String nome, String proprietaio, double dimensione, Date dataUpload, int like,
 			int dislike, String pathCaricamento) {
 		super();
-		this.idRisorsa = idRisorsa;
 		this.nome = nome;
 		this.proprietaio = proprietaio;
 		this.dimensione = dimensione;
@@ -241,10 +240,13 @@ public class Risorsa {
 	public synchronized int addDisike(){		
 		dislike++;
 		return dislike;
-
 	}
 
-
-
-
+	@Override
+	public String toString() {
+		return "Risorsa [idRisorsa=" + idRisorsa + ", nome=" + nome + ", proprietaio=" + proprietaio + ", dimensione="
+				+ dimensione + ", dataUpload=" + dataUpload + ", like=" + like + ", dislike=" + dislike
+				+ ", pathCaricamento=" + pathCaricamento + "]";
+	}
+	
 }
