@@ -40,8 +40,16 @@ public class Login extends HttpServlet {
 			
 			if(u!=null)
 			{
-				
+				if(u.getPassword().equals(password))
+				{
+					System.out.println("login effettuato");
+				}
+				else
+				{
+					System.out.println("Email o password errati");
+				}
 			}
+
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
