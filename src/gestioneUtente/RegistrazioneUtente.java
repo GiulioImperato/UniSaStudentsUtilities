@@ -66,8 +66,6 @@ public class RegistrazioneUtente extends HttpServlet {
 			{
 				DatabaseGU.addUser(new Utente(n,c,e,p,ss,pa));
 				//email link
-				System.out.println(flag);
-				
 				response.sendRedirect("http://www.google.com");
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -76,7 +74,7 @@ public class RegistrazioneUtente extends HttpServlet {
 		}
 		else
 		{
-			System.out.println(flag);
+			System.out.println("Errore");
 		}
 		
 		

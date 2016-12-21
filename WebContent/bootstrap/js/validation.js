@@ -51,3 +51,29 @@ $('#ajax-register-form').bootstrapValidator({
 			}
         }
     });
+
+$('#ajax-login-form').bootstrapValidator({
+//  live: 'disabled',
+  message: 'This value is not valid',
+  feedbackIcons: {
+      valid: 'glyphicon glyphicon-ok',
+      invalid: 'glyphicon glyphicon-remove',
+      validating: 'glyphicon glyphicon-refresh'
+  },
+  fields: {
+      emailLogin: {
+          validators: {
+              notEmpty: {
+                  message: 'Inserisci l\'email'
+              }
+          }
+      },
+      passwordLogin: {
+          validators: {
+              notEmpty: {
+                  message: 'Inserisci la password'
+              }
+          }
+      }
+  }
+});
