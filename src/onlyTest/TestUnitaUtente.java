@@ -16,7 +16,7 @@ public class TestUnitaUtente {
 	@Test
 	public void test1() {
 		try {
-			Boolean aspetto = DatabaseGU.addUser(new Utente("NOME","COGNOME", "sdfdsxcdsfds", "PASSWORD", false, true ));
+			Boolean aspetto = DatabaseGU.AddUser(new Utente("NOME","COGNOME", "sdfdsfds", "PASSWORD", false, true ));
 			assertEquals(true, aspetto);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

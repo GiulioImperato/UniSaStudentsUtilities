@@ -54,7 +54,7 @@ public class TestDb {
 		 * System.out.println("inserimento avvenuto2");
 		 */
 		//boolean b=DatabaseGU.addUser(new Utente("erfre", "Brgrgco", "giggdsfdsgdsgl.it", "cucccabacucco",true ,false));
-		Utente c=DatabaseGU.getUtenteByID("ang@hootmail.it");
+		Utente c=DatabaseGU.GetUtenteByID("ang@hootmail.it");
 		System.out.println(c);
 		//boolean b=DatabaseGU.deleteUser("giggimiticol@hotmail.it");
 		//System.out.println(b);
