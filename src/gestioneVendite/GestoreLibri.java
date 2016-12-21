@@ -8,8 +8,10 @@ import storageLayer.DatabaseGV;
 
 public class GestoreLibri {
 
-	private ArrayList<Annuncio> listaAnnunci;
-	//fsdfdsfdsfds
+	//private ArrayList<Annuncio> listaAnnunci;
+	private Annuncio annuncio;
+	private DettagliAnnuncio dettagli;
+	
 	/**
 	 * <b>Creazione del GestoreLibri senza parametri</b>
 	 */
@@ -42,14 +44,14 @@ public class GestoreLibri {
 		System.out.println(sdf.format(data));
 		*/
 		
-		DettagliAnnuncio dt = new DettagliAnnuncio(editore, anno, descrizione, data, foto);
+		dettagli = new DettagliAnnuncio(editore, anno, descrizione, data, foto);
 
-		Annuncio ann = new Annuncio(titolo, autore, corso, proprietario, condizione, prezzo, dt);
+		annuncio = new Annuncio(titolo, autore, corso, proprietario, condizione, prezzo, dettagli);
 		
 		//listaAnnunci.add(ann); 
 
 		
-		if(DatabaseGV.addAnnuncio(ann,dt))
+		if(DatabaseGV.addAnnuncio(annuncio,dettagli))
 			return true;
 		else
 			return false;
