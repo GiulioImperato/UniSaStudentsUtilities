@@ -7,11 +7,15 @@ import gestioneUtente.Utente;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import gestioneAule.Giorno;
+import gestioneAule.OraAula;
 import gestioneVendite.CondizioneLibro;
 import gestioneVendite.GestoreLibri;
+import storageLayer.DatabaseGA;
 import storageLayer.DatabaseGM;
 import storageLayer.DatabaseGU;
 
@@ -30,9 +34,15 @@ public class TestDb {
 		// GestoreLibri gst = new GestoreLibri();
 		//Risorsa r = DatabaseGM.getRisorsaByID(0);
 		//System.out.println(r);
-		Date data=new Date(2016, 12, 16);
-		Risorsa risorsa=new Risorsa("materiale", "ang@hotmail.it", 10, data, 5, 0, "src/banana");
-		System.out.println(DatabaseGM.insertRisorsa(risorsa));
+		//Date data=new Date(2016, 12, 16);
+	//	Risorsa risorsa=new Risorsa("materiale", "ang@hotmail.it", 10, data, 5, 0, "src/banana");
+		Time i=new Time(15, 00, 00);
+		Time f=new Time(16,00,00);
+		OraAula o=new OraAula("F1",Giorno.gio, i, f, false, true, "ang@hotmail.it");
+		DatabaseGA.InsertAula(o);
+		
+		
+		//System.out.println(DatabaseGM.insertRisorsa(risorsa));
 		// if(gst.inserisciAnnuncio("qwe", "Something", CondizioneLibro.nuovo,
 		// "Prog Distribuita", 40, "Gigi", 2016, "Libro di prog distr", new
 		// Date(), "JavaEE", "pas@hotmail.it"))
