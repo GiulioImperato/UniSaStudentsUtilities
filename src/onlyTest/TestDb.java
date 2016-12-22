@@ -36,11 +36,11 @@ public class TestDb {
 		//System.out.println(r);
 		//Date data=new Date(2016, 12, 16);
 	//	Risorsa risorsa=new Risorsa("materiale", "ang@hotmail.it", 10, data, 5, 0, "src/banana");
-		Time i=new Time(15, 00, 00);
+		/*Time i=new Time(15, 00, 00);
 		Time f=new Time(16,00,00);
 		OraAula o=new OraAula("F1",Giorno.gio, i, f, false, true, "ang@hotmail.it");
 		DatabaseGA.InsertAula(o);
-		
+		*/
 		
 		//System.out.println(DatabaseGM.insertRisorsa(risorsa));
 		// if(gst.inserisciAnnuncio("qwe", "Something", CondizioneLibro.nuovo,
