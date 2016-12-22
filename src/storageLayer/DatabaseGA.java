@@ -12,14 +12,18 @@ import gestioneAule.Giorno;
 import gestioneAule.OraAula;
 
 public class DatabaseGA {
-
+/**
+ * Metodo che ritorna un arraylist contenente tutte le Aule
+ * @return Array di Aule
+ * @author Tropeano Domenico Antonio
+ */
 	public static ArrayList<Aula> getListaAule() {
 		Connection connection = null;
-		PreparedStatement psInsertOraAula = null;
+		PreparedStatement psGetListaAule = null;
 		ArrayList<Aula> listaAule = new ArrayList<Aula>();
 		try {
 			connection = Database.getConnection();
-			PreparedStatement psGetListaAule = connection.prepareStatement(queryGetListaAule);
+			psGetListaAule = connection.prepareStatement(queryGetListaAule);
 			ResultSet rs = psGetListaAule.executeQuery();
 			while (rs.next()) {
 				Aula a = new Aula(rs.getString("Nome"), rs.getDouble("CoordinateX"), rs.getDouble("CoordinateY"));
@@ -40,7 +44,14 @@ public class DatabaseGA {
 
 		return listaAule;
 	}
-
+/**
+ * Metodo che ritorna un arrayList di aule libere
+ * @param giorno
+ * @param oraInizio
+ * @param oraFine
+ * @return ArrayList di aule libere
+ * @author Tropeano Domenico Antonio
+ */
 	public static ArrayList<Aula> RicercaAule(Giorno giorno, Time oraInizio, Time oraFine) {
 
 		Connection connection = null;
@@ -48,8 +59,8 @@ public class DatabaseGA {
 		ArrayList<Aula> listaAuleLibere = new ArrayList<Aula>();
 		try {
 			connection = Database.getConnection();
-			psRicercaAula = connection.prepareStatement(queryGetListaAule);
-			psRicercaAula.setString(1, giorno.toString());// cosa devo prendere qui?
+			psRicercaAula = connection.prepareStatement(queryRicercaAule);
+			psRicercaAula.setString(1, giorno.name());// cosa devo prendere qui?
 			psRicercaAula.setTime(2, oraInizio);
 			psRicercaAula.setTime(3, oraFine);
 			ResultSet rs = psRicercaAula.executeQuery();
@@ -73,17 +84,24 @@ public class DatabaseGA {
 		return listaAuleLibere;
 
 	}
-
+/**
+ * Metodo che ritorna un ArrayList di oreAula 
+ * @param nome
+ * @param giorno
+ * @return array di OreAula
+ * @author Tropeano Domenico Antonio
+ */
 	public static ArrayList<OraAula> visualizzaInfoAula(String nome, Giorno giorno) {
 		Connection connection = null;
-		PreparedStatement psGetListaAule = null;
+		PreparedStatement psVisualizzaInfoAula = null;
 		ArrayList<OraAula> listaOreLibere = new ArrayList<OraAula>();
 		try {
 			connection = Database.getConnection();
-			psGetListaAule = connection.prepareStatement(queryGetListaAule);
-			psGetListaAule.setString(1, nome);
-			psGetListaAule.setString(2, giorno.toString()); //cosa devo prendere qui?
-			ResultSet rs = psGetListaAule.executeQuery();
+			psVisualizzaInfoAula = connection.prepareStatement(queryVisualizzaInfoAule);
+			psVisualizzaInfoAula.setString(1, nome);
+			psVisualizzaInfoAula.setString(2, giorno.name()); //cosa devo prendere qui?
+			System.out.println(psVisualizzaInfoAula);
+			ResultSet rs = psVisualizzaInfoAula.executeQuery();
 			while (rs.next()) {
 				Giorno g = Giorno.valueOf(rs.getString("giorno"));
 				OraAula a = new OraAula(rs.getString("Nome"), g, rs.getTime("oraInizio"), rs.getTime("oraFine"),
@@ -106,7 +124,13 @@ public class DatabaseGA {
 		return listaOreLibere;
 
 	}
-
+/**
+ * Metodo che invia un feedback per un aula
+ * @param Nome
+ * @param status
+ * @param emailUtente
+ * @return {@code true} se e' ok, {@code false}  altrimenti.
+ */
 	public static boolean invioFeedback(String Nome, boolean status, String emailUtente) {
 		Connection connection = null;
 		PreparedStatement psInvioFeedback = null;
@@ -136,7 +160,7 @@ public class DatabaseGA {
 		queryRicercaAule = "SELECT distinct a.Nome,CoordinateX,CoordinateY "
 				+ "FROM redteam.aula as a,redteam.oraaula as oa "
 				+ "WHERE oa.giorno =?  and oa.oraInizio >= ? and oa.oraFine <= ? and oa.defaultStatus = true and a.nome = oa.nome";
-		queryVisualizzaInfoAule = "SELECT Nome, OraInizio, OraFine, defaultStatus, feedStatus, emailUtente"
+		queryVisualizzaInfoAule = "SELECT Nome, Giorno ,OraInizio, OraFine, defaultStatus, feedStatus, emailUtente "
 				+ "FROM redteam.oraaula " + "WHERE nome = ?  and giorno = ? and defaultStatus = true";
 		queryInvioFeedback = "UPDATE redteam.oraaula " + "SET feedStatus = ?, emailUtente = ?"
 				+ "where nome = ? and giorno = ?;";

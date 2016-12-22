@@ -33,8 +33,8 @@ public class TestDb {
 		*/
 		Time i=new Time(9, 00, 00);
 		Time f=new Time(10, 00, 00);
-		ArrayList<Aula> array=new ArrayList<>();
-		array=DatabaseGA.RicercaAule(Giorno.lun, i, f);
+		ArrayList<OraAula> array=new ArrayList<>();
+		array=DatabaseGA.visualizzaInfoAula("F1", Giorno.lun);
 		for(int z=0;z<array.size();z++){
 			System.out.println(array.get(z));
 		}

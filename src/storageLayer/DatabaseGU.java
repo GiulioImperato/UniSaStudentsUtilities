@@ -14,7 +14,7 @@ public class DatabaseGU {
 	/**
 	 * <b>Registra un utente nel database</b>
 	 * @param utente
-	 * @return {@code true} se la registrazione � ok, {@code false}  altrimenti.
+	 * @return {@code true} se la registrazione e' ok, {@code false}  altrimenti.
 	 * @throws SQLException
 	  * @author Domenico Tropeano
 	 */
