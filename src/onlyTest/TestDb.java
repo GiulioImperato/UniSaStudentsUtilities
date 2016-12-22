@@ -10,7 +10,9 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
+import gestioneAule.Aula;
 import gestioneAule.Giorno;
 import gestioneAule.OraAula;
 import gestioneVendite.CondizioneLibro;
@@ -22,8 +24,20 @@ import storageLayer.DatabaseGU;
 public class TestDb {
 
 	public static void main(String[] args) throws SQLException {
-		// TODO Auto-generated method stub
-
+		
+		
+		/*ArrayList<Aula> array=DatabaseGA.getListaAule();
+		for(int i=0;i<array.size();i++){
+			System.out.println(array.get(i));
+		}
+		*/
+		Time i=new Time(9, 00, 00);
+		Time f=new Time(10, 00, 00);
+		ArrayList<Aula> array=new ArrayList<>();
+		array=DatabaseGA.RicercaAule(Giorno.lun, i, f);
+		for(int z=0;z<array.size();z++){
+			System.out.println(array.get(z));
+		}
 		// boolean b=DatabaseGU.addUser(new Utente("erfre", "Brgrgco",
 		// "giggdsfdsgdsgl.it", "cucccabacucco",true ,false));
 		// Utente c=DatabaseGU.getUtenteByID("ang@hotmail.it");
@@ -54,8 +68,8 @@ public class TestDb {
 		 * System.out.println("inserimento avvenuto2");
 		 */
 		//boolean b=DatabaseGU.addUser(new Utente("erfre", "Brgrgco", "giggdsfdsgdsgl.it", "cucccabacucco",true ,false));
-		Utente c=DatabaseGU.GetUtenteByID("ang@hootmail.it");
-		System.out.println(c);
+		//Utente c=DatabaseGU.GetUtenteByID("ang@hootmail.it");
+		//System.out.println(c);
 		//boolean b=DatabaseGU.deleteUser("giggimiticol@hotmail.it");
 		//System.out.println(b);
 				
