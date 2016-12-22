@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import gestioneUtente.Utente;
 
@@ -168,7 +169,6 @@ public class DatabaseGU {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-
 				utente.setNome(rs.getString("nome"));
 				utente.setCognome(rs.getString("cognome"));
 				utente.setEmail(rs.getString("email"));
@@ -176,7 +176,6 @@ public class DatabaseGU {
 				utente.setStatus(rs.getBoolean("status"));
 				utente.setPrivilegioAdmin(rs.getBoolean("privilegioAdmin"));				
 			}
- 
 		}finally {
 			try {
 				if (preparedStatement != null)
