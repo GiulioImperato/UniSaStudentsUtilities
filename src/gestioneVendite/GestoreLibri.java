@@ -75,8 +75,15 @@ public class GestoreLibri {
 		
 	}
 	
-	public ArrayList <Annuncio> getAnnunciUtente(String username) {
-		return null;
+	/**
+	 * @author Pasquale Settembre
+	 * <b>Restituisce la lista di annunci di un determinato utente
+	 * @param email dell'utente
+	 * @return lista degli annunci
+	 * @throws SQLException
+	 */
+	public ArrayList <String> getAnnunciUtente(String email) throws SQLException {
+		return DatabaseGV.getListaAnnunciUtente(email);
 	}
 	
 	public boolean controllaDati(String titolo, String autore, String condizione, String corso, double prezzo){
