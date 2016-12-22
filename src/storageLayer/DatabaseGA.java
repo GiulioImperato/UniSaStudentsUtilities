@@ -49,8 +49,7 @@ public class DatabaseGA {
 		try {
 			connection = Database.getConnection();
 			psRicercaAula = connection.prepareStatement(queryGetListaAule);
-			psRicercaAula.setString(1, giorno.toString());// cosa devo prendere
-															// qui?
+			psRicercaAula.setString(1, giorno.toString());// cosa devo prendere qui?
 			psRicercaAula.setTime(2, oraInizio);
 			psRicercaAula.setTime(3, oraFine);
 			ResultSet rs = psRicercaAula.executeQuery();
