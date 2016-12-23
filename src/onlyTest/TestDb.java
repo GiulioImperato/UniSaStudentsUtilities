@@ -19,8 +19,7 @@ import gestioneVendite.GestoreLibri;
 import storageLayer.DatabaseGA;
 import storageLayer.DatabaseGM;
 import storageLayer.DatabaseGU;
-import storageLayer.DatabaseGM;
-import storageLayer.DatabaseGU;
+
 
 public class TestDb {
 
@@ -87,6 +86,7 @@ public class TestDb {
 		//Date data=new Date(2016, 12, 16);
 		//Risorsa risorsa=new Risorsa("materiale", "ang@hotmail.it", 10, data, 5, 0, "src/banana");
 		//System.out.println(DatabaseGM.insertRisorsa(risorsa));
+
 		// if(gst.inserisciAnnuncio("qwe", "Something", CondizioneLibro.nuovo,
 		// "Prog Distribuita", 40, "Gigi", 2016, "Libro di prog distr", new
 		// Date(), "JavaEE", "pas@hotmail.it"))
