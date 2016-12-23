@@ -42,7 +42,7 @@ public class RegistrazioneUtente extends HttpServlet {
 		boolean flag=false;
 		try 
 		{
-			Utente u = DatabaseGU.getUtenteByID(e);
+			Utente u = DatabaseGU.GetUtenteByID(e);
 			
 			if(u==null)
 			{	
@@ -64,7 +64,7 @@ public class RegistrazioneUtente extends HttpServlet {
 		{
 			try 
 			{
-				DatabaseGU.addUser(new Utente(n,c,e,p,ss,pa));
+				DatabaseGU.AddUser(new Utente(n,c,e,p,ss,pa));
 				//email link
 				response.sendRedirect("http://www.google.com");
 			} catch (SQLException e1) {

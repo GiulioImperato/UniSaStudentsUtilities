@@ -36,7 +36,7 @@ public class Login extends HttpServlet {
 		
 		try {
 			
-			Utente u = DatabaseGU.getUtenteByID(email);
+			Utente u = DatabaseGU.GetUtenteByID(email);
 			
 			if(u!=null)
 			{
