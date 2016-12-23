@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="lib/junit.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="lib" path="lib/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+	<classpathentry kind="lib" path="lib/taglibs-standard-jstlel-1.2.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
