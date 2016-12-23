@@ -2,6 +2,7 @@ package storageLayer;
 
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,12 +10,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import gestioneVendite.Annuncio;
+import gestioneVendite.CondizioneLibro;
 import gestioneVendite.DettagliAnnuncio;
 
 public class DatabaseGV {
 	
 	private static String queryAddAnnuncio;
 	private static String queryDettagliAnnuncio;
+	private static String queryListAnnunciUtente;
 	
 	/**
 	 * @author Pasquale Settembre
@@ -81,9 +84,53 @@ public class DatabaseGV {
 		return true;
 	}
 	
+	/**
+	 * @author Pasquale Settembre
+	 * <b>Permette di prendere dal database la lista degli annunci di un determinato utente</b>
+	 * @param email dell'utente 
+	 * @return    restituisce la lista degli annunci 
+	 * @throws SQLException
+	 */
+	public static ArrayList<String>getListaAnnunciUtente(String email) throws SQLException{
+		Connection connection = null;
+		PreparedStatement psListAnnunciUtente= null;
+		ArrayList<String> listAnnunci = new ArrayList();
+		try{
+			connection = Database.getConnection();
+			psListAnnunciUtente = connection.prepareStatement(queryListAnnunciUtente);
+			
+			psListAnnunciUtente.setString(1, email);
+			ResultSet rs = psListAnnunciUtente.executeQuery();
+			
+			while(rs.next()){
+				String title = rs.getString("Titolo");
+				String autore = rs.getString("Autore");
+				String corso = rs.getString("Corso");
+				String proprietario = rs.getString("Proprietario");
+				String condizione = rs.getString("condizioneLibro");
+				double prezzo = rs.getDouble("prezzo");
+				listAnnunci.add(title+autore+corso+proprietario+condizione+prezzo);	
+			}
+		}
+		finally {
+			try {
+				if(psListAnnunciUtente != null)
+					psListAnnunciUtente.close();
+				if(psListAnnunciUtente !=null)
+					psListAnnunciUtente.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			 finally {
+				Database.releaseConnection(connection);
+			}
+		}
+		return listAnnunci;
+	}
 	
 	static {
 		queryAddAnnuncio = "INSERT INTO redteam.annuncio (Titolo, Autore, Corso, Proprietario, CondizioneLibro,Prezzo) VALUES (?,?,?,?,?,?)";
-		queryDettagliAnnuncio ="INSERT INTO redteam.dettagliannuncio (id, Editore, Anno, Descrizione, Data, Foto) VALUES (?,?,?,?,?,?)";
+		queryDettagliAnnuncio = "INSERT INTO redteam.dettagliannuncio (id, Editore, Anno, Descrizione, Data, Foto) VALUES (?,?,?,?,?,?)";
+		queryListAnnunciUtente = "SELECT * FROM Annuncio WHERE Proprietario = ?";
 	}
 }
