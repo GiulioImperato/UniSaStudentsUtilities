@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import gestioneMaterialeDidattico.Risorsa;
+import gestioneUtente.Utente;
 
 public class DatabaseGM {
 
@@ -45,6 +47,13 @@ public class DatabaseGM {
 		return risorsa;
 	}
 
+	/**
+	 * <b>Salva una risorsa nel database</b>
+	 * @param risorsa
+	 * @return {@code true} se il salvataggio è ok, {@code false}  altrimenti.
+	 * @throws SQLException
+	 * @author Domenico Tropeano
+	 */
 	public static int insertRisorsa(Risorsa risorsa) {
 		Connection connection = null;
 		PreparedStatement psGetRisorsaByID = null;
@@ -72,10 +81,284 @@ public class DatabaseGM {
 		return lastID;
 	}
 
+	/**
+	 * <b>Elimina una Risorsa dal database</b>
+	 * @param id 
+	 * @return {@code true}  se l'eliminazione è ok, {@code false}  altrimenti.
+	 * @throws SQLException
+	 * @author Antonio Corsuto
+	 */
+	public synchronized static boolean DeleteRisorsa(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		int result = 0;
+
+		try {
+			connection = Database.getConnection();
+			preparedStatement = connection.prepareStatement(queryDeleteRisorsa);
+			preparedStatement.setInt(1, id);
+
+			result = preparedStatement.executeUpdate();
+			connection.commit();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				Database.releaseConnection(connection);
+			}
+		}
+		return (result != 0);
+	}
+
+	/**
+	 * Restituisce tutti le risorse del database
+	 * @return {@code null}  se non esistono risorse, {@code ArrayListRisorse }  altrimenti.
+	 * @throws SQLException
+	 * @author Antonio Corsuto
+	 */
+	public synchronized static ArrayList<Risorsa> DoRetrieveAll() throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		ArrayList<Risorsa> risorse = new ArrayList<Risorsa>();
+
+		try {
+			connection = Database.getConnection();
+			preparedStatement = connection.prepareStatement(queryGetAllRisorse);
+
+			ResultSet rs = preparedStatement.executeQuery();
+			connection.commit();
+
+			while (rs.next()) {
+				Risorsa risorsa = new Risorsa();	
+
+				risorsa.setNome(rs.getString("Nome"));
+				risorsa.setDimensione(rs.getDouble("Dimensione"));
+				risorsa.setDataUpload(rs.getDate("dataUpload"));
+				risorsa.setProprietaio(rs.getString("Proprietario"));
+				risorsa.setLike(rs.getInt("Like"));
+				risorsa.setDislike(rs.getInt("Dislike"));
+				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));	
+
+				risorse.add(risorsa);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				Database.releaseConnection(connection);
+			}
+		}
+
+		if(risorse.size()<1)
+			return null;
+		else  		
+			return risorse ;
+	}
+
+
+	/**
+	 * Restituisce tutti le risorse pubblicate da un utente
+	 * @return {@code null}  se non esistono risorse, {@code ArrayListRisorse }  altrimenti.
+	 * @param idUtente emeil del utente 
+	 * @throws SQLException
+	 * @author Antonio Corsuto
+	 */
+	public synchronized static ArrayList<Risorsa> DoRetrieveAllByUtente(String idUtente) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		ArrayList<Risorsa> risorse = new ArrayList<Risorsa>();
+
+		try {
+			connection = Database.getConnection();
+			preparedStatement = connection.prepareStatement(queryGetRisorseUtente);
+			preparedStatement.setString(1, idUtente);
+
+			ResultSet rs = preparedStatement.executeQuery();
+			connection.commit();
+
+			while (rs.next()) {
+				Risorsa risorsa = new Risorsa();	
+
+				risorsa.setNome(rs.getString("Nome"));
+				risorsa.setDimensione(rs.getDouble("Dimensione"));
+				risorsa.setDataUpload(rs.getDate("dataUpload"));
+				risorsa.setProprietaio(rs.getString("Proprietario"));
+				risorsa.setLike(rs.getInt("Like"));
+				risorsa.setDislike(rs.getInt("Dislike"));
+				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));	
+
+				risorse.add(risorsa);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				Database.releaseConnection(connection);
+			}
+		}
+
+		if(risorse.size()<1)
+			return null;
+		else  		
+			return risorse ;
+	}
+
+
+	/**
+	 * Restituisce tutti le risorse in un determinata directory
+	 * @return {@code null}  se non esistono risorse, {@code ArrayListRisorse }  altrimenti.
+	 * @param path directory
+	 * @throws SQLException
+	 * @author Antonio Corsuto
+	 */
+	public synchronized static ArrayList<Risorsa> DoRetrieveAllByPath(String path) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		ArrayList<Risorsa> risorse = new ArrayList<Risorsa>();
+
+		try {
+			connection = Database.getConnection();
+			preparedStatement = connection.prepareStatement(queryGetRisorsePath);
+			preparedStatement.setString(1, path);
+
+			ResultSet rs = preparedStatement.executeQuery();
+			connection.commit();
+
+			while (rs.next()) {
+				Risorsa risorsa = new Risorsa();	
+
+				risorsa.setNome(rs.getString("Nome"));
+				risorsa.setDimensione(rs.getDouble("Dimensione"));
+				risorsa.setDataUpload(rs.getDate("dataUpload"));
+				risorsa.setProprietaio(rs.getString("Proprietario"));
+				risorsa.setLike(rs.getInt("Like"));
+				risorsa.setDislike(rs.getInt("Dislike"));
+				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));	
+
+				risorse.add(risorsa);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				Database.releaseConnection(connection);
+			}
+		}
+
+		if(risorse.size()<1)
+			return null;
+		else  		
+			return risorse ;
+	}
+
+
+	/**
+	 * Aggiorna i like di una risorsa
+	 *@return {@code true} se la modifica è ok, {@code false}  altrimenti.
+	 * @param id id della risorsa 
+	 * @param like  valore aggiornato
+	 * @throws SQLException
+	 * @author Antonio Corsuto
+	 */
+	public synchronized static boolean AggiornaLike(int id ,int like) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		int result = 0;
+
+		try {
+			connection = Database.getConnection();
+			preparedStatement = connection.prepareStatement(queryAggiornaLike);
+			preparedStatement.setInt(1,like);			
+			preparedStatement.setInt(2,id);
+
+			result = preparedStatement.executeUpdate();
+			connection.commit();
+
+
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				Database.releaseConnection(connection);
+			}
+		}
+
+		return (result != 0);
+
+	}
+
+
+	/**
+	 * Aggiorna i dislike di una risorsa
+	 *@return {@code true} se la modifica è ok, {@code false}  altrimenti.
+	 * @param id identificativo della risorsa 
+	 * @param like valore aggiornato
+	 * @throws SQLException
+	 * @author Antonio Corsuto
+	 */
+	public synchronized static boolean AggiornaDislike(int id ,int like) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		int result = 0;
+
+		try {
+			connection = Database.getConnection();
+			preparedStatement = connection.prepareStatement(queryAggiornaDislike);
+			preparedStatement.setInt(1,like);			
+			preparedStatement.setInt(2,id);
+
+			result = preparedStatement.executeUpdate();
+			connection.commit();
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				Database.releaseConnection(connection);
+			}
+		}
+
+		return (result != 0);
+
+	}
+
+
+
+
+
 	private static String queryGetRisorsa;
-	private static String queryInsertRisorsa;
+	private static String queryInsertRisorsa;	
+	private static String queryDeleteRisorsa;
+	private static String queryGetAllRisorse;	
+	private static String queryGetRisorseUtente;
+	private static String queryGetRisorsePath;
+	private static String queryAggiornaLike;
+	private static String queryAggiornaDislike;
+
 	static {
 		queryGetRisorsa = "SELECT * FROM redteam.risorsa WHERE risorsa.idRisorsa=?";
 		queryInsertRisorsa = "INSERT INTO `redteam`.`risorsa` (`Nome`, `Dimensione`, `dataUpload`, `Proprietario`, `Like`, `Dislike`, `PathCaricamento`) VALUES (?,?,?,?,?,?,?);";
+		queryDeleteRisorsa = "DELETE FROM `redteam`.`risorsa` WHERE `idRisorsa`=?;";
+		queryGetAllRisorse = "SELECT * From redteam.risorsa";
+		queryGetRisorseUtente = "SELECT * FROM `redteam`.`risorsa` WHERE `proprietaio`=?;";
+		queryGetRisorsePath = "SELECT * FROM `redteam`.`risorsa` WHERE `pathCaricamento`=?;";
+		queryAggiornaLike =  "UPDATE `redteam`.`risorsa` SET `like`=? WHERE `idRisorsa`=?;";
+		queryAggiornaDislike ="UPDATE `redteam`.`risorsa` SET `dislike`=? WHERE `idRisorsa`=?;";
 	}
 }
