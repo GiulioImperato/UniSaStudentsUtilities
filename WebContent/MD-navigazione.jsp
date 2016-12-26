@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="java.util.*,gestioneUtente.*,storageLayer.*"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%	
    Utente utente = (Utente)session.getAttribute("utente");
         if(utente==null){
@@ -51,14 +51,14 @@
 	<div id="works" class=" clearfix grid">
 		<div class="container col-lg-8 col-md-offset-2">
 			<h2 style="text-align: left;">Corsi di laurea</h2>
-			<a href="MD-DownloadUpload.jsp"><h2 style="text-align: left;">tabella meteriale(esempio prova)</h2></a>
+			<a href="MD-DownloadUpload.jsp"><h2 style="text-align: left;">tabella materiale(esempio prova)</h2></a>
 			<hr>
 			<!-- ListaCorsi -->
 			<ul class="list-unstyled">
-				<a href="#"><li class="well">Informatica</li></a>
-				<a href="#"><li class="well">Chimica</li></a>
-				<a href="#"><li class="well">Biologia</li></a>
-				<a href="#"><li class="well">Matematica</li></a>
+				<c:forEach var="item"  items="${requestScope.folderArray}">
+					<a href="GestoreRicerca?folderClicked=${item.nome}"><li class="well">${item.nome}</li></a>
+				</c:forEach>
+				<c:remove var="item" />
 			</ul>
 			<!-- /ListaCorsi -->
 		</div>

@@ -21,8 +21,8 @@ public class DatabaseGM {
 			psGetRisorsaByID = connection.prepareStatement(queryGetRisorsa);
 			psGetRisorsaByID.setInt(1, idRisorsa);
 			ResultSet rs = psGetRisorsaByID.executeQuery();
+			connection.commit();
 			while (rs.next()) {
-
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));

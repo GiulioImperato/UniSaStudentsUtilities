@@ -10,22 +10,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import storageLayer.DatabaseGM;
 
 /**
  * Servlet implementation class GestoreMaterialeDidattico
  */
-@WebServlet("/GestoreMaterialeDidattico")
-public class GestoreMaterialeDidattico extends HttpServlet {
+@WebServlet("/GestoreRicerca")
+public class GestoreRicerca extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private String previousPath="";
-    static ArrayList<Item> listItem=new ArrayList<>();
-    static ArrayList<Risorsa>listRisorse=new ArrayList<>();
+    static ArrayList<Item> listItem=null;
+    static ArrayList<Risorsa>listRisorse=null;
+    static boolean lastLeaf=false;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GestoreMaterialeDidattico() {
+    public GestoreRicerca() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,13 +38,25 @@ public class GestoreMaterialeDidattico extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String folderClicked=request.getParameter("folderClicked");
 		String folderPath;
+		System.out.println(folderClicked);
+		listItem=new ArrayList<>();
+		listRisorse=new ArrayList<>();
 		if(previousPath!=""){
 			folderPath=previousPath+folderClicked;
 		}else{
 			folderPath=request.getSession().getServletContext().getRealPath("res/"+folderClicked);
 		}
-		File folderPointer=new File(folderPath);
+		previousPath=folderPath+"/";
+		File folderPointer=new File(folderPath+"/");
 		displayDirectoryContents(folderPointer);
+		System.out.println("dsfdsf");
+		if(!lastLeaf){
+			request.setAttribute("folderArray", listItem);
+			request.getRequestDispatcher("MD-navigazione.jsp").forward(request, response);
+		}else{
+			request.setAttribute("resourceArray", listRisorse);
+			request.getRequestDispatcher("MD-DownloadUpload.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -61,6 +75,7 @@ public class GestoreMaterialeDidattico extends HttpServlet {
 			} else {
 				Risorsa r=DatabaseGM.getRisorsaByID(Integer.parseInt(file.getName()));
 				listRisorse.add(r);
+				lastLeaf=true;
 			}
 		}
 	}
