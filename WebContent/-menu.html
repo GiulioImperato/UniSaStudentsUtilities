@@ -1,0 +1,89 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header" style="margin-top:-10px">
+      <a class="navbar-brand" href="#"><img src="images/logo.png"></a>
+      <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.jsp">Home</a></li>
+        <li><a href="MD-navigazione.jsp">Materiali didattico</a></li>
+        <li><a href="GV-RicercaLibri.jsp">Vendita libri</a></li>
+        <li><a href="#">Mappa aule</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Registrati</a>
+          <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+            <div class="col-lg-12">
+              <div class="text-center"><h3><b>Registrati</b></h3></div>
+              <form id="ajax-register-form" action="RegistrazioneUtente" method="post" role="form" autocomplete="off">
+                <div class="form-group">
+                  <input type="text" name="nome" id="nome" tabindex="1" class="form-control" placeholder="Nome" value="">
+                </div>
+                <div class="form-group">
+                  <input type="text" name="cognome" id="cognome" tabindex="1" class="form-control" placeholder="Cognome" value="">
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="">
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <input type="password" name="confirmpassword" id="confirmpassword" tabindex="3" class="form-control" placeholder="Conferma Password">
+                </div>
+                <div class="form-group">
+                  <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn-info" value="Registra">
+                </div>
+              </form>
+            </div>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+            <div class="col-lg-12">
+              <div class="text-center"><h3><b>Log In</b></h3></div>
+              <form id="ajax-login-form" action="Login" method="post" role="form" autocomplete="off">
+                <div class="form-group">
+                  <label for="email-login">Email</label>
+                  <input type="text" name="emailLogin" id="email-login" tabindex="1" class="form-control" placeholder="Email" value="" autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label for="password-login">Password</label>
+                  <input type="password" name="passwordLogin" id="password-login" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-xs-7">
+                      <input type="checkbox" tabindex="3" name="remember" id="remember">
+                      <label for="remember"> Remember Me</label>
+                    </div>
+                    <div class="col-xs-5 pull-right">
+                      <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn-success" value="Log In">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="text-center">
+                        <a href="#" tabindex="5" class="forgot-password">Forgot Password?</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
