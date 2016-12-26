@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import gestioneMaterialeDidattico.Risorsa;
-import gestioneUtente.Utente;
+
 
 public class DatabaseGM {
 
@@ -19,10 +19,20 @@ public class DatabaseGM {
 		try {
 			connection = Database.getConnection();
 			psGetRisorsaByID = connection.prepareStatement(queryGetRisorsa);
+			
 			psGetRisorsaByID.setInt(1, idRisorsa);
 			ResultSet rs = psGetRisorsaByID.executeQuery();
-			connection.commit();
+			
+			
+			if(!rs.next()){
+				return null;
+				
+			}
+											
+			
 			while (rs.next()) {
+				
+				risorsa.setIdRisorsa(rs.getInt("idRisorsa"));
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));
@@ -44,6 +54,7 @@ public class DatabaseGM {
 				e.printStackTrace();
 			}
 		}
+		
 		return risorsa;
 	}
 
@@ -133,7 +144,8 @@ public class DatabaseGM {
 
 			while (rs.next()) {
 				Risorsa risorsa = new Risorsa();	
-
+				
+				risorsa.setIdRisorsa(rs.getInt("idRisorsa"));
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));
@@ -185,6 +197,7 @@ public class DatabaseGM {
 			while (rs.next()) {
 				Risorsa risorsa = new Risorsa();	
 
+				risorsa.setIdRisorsa(rs.getInt("idRisorsa"));
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));
@@ -236,6 +249,7 @@ public class DatabaseGM {
 			while (rs.next()) {
 				Risorsa risorsa = new Risorsa();	
 
+				risorsa.setIdRisorsa(rs.getInt("idRisorsa"));
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));
