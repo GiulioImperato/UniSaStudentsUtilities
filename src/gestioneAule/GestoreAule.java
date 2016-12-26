@@ -12,7 +12,6 @@ import storageLayer.DatabaseGA;
  *
  */
 public class GestoreAule {
-	private ArrayList<Aula> aule;
 	
 	/**
 	 *  <b> Creazione del Gestore Aule senza parametri </b>
