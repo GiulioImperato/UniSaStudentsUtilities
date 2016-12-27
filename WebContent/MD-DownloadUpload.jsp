@@ -99,15 +99,15 @@
 						<td><a href="#">${risorsa.dislike}  <span class="glyphicon glyphicon-thumbs-down"></span></a></td>
 						<td>${risorsa.dataUpload}</td>
 						<td>${risorsa.dimensione}</td>
-						<td><a href="#"><span class="glyphicon glyphicon-save"></span></a></td>
+						<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}"><span class="glyphicon glyphicon-save"></span></a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			<!-- /TabellaLibri -->
 			<label class="btn btn-file btn-success" style="margin-bottom: 10px"><span
-				class="glyphicon glyphicon-open"></span> Upload file<input
-				type="file" style="display: none;"> </label>
+				class="glyphicon glyphicon-open"></span> <form id="uploadForm" action="GestoreUpload" method="get" enctype="multipart/form-data">Upload file<input
+				type="file" id="uploadable" style="display: none;"> </form></label>
 		</div>
 	</div>
 	<!-- works -->
@@ -123,4 +123,12 @@
 
 
 </body>
+<script>
+$(function(){
+    $("#uploadable").change(function(){
+        $("#uploadForm").submit();
+    });
+});
+</script>
 </html>
+

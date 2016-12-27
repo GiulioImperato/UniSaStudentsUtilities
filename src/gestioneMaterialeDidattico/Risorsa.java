@@ -11,7 +11,6 @@ public class Risorsa {
 	private Date dataUpload;
 	private int like;
 	private int dislike;
-	private String tipo;
 	private String pathCaricamento;
 
 
@@ -38,11 +37,11 @@ public class Risorsa {
 	 * @author Antonio Corsuto
 	 */
 
-	public Risorsa( String nome, String proprietaio, double dimensione, Date dataUpload, int like,
+	public Risorsa( String nome, String proprietario, double dimensione, Date dataUpload, int like,
 			int dislike, String pathCaricamento) {
 		super();
 		this.nome = nome;
-		this.proprietario = proprietaio;
+		this.proprietario = proprietario;
 		this.dimensione = dimensione;
 		this.dataUpload = dataUpload;
 		this.like = like;
@@ -188,13 +187,6 @@ public class Risorsa {
 
 	public int getLike() {
 		return like;
-	}
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
 	}
 
 	/**
