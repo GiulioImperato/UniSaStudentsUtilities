@@ -38,7 +38,6 @@ public class GestoreRicerca extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String folderClicked=request.getParameter("folderClicked");
 		String folderPath;
-		System.out.println(folderClicked);
 		listItem=new ArrayList<>();
 		listRisorse=new ArrayList<>();
 		if(previousPath!=""){
@@ -72,7 +71,10 @@ public class GestoreRicerca extends HttpServlet {
 				Item f=new Item(file.getName());
 				listItem.add(f);
 			} else {
-				Risorsa r=DatabaseGM.getRisorsaByID(Integer.parseInt(file.getName()));
+				int id=Integer.parseInt(file.getName());
+				Risorsa r=DatabaseGM.getRisorsaByID(id);
+				System.out.println(r);
+				System.out.println(id);
 				listRisorse.add(r);
 				lastLeaf=true;
 			}

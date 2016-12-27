@@ -30,7 +30,7 @@ public class TestDBrisorsa {
 		
 		DatabaseGM.insertRisorsa(r);
 		System.out.println("CONTROLLO CHE SIA STATO INSERITO");
-		Risorsa R= DatabaseGM.getRisorsaByID(0);
+		Risorsa R= DatabaseGM.getRisorsaByID(7);
 		
 		
 	

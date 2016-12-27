@@ -21,22 +21,20 @@ public class DatabaseGM {
 			psGetRisorsaByID = connection.prepareStatement(queryGetRisorsa);
 			
 			psGetRisorsaByID.setInt(1, idRisorsa);
+			System.out.println(psGetRisorsaByID);
 			ResultSet rs = psGetRisorsaByID.executeQuery();
 			
 			
-			if(!rs.next()){
-				return null;
-				
-			}
+			if (!rs.isBeforeFirst() ) {    
+			    return null; 
+			} 
 											
-			
 			while (rs.next()) {
-				
 				risorsa.setIdRisorsa(rs.getInt("idRisorsa"));
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));
-				risorsa.setProprietaio(rs.getString("Proprietario"));
+				risorsa.setProprietario(rs.getString("Proprietario"));
 				risorsa.setLike(rs.getInt("Like"));
 				risorsa.setDislike(rs.getInt("Dislike"));
 				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));
@@ -75,7 +73,7 @@ public class DatabaseGM {
 			psGetRisorsaByID.setString(1, risorsa.getNome());
 			psGetRisorsaByID.setDouble(2, risorsa.getDimensione());
 			psGetRisorsaByID.setDate(3, risorsa.getDataUpload());
-			psGetRisorsaByID.setString(4, risorsa.getProprietaio());
+			psGetRisorsaByID.setString(4, risorsa.getProprietario());
 			psGetRisorsaByID.setInt(5, risorsa.getLike());
 			psGetRisorsaByID.setInt(6, risorsa.getDislike());
 			psGetRisorsaByID.setString(7, risorsa.getPathCaricamento());
@@ -149,7 +147,7 @@ public class DatabaseGM {
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));
-				risorsa.setProprietaio(rs.getString("Proprietario"));
+				risorsa.setProprietario(rs.getString("Proprietario"));
 				risorsa.setLike(rs.getInt("Like"));
 				risorsa.setDislike(rs.getInt("Dislike"));
 				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));	
@@ -201,7 +199,7 @@ public class DatabaseGM {
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));
-				risorsa.setProprietaio(rs.getString("Proprietario"));
+				risorsa.setProprietario(rs.getString("Proprietario"));
 				risorsa.setLike(rs.getInt("Like"));
 				risorsa.setDislike(rs.getInt("Dislike"));
 				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));	
@@ -253,7 +251,7 @@ public class DatabaseGM {
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));
-				risorsa.setProprietaio(rs.getString("Proprietario"));
+				risorsa.setProprietario(rs.getString("Proprietario"));
 				risorsa.setLike(rs.getInt("Like"));
 				risorsa.setDislike(rs.getInt("Dislike"));
 				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));	

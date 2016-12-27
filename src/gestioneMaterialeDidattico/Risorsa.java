@@ -6,11 +6,12 @@ public class Risorsa {
 
 	private int idRisorsa;
 	private String nome;
-	private String proprietaio;
+	private String proprietario;
 	private double dimensione;
 	private Date dataUpload;
 	private int like;
 	private int dislike;
+	private String tipo;
 	private String pathCaricamento;
 
 
@@ -41,7 +42,7 @@ public class Risorsa {
 			int dislike, String pathCaricamento) {
 		super();
 		this.nome = nome;
-		this.proprietaio = proprietaio;
+		this.proprietario = proprietaio;
 		this.dimensione = dimensione;
 		this.dataUpload = dataUpload;
 		this.like = like;
@@ -122,8 +123,8 @@ public class Risorsa {
 	 * @author Antonio Corsuto 
 	 */
 
-	public String getProprietaio() {
-		return proprietaio;
+	public String getProprietario() {
+		return proprietario;
 	}
 
 	/**
@@ -133,8 +134,8 @@ public class Risorsa {
 	 */
 
 
-	public void setProprietaio(String proprietaio) {
-		this.proprietaio = proprietaio;
+	public void setProprietario(String proprietario) {
+		this.proprietario = proprietario;
 	}
 
 
@@ -188,6 +189,14 @@ public class Risorsa {
 	public int getLike() {
 		return like;
 	}
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	/**
 	 * Setta il numero di like della Risorsa
 	 * @param like indica il nuovo numero di like
@@ -244,7 +253,7 @@ public class Risorsa {
 
 	@Override
 	public String toString() {
-		return "Risorsa [idRisorsa=" + idRisorsa + ", nome=" + nome + ", proprietaio=" + proprietaio + ", dimensione="
+		return "Risorsa [idRisorsa=" + idRisorsa + ", nome=" + nome + ", proprietaio=" + proprietario + ", dimensione="
 				+ dimensione + ", dataUpload=" + dataUpload + ", like=" + like + ", dislike=" + dislike
 				+ ", pathCaricamento=" + pathCaricamento + "]";
 	}
