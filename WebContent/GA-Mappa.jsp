@@ -26,9 +26,12 @@
           type="text/javascript"></script>
   <script src="js/MapsAPI.js" type="text/javascript"></script>
   <style>
+  		body{
+  			overflow-y:hidden;
+  		}
        #map {
        		width:100% !important; 
-			height:100% !important;
+			height:90% !important;
 			top:0px !important; 
 			left:0px !important; 
 			position: fixed !important;
@@ -46,12 +49,23 @@
   <div id="works"  class=" clearfix grid">
     <div class="container col-lg-8 col-md-offset-2">
       	<div id="map"></div>
-    		<script>initMap()</script>
+      	<iframe
+  			width="600"
+  			height="450"
+  			frameborder="0" style="border:0"
+  			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd1SnqQOoCKVRD8zVyiNYEttyPnxQSMnw&callback=initMap" onload="initMap();" allowfullscreen>
+			</iframe>
     </div>
    </div>
+   
+   <!--Contact Starts-->
+	<div id="contact" class="spacer">
+
+
+	</div>
+<!--Contact Ends-->
 
 	<!-- works -->
-
 	<%@ include file="-footer.html"%>
 
 	<%@ include file="-DOWNimport.html"%>
