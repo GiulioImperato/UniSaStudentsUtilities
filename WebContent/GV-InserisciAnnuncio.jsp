@@ -39,6 +39,8 @@
       <h2 style="text-align: left;">Inserisci annuncio</h2> 
 
       <!-- TabellaLibri -->
+      <form method="post" action="GestoreLibriServlet?azione=inserisciAnnuncio" role="form">
+      
       <table class="table">
         <tbody>
           <tr>
@@ -48,21 +50,24 @@
                 Image...<input type="file" style="display: none;">
               </label>
             </td>
+            
             <td>
               <ul class="list-unstyled stylish-insert-ad">
-                <li><input type="text" name="titolo-libro" class="form-control" placeholder="Titolo" tabindex="1"></li>
-                <li><input type="text" name="autore-libro" class="form-control" placeholder="Autore" tabindex="2"></li>
+               	<li><input type="text" name="titolo-libro" class="form-control" placeholder="Titolo" tabindex="1" ></li>
+                <li><input type="text" name="autore-libro" class="form-control" placeholder="Autore" tabindex="2" ></li>                
+                <li><input type="text" name="editore-libro" class="form-control" placeholder="Editore" tabindex="3" ></li>
+                <li><input type="number" min="00.00" name="anno-libro" class="form-control" placeholder="Anno: aaaa" tabindex="4" ></li>
                 <li>
-                  <select class="form-control" name="select-condizioni" id="select-condizioni" tabindex="3">
+                  <select class="form-control" name="condizioni-libro" id="select-condizioni" tabindex="5" >
                     <option selected>Seleziona condizione</option>
                     <option>Nuovo</option>
                     <option>Usato</option>
                     <option>Fotocopie</option>
                   </select>
                 </li>
-                <li><input type="number" min="00.00" value="00.00" step="01.00" name="prezzo-libro" class="form-control" placeholder="Prezzo" tabindex="4"></li>
+                <li><input type="number" min="00.00" step="00.01" name="prezzo-libro" class="form-control" placeholder="Prezzo: 00,00" tabindex="6" ></li>
                 <li>
-                  <select class="form-control" id="select-corso" tabindex="5">
+                  <select class="form-control" name="corso-libro" id="select-corso" tabindex="6" >
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -70,7 +75,7 @@
                   </select>
                 </li>
                 <li>
-                  <textarea id="textarea-libro" class="form-control" placeholder="Descrizione" tabindex="6" rows="6"></textarea>
+                  <textarea id="textarea-libro" class="form-control" placeholder="Descrizione" tabindex="6" rows="7" ></textarea>
                 </li>
               </ul>
             </td>
@@ -78,8 +83,9 @@
         </tbody>
       </table>
       <div class="form-group pull-right" style="margin-top: -29px">
-        <input type="button" name="inserisci-annuncio" value="inserisci annuncio" class="btn btn-success">
+        <input type="submit" name="inserisci-annuncio" value="inserisci annuncio" class="btn btn-success">
       </div>
+     </form>
       <!-- /TabellaLibri -->
     </div>
   </div>
