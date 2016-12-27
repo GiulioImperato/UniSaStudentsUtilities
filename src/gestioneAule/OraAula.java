@@ -7,9 +7,9 @@ public class OraAula {
 	private Giorno giorno;
 	private Time oraInizio;
 	private Time oraFine;
-	private boolean defaultStatus = false;
-	private boolean feedStatus = false;
-	private String emailUtente;				//Far vedere al prof. Gravino
+	private boolean defaultStatus;
+	private boolean feedStatus;
+	private String emailUtente;				
 	
 	public OraAula(){
 	}
