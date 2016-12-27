@@ -12,6 +12,16 @@ import gestioneMaterialeDidattico.Risorsa;
 
 public class DatabaseGM {
 
+	
+	
+	/**
+	 * Restituisce ,se esiste, un oggetto Risorsa data un ID
+	 * @param idRisorsa
+	 * @return {@code null}  se l'utene non esiste, {@code Risorsa Utente }  altrimenti.
+	 * @throws SQLException
+	  * @author Domenico Tropeano
+	 */
+
 	public static Risorsa getRisorsaByID(int idRisorsa) {
 		Connection connection = null;
 		PreparedStatement psGetRisorsaByID = null;
