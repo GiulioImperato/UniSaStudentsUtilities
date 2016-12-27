@@ -49,7 +49,6 @@ public class GestoreRicerca extends HttpServlet {
 		previousPath=folderPath+"/";
 		File folderPointer=new File(folderPath+"/");
 		displayDirectoryContents(folderPointer);
-		System.out.println("dsfdsf");
 		if(!lastLeaf){
 			request.setAttribute("folderArray", listItem);
 			request.getRequestDispatcher("MD-navigazione.jsp").forward(request, response);
