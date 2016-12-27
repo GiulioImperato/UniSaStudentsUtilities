@@ -27,11 +27,12 @@
   <script src="js/MapsAPI.js" type="text/javascript"></script>
   <style>
   		body{
+  			overflow-x:hidden;
   			overflow-y:hidden;
   		}
        #map {
        		width:100% !important; 
-			height:90% !important;
+			height:89% !important;
 			top:0px !important; 
 			left:0px !important; 
 			position: fixed !important;
@@ -69,6 +70,5 @@
 	<%@ include file="-footer.html"%>
 
 	<%@ include file="-DOWNimport.html"%>
-	
 </body>
 </html>
