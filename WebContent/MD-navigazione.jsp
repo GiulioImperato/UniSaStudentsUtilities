@@ -2,6 +2,7 @@
 	import="java.util.*,gestioneUtente.*,storageLayer.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%	
+  String successivo= (String)request.getAttribute("tiposuccessivo"); 
    Utente utente = (Utente)session.getAttribute("utente");
         if(utente==null){
         	// SIMULA LA SESSIONE
@@ -55,8 +56,9 @@
 			<hr>
 			<!-- ListaCorsi -->
 			<ul class="list-unstyled">
+			
 				<c:forEach var="item"  items="${requestScope.folderArray}">
-					<a href="GestoreRicerca?folderClicked=${item.nome}"><li class="well">${item.nome}</li></a>
+					<a href="GestoreRicerca?typeClicked=<%=successivo%>&folderClicked=${item.nome}"><li class="well">${item.nome}</li></a>
 				</c:forEach>
 				<c:remove var="item" />
 			</ul>
