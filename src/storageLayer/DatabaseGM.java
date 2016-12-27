@@ -97,7 +97,7 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static boolean DeleteRisorsa(int id) throws SQLException {
+	public synchronized static boolean deleteRisorsa(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -127,7 +127,7 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static ArrayList<Risorsa> DoRetrieveAll() throws SQLException {
+	public synchronized static ArrayList<Risorsa> doRetrieveAll() throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -178,7 +178,7 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static ArrayList<Risorsa> DoRetrieveAllByUtente(String idUtente) throws SQLException {
+	public synchronized static ArrayList<Risorsa> doRetrieveAllByUtente(String idUtente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -230,7 +230,7 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static ArrayList<Risorsa> DoRetrieveAllByPath(String path) throws SQLException {
+	public synchronized static ArrayList<Risorsa> doRetrieveAllByPath(String path) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -283,7 +283,7 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static boolean AggiornaLike(int id ,int like) throws SQLException {
+	public synchronized static boolean aggiornaLike(int id ,int like) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -322,7 +322,7 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static boolean AggiornaDislike(int id ,int like) throws SQLException {
+	public synchronized static boolean aggiornaDislike(int id ,int like) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
