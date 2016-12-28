@@ -21,58 +21,51 @@ import storageLayer.DatabaseGV;
 @WebServlet("/GestoreLibriServlet")
 public class GestoreLibriServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GestoreLibriServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GestoreLibriServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession s = request.getSession();
-		String azione = request.getParameter("azione");
-		
-		if(azione!=null){
-			if(azione.equalsIgnoreCase("inserisciAnnuncio")){
-				
-				String titoloLibro = request.getParameter("titolo-libro");
-				String autore = request.getParameter("autore-libro");
-				CondizioneLibro condizione = CondizioneLibro.valueOf(request.getParameter("condizioni-libro"));
-				String corso = request.getParameter("corso-libro");
-				String proprietario = (String) s.getAttribute("email");
-				String editore = request.getParameter("editore-libro");
-				String year = request.getParameter("anno-libro");
-				int anno = Integer.parseInt(year);
-				String price = request.getParameter("prezzo-libro");
-				double prezzo = Double.parseDouble(price);
-				String descrizione = request.getParameter("descrizione");
-				
-				DettagliAnnuncio dt = new DettagliAnnuncio(editore, anno, descrizione, new Date(), "pathProva");
-				Annuncio annuncio = new Annuncio(titoloLibro, autore, corso, proprietario, condizione, prezzo, dt);
-				try {
-					DatabaseGV.addAnnuncio(annuncio, dt);
-					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				
-				response.sendRedirect("/usu/index.jsp");
-				
-			}
-		}
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		HttpSession s = request.getSession();
+		String azione = request.getParameter("azione");
+		System.out.println("fdfdsfdsfsfsdfdsds");
+		if(azione.equalsIgnoreCase("inserisciAnnuncio")){
+			
+			String titoloLibro = request.getParameter("titolo-libro");	 
+			String autore = request.getParameter("autore-libro");
+			String editore = request.getParameter("editore-libro");
+			String year = request.getParameter("anno-libro");
+			String proprietario = (String) s.getAttribute("email");
+			int anno = Integer.parseInt(year);
+			CondizioneLibro condizione = CondizioneLibro.valueOf(request.getParameter("condizioni"));
+			String price = request.getParameter("prezzo-libro");
+			double prezzo = Double.parseDouble(price);
+			String corso = request.getParameter("corso-libro");
+			String descrizione = request.getParameter("descrizione");
+			
+			DettagliAnnuncio dt = new DettagliAnnuncio(editore, anno, descrizione, new Date(), "pathProva");
+			Annuncio annuncio = new Annuncio(titoloLibro, autore, corso, proprietario, condizione, prezzo, dt);
+			try {
+				DatabaseGV.addAnnuncio(annuncio, dt);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

@@ -31,7 +31,7 @@
   		}
        #map {
        		width:100% !important; 
-			height:90% !important;
+			height:100% !important;
 			top:0px !important; 
 			left:0px !important; 
 			position: fixed !important;
@@ -68,7 +68,6 @@
 	<!-- works -->
 	<%@ include file="-footer.html"%>
 
-	<%@ include file="-DOWNimport.html"%>
 	
 </body>
 </html>
