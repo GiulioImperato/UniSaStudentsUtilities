@@ -21,7 +21,7 @@ import storageLayer.DatabaseGV;
 @WebServlet("/GestoreLibriServlet")
 public class GestoreLibriServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -43,7 +43,8 @@ public class GestoreLibriServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession s = request.getSession();
 		String azione = request.getParameter("azione");
-		System.out.println("fdfdsfdsfsfsdfdsds");
+		String path = request.getParameter("path");
+		System.out.println("PATH "+path);
 		if(azione.equalsIgnoreCase("inserisciAnnuncio")){
 			
 			String titoloLibro = request.getParameter("titolo-libro");	 
@@ -60,9 +61,15 @@ public class GestoreLibriServlet extends HttpServlet {
 			
 			DettagliAnnuncio dt = new DettagliAnnuncio(editore, anno, descrizione, new Date(), "pathProva");
 			Annuncio annuncio = new Annuncio(titoloLibro, autore, corso, proprietario, condizione, prezzo, dt);
-			try {
+			/*try {
 				DatabaseGV.addAnnuncio(annuncio, dt);
 			} catch (SQLException e) {
+				e.printStackTrace();
+			}*/
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
