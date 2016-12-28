@@ -4,6 +4,13 @@
 
 <%
 	Utente utente = (Utente) session.getAttribute("utente");
+
+	String home = (String) request.getAttribute("home");
+	String dip = (String) request.getAttribute("dip");
+	String degree = (String) request.getAttribute("degree");
+	String corso = (String) request.getAttribute("corso");
+	String materiale = (String) request.getAttribute("materiale");
+
 	if (utente == null) {
 		// SIMULA LA SESSIONE
 		//utente = new Utente("a","a","a","a",true,true);
@@ -65,10 +72,14 @@
 			<!-- NavPath-->
 
 			<ol class="breadcrumb">
-				<li><a id="department" href="GestoreRicerca?typeClicked=department&folderClicked=Informatica">Informatica</a></li>
-				<li><a id="degree" href="GestoreRicerca?typeClicked=degree&folderClicked=Triennale">Triennale</a></li>
-				<li><a id="corso" href="GestoreRicerca?typeClicked=corso&folderClicked=Programmazione_1">Programmazione_1</a></li>
-				<li><a id="materiale" href="GestoreRicerca?typeClicked=materiale&folderClicked=Slides">Slides</a></li>
+				<li><a id="department"
+					href="GestoreRicerca?typeClicked=department&folderClicked=<%=dip %>"><%=dip %></a></li>
+				<li><a id="degree"
+					href="GestoreRicerca?typeClicked=degree&folderClicked=<%=degree %>"><%=degree %></a></li>
+				<li><a id="corso"
+					href="GestoreRicerca?typeClicked=corso&folderClicked=<%=corso %>"><%=corso %></a></li>
+				<li><a id="materiale"
+					href="GestoreRicerca?typeClicked=materiale&folderClicked=<%=materiale %>"><%=materiale %></a></li>
 
 			</ol>
 
@@ -110,7 +121,8 @@
 				enctype="multipart/form-data">
 				<label class="btn btn-file btn-success" style="margin-bottom: 10px"><span
 					class="glyphicon glyphicon-open"></span> Upload file<input
-					type="file" name="uploadable" id="uploadable" style="display: none;"> </label>
+					type="file" name="uploadable" id="uploadable"
+					style="display: none;"> </label>
 			</form>
 
 		</div>
@@ -129,8 +141,8 @@
 
 </body>
 <script>
-$('#uploadable').change(function() {
-	  $('#uploadForm').submit();
+	$('#uploadable').change(function() {
+		$('#uploadForm').submit();
 	});
 </script>
 </html>
