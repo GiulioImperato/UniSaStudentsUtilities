@@ -287,13 +287,13 @@ public class DatabaseGM {
 
 	/**
 	 * Aggiorna i like di una risorsa
-	 *@return {@code true} se la modifica è ok, {@code false}  altrimenti.
+	  *@return il numero dei like aggiornato se la modifica è ok, 0  altrimenti.
 	 * @param id id della risorsa 
 	 * @param like  valore aggiornato
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static boolean aggiornaLike(int id ,int like) throws SQLException {
+	public synchronized static int aggiornaLike(int id ,int like) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -319,20 +319,22 @@ public class DatabaseGM {
 			}
 		}
 
-		return (result != 0);
+		if(result != 0)
+			return like;
+		else return 0;
 
 	}
 
 
 	/**
 	 * Aggiorna i dislike di una risorsa
-	 *@return {@code true} se la modifica è ok, {@code false}  altrimenti.
+	 *@return il numero dei dislike aggiornato se la modifica è ok, 0  altrimenti.
 	 * @param id identificativo della risorsa 
 	 * @param like valore aggiornato
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static boolean aggiornaDislike(int id ,int like) throws SQLException {
+	public synchronized static int aggiornaDislike(int id ,int like) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -356,7 +358,9 @@ public class DatabaseGM {
 			}
 		}
 
-		return (result != 0);
+		if(result != 0)
+			return like;
+		else return 0;
 
 	}
 

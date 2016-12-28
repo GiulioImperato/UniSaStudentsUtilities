@@ -71,7 +71,7 @@
 		
 		
 		var degree = document.getElementById("degree");
-		var b = degreedip.childNodes[0].textContent;		
+		var b = degree.childNodes[0].textContent;		
 		if(b==""){
 			$(degree).hide();
 		}
@@ -81,7 +81,7 @@
 		
 		
 		var corso = document.getElementById("corso");
-		var c = corsodip.childNodes[0].textContent;
+		var c = corso.childNodes[0].textContent;
 		if(c==""){
 			$(corso).hide();
 		}
@@ -90,7 +90,7 @@
 		}
 		
 		var materiale = document.getElementById("materiale");
-		var d =materialedip.childNodes[0].textContent;
+		var d =materiale.childNodes[0].textContent;
 		if(d==""){
 			$(materiale).hide();
 		}
