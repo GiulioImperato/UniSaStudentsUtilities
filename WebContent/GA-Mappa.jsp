@@ -32,7 +32,11 @@
   		}
        #map {
        		width:100% !important; 
+<<<<<<< HEAD
 			height:89% !important;
+=======
+			height:100% !important;
+>>>>>>> refs/remotes/origin/Pasquale
 			top:0px !important; 
 			left:0px !important; 
 			position: fixed !important;
@@ -69,6 +73,10 @@
 	<!-- works -->
 	<%@ include file="-footer.html"%>
 
+<<<<<<< HEAD
 	<%@ include file="-DOWNimport.html"%>
+=======
+	
+>>>>>>> refs/remotes/origin/Pasquale
 </body>
 </html>
