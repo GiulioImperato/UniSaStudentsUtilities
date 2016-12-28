@@ -30,7 +30,12 @@ function alterContent2() {
 //Function for handling the return of servlet data
 
 var map;
+var user;
 function handleAlterContent2() {
+	
+	user = document.getElementById('user').value;
+	alert('utente '+user)
+	
 	if (rcvReq2.readyState == 4) {
 
 		var responseTextVar = rcvReq2.responseText;				//Stringa ricevuta dalla servlet
@@ -129,7 +134,7 @@ function handleAlterContent2() {
 							console.log(aula);
 							aula.splice(1,4);
 							console.log(aula);
-							infowindow.setContent(aula+space+contentString);
+							infowindow.setContent(aula+space+contentString+'<br><button onclick="myFunction()">Click me</button>');
 						}	
 					});
 					marker.setIcon(icon_green);
@@ -142,3 +147,9 @@ function handleAlterContent2() {
 //Load function
 google.maps.event.addDomListener(window, 'load', handleAlterContent2);
 
+
+function myFunction(){
+	console.log(infowindow.getContent());
+	alert("fa"+infowindow.getContent());
+	alert('ciao '+user);
+}
