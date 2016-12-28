@@ -203,14 +203,12 @@ public class DatabaseGA {
 		return true;
 	}
 
-	private static String queryAddOraAula;
 	private static String queryGetListaAule;
 	private static String queryRicercaAule;
 	private static String queryVisualizzaInfoAule;
 	private static String queryInvioFeedback;
 	private static String queryResetFeedback;
 	static {
-		queryAddOraAula = "INSERT INTO `redteam`.`oraaula` (`Nome`, `giorno`, `oraInizio`, `oraFine`, `defaultStatus`, `feedStatus`, `emailUtente`) VALUES (?, ?, ?, ?, ?, ?, ?);";
 		queryGetListaAule = "SELECT * FROM redteam.aula";
 		queryRicercaAule = "SELECT distinct a.Nome,CoordinateX,CoordinateY "
 				+ "FROM redteam.aula as a,redteam.oraaula as oa "
