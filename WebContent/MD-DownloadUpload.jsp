@@ -65,11 +65,10 @@
 			<!-- NavPath-->
 
 			<ol class="breadcrumb">
-				<li><a href="#">Corso di laurea</a></li>
-				<li><a href="#">Informatica</a></li>
-				<li><a href="#">Triennale</a></li>
-				<li><a href="#">Programmazione 1</a></li>
-				<li><a href="#">Slides</a></li>
+				<li><a id="department" href="GestoreRicerca?typeClicked=department&folderClicked=Informatica">Informatica</a></li>
+				<li><a id="degree" href="GestoreRicerca?typeClicked=degree&folderClicked=Triennale">Triennale</a></li>
+				<li><a id="corso" href="GestoreRicerca?typeClicked=corso&folderClicked=Programmazione_1">Programmazione_1</a></li>
+				<li><a id="materiale" href="GestoreRicerca?typeClicked=materiale&folderClicked=Slides">Slides</a></li>
 
 			</ol>
 
