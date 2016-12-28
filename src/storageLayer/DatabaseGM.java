@@ -12,6 +12,16 @@ import gestioneMaterialeDidattico.Risorsa;
 
 public class DatabaseGM {
 
+	
+	
+	/**
+	 * Restituisce ,se esiste, un oggetto Risorsa data un ID
+	 * @param idRisorsa
+	 * @return {@code null}  se l'utene non esiste, {@code Risorsa Utente }  altrimenti.
+	 * @throws SQLException
+	  * @author Domenico Tropeano
+	 */
+
 	public static Risorsa getRisorsaByID(int idRisorsa) {
 		Connection connection = null;
 		PreparedStatement psGetRisorsaByID = null;
@@ -21,22 +31,20 @@ public class DatabaseGM {
 			psGetRisorsaByID = connection.prepareStatement(queryGetRisorsa);
 			
 			psGetRisorsaByID.setInt(1, idRisorsa);
+			System.out.println(psGetRisorsaByID);
 			ResultSet rs = psGetRisorsaByID.executeQuery();
 			
 			
-			if(!rs.next()){
-				return null;
-				
-			}
+			if (!rs.isBeforeFirst() ) {    
+			    return null; 
+			} 
 											
-			
 			while (rs.next()) {
-				
 				risorsa.setIdRisorsa(rs.getInt("idRisorsa"));
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));
-				risorsa.setProprietaio(rs.getString("Proprietario"));
+				risorsa.setProprietario(rs.getString("Proprietario"));
 				risorsa.setLike(rs.getInt("Like"));
 				risorsa.setDislike(rs.getInt("Dislike"));
 				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));
@@ -75,7 +83,7 @@ public class DatabaseGM {
 			psGetRisorsaByID.setString(1, risorsa.getNome());
 			psGetRisorsaByID.setDouble(2, risorsa.getDimensione());
 			psGetRisorsaByID.setDate(3, risorsa.getDataUpload());
-			psGetRisorsaByID.setString(4, risorsa.getProprietaio());
+			psGetRisorsaByID.setString(4, risorsa.getProprietario());
 			psGetRisorsaByID.setInt(5, risorsa.getLike());
 			psGetRisorsaByID.setInt(6, risorsa.getDislike());
 			psGetRisorsaByID.setString(7, risorsa.getPathCaricamento());
@@ -99,7 +107,7 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static boolean DeleteRisorsa(int id) throws SQLException {
+	public synchronized static boolean deleteRisorsa(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -129,7 +137,7 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static ArrayList<Risorsa> DoRetrieveAll() throws SQLException {
+	public synchronized static ArrayList<Risorsa> doRetrieveAll() throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -149,7 +157,7 @@ public class DatabaseGM {
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));
-				risorsa.setProprietaio(rs.getString("Proprietario"));
+				risorsa.setProprietario(rs.getString("Proprietario"));
 				risorsa.setLike(rs.getInt("Like"));
 				risorsa.setDislike(rs.getInt("Dislike"));
 				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));	
@@ -180,7 +188,7 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static ArrayList<Risorsa> DoRetrieveAllByUtente(String idUtente) throws SQLException {
+	public synchronized static ArrayList<Risorsa> doRetrieveAllByUtente(String idUtente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -201,7 +209,7 @@ public class DatabaseGM {
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));
-				risorsa.setProprietaio(rs.getString("Proprietario"));
+				risorsa.setProprietario(rs.getString("Proprietario"));
 				risorsa.setLike(rs.getInt("Like"));
 				risorsa.setDislike(rs.getInt("Dislike"));
 				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));	
@@ -232,7 +240,7 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static ArrayList<Risorsa> DoRetrieveAllByPath(String path) throws SQLException {
+	public synchronized static ArrayList<Risorsa> doRetrieveAllByPath(String path) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -253,7 +261,7 @@ public class DatabaseGM {
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
 				risorsa.setDataUpload(rs.getDate("dataUpload"));
-				risorsa.setProprietaio(rs.getString("Proprietario"));
+				risorsa.setProprietario(rs.getString("Proprietario"));
 				risorsa.setLike(rs.getInt("Like"));
 				risorsa.setDislike(rs.getInt("Dislike"));
 				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));	
@@ -285,7 +293,7 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static boolean AggiornaLike(int id ,int like) throws SQLException {
+	public synchronized static boolean aggiornaLike(int id ,int like) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -324,7 +332,7 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static boolean AggiornaDislike(int id ,int like) throws SQLException {
+	public synchronized static boolean aggiornaDislike(int id ,int like) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 

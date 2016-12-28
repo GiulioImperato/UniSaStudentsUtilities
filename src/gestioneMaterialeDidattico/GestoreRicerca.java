@@ -24,6 +24,15 @@ public class GestoreRicerca extends HttpServlet {
     static ArrayList<Item> listItem=null;
     static ArrayList<Risorsa>listRisorse=null;
     static boolean lastLeaf=false;
+
+    
+    private String home="";
+    private String dip="";
+    private String degree="";
+    private String corso="";
+    private String materiale="";
+    String tipoSuccessivo="";
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,21 +45,101 @@ public class GestoreRicerca extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String folderClicked=request.getParameter("folderClicked");
+		String typeClicked=request.getParameter("typeClicked");
+		
+		String errore="";
+	    String requestPath	=request.getSession().getServletContext().getRealPath("res/");
+		
+		
+		
+		System.out.println(" folderClicked = " + folderClicked);
+		System.out.println(" folderClicked = " + typeClicked);
+		
+		if(typeClicked.equals("home")){
+			 home="";
+			 dip="";
+			 degree="";
+			 corso="";
+			 materiale="";
+			tipoSuccessivo="department";
+			home=folderClicked;
+			 previousPath="";
+		      lastLeaf=false;
+		      listItem=null;
+		      listRisorse=null;
+			
+		}
+		
+		else if(typeClicked.equals("department")){
+			
+			 errore =home+"/";
+			
+			tipoSuccessivo="degree";
+			dip=folderClicked;
+			lastLeaf=false;
+		}
+		
+		else if(typeClicked.equals("degree")){
+			
+		 errore =home+"/"+dip+"/";
+			
+			tipoSuccessivo="corso";
+			degree=folderClicked;
+			lastLeaf=false;
+		}
+		
+		else if(typeClicked.equals("corso")){
+			
+			errore =home+"/"+dip+"/"+degree+"/";
+			
+			tipoSuccessivo="materiale";
+			corso=folderClicked;
+			lastLeaf=false;
+		}
+		
+		else if(typeClicked.equals("materiale")){
+			
+			 errore =home+"/"+dip+"/"+degree+"/"+corso+"/";
+			
+			tipoSuccessivo="";
+			materiale=folderClicked;
+			lastLeaf=false;
+		}
+		
+		else{
+			//redirect error page
+		}
+		
+	
+		
 		String folderPath;
-		System.out.println(folderClicked);
+		
 		listItem=new ArrayList<>();
 		listRisorse=new ArrayList<>();
+		
 		if(previousPath!=""){
+			previousPath=requestPath+errore;
 			folderPath=previousPath+folderClicked;
+			System.out.println("previousPath "+previousPath);
+			
 		}else{
 			folderPath=request.getSession().getServletContext().getRealPath("res/"+folderClicked);
 		}
 		previousPath=folderPath+"/";
+		
+		System.out.println(" folderPath = " + folderPath);
+		
+		System.out.println("previousPath "+previousPath);
+		
 		File folderPointer=new File(folderPath+"/");
+		
+		
 		displayDirectoryContents(folderPointer);
 		if(!lastLeaf){
 			request.setAttribute("folderArray", listItem);
+			request.setAttribute("tiposuccessivo",tipoSuccessivo);			
 			request.getRequestDispatcher("MD-navigazione.jsp").forward(request, response);
 		}else{
 			request.setAttribute("resourceArray", listRisorse);
@@ -72,11 +161,16 @@ public class GestoreRicerca extends HttpServlet {
 				Item f=new Item(file.getName());
 				listItem.add(f);
 			} else {
-				Risorsa r=DatabaseGM.getRisorsaByID(Integer.parseInt(file.getName()));
+				int id=Integer.parseInt(file.getName());
+				Risorsa r=DatabaseGM.getRisorsaByID(id);
+				System.out.println(r);
+				System.out.println(id);
 				listRisorse.add(r);
 				lastLeaf=true;
 			}
 		}
 	}
+	
+	
 
 }
