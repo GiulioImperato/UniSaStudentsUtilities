@@ -91,23 +91,29 @@
 
 				<tbody>
 					<c:forEach var="risorsa" items="${requestScope.resourceArray}">
-					<tr>
-						<td>${risorsa.nome}</td>
-						<td>${risorsa.proprietario}</td>
-						<td><a href="#">${risorsa.like}  <span
-								class="glyphicon glyphicon-thumbs-up"></span></a></td>
-						<td><a href="#">${risorsa.dislike}  <span class="glyphicon glyphicon-thumbs-down"></span></a></td>
-						<td>${risorsa.dataUpload}</td>
-						<td>${risorsa.dimensione}</td>
-						<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}"><span class="glyphicon glyphicon-save"></span></a></td>
+						<tr>
+							<td>${risorsa.nome}</td>
+							<td>${risorsa.proprietario}</td>
+							<td><a href="#">${risorsa.like} <span
+									class="glyphicon glyphicon-thumbs-up"></span></a></td>
+							<td><a href="#">${risorsa.dislike} <span
+									class="glyphicon glyphicon-thumbs-down"></span></a></td>
+							<td>${risorsa.dataUpload}</td>
+							<td>${risorsa.dimensione}</td>
+							<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}"><span
+									class="glyphicon glyphicon-save"></span></a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			<!-- /TabellaLibri -->
-			<label class="btn btn-file btn-success" style="margin-bottom: 10px"><span
-				class="glyphicon glyphicon-open"></span> <form id="uploadForm" action="GestoreUpload" method="get" enctype="multipart/form-data">Upload file<input
-				type="file" id="uploadable" style="display: none;"> </form></label>
+			<form id="uploadForm" action="GestoreUpload" method="post"
+				enctype="multipart/form-data">
+				<label class="btn btn-file btn-success" style="margin-bottom: 10px"><span
+					class="glyphicon glyphicon-open"></span> Upload file<input
+					type="file" name="uploadable" id="uploadable" style="display: none;"> </label>
+			</form>
+
 		</div>
 	</div>
 	<!-- works -->
@@ -124,11 +130,9 @@
 
 </body>
 <script>
-$(function(){
-    $("#uploadable").change(function(){
-        $("#uploadForm").submit();
-    });
-});
+$('#uploadable').change(function() {
+	  $('#uploadForm').submit();
+	});
 </script>
 </html>
 

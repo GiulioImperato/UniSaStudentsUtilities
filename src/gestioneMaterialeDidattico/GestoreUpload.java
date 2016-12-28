@@ -41,8 +41,17 @@ public class GestoreUpload extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		if (ServletFileUpload.isMultipartContent(request)) {
-			String path = "res/uni/Triennale/Informatica/Slides/";
+			String path = "res/uni/Informatica/Triennale/Programmazione_1/Slides/";
 			String UPLOAD_DIRECTORY = getServletContext().getRealPath(path);
 			File uploadDirectory = new File(UPLOAD_DIRECTORY);
 
@@ -62,17 +71,17 @@ public class GestoreUpload extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if (multiparts != null && multiparts.size() > 0) {
+			if (multiparts != null ) { //&& multiparts.size() > 0
 				// iterates over form's fields
+				Iterator<FileItem> parameters = multiparts.iterator();
 				for (FileItem item : multiparts) {
 					// processes only fields that are not form fields
 					if (!item.isFormField()) {
 						String name = new File(item.getName()).getName();
 						String proprietario = "ang@hotmail.it"; // da
 																// risolvereeeeeeeeeeeee
-						double dimensione = item.getSize();
+						double dimensione = item.getSize()/1024; //fix it
 						Date dataUpload = new java.sql.Date(System.currentTimeMillis());
-						;
 						int like = 0;
 						int dislike = 0;
 						String pathCaricamento = path;
@@ -80,7 +89,7 @@ public class GestoreUpload extends HttpServlet {
 								pathCaricamento);
 
 						int idRisorsa = DatabaseGM.insertRisorsa(r);
-						String filePath = path + File.separator + idRisorsa;
+						String filePath = UPLOAD_DIRECTORY + File.separator + idRisorsa;
 						File storeFile = new File(filePath);
 
 						// saves the file on disk
@@ -90,20 +99,10 @@ public class GestoreUpload extends HttpServlet {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					}
+					} 
 				}
-			}
-		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+			} 
+		} 
 	}
 
 }
