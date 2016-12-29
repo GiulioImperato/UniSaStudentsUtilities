@@ -41,7 +41,7 @@ public class GestoreRicerca extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
-	 *      @author Antonio Corsuto & Domenico Antonio Tropeano
+	 * @author Antonio Corsuto & Domenico Antonio Tropeano
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -143,7 +143,11 @@ public class GestoreRicerca extends HttpServlet {
 		request.setAttribute("corso", corso);
 		request.setAttribute("materiale", materiale);
 
-		displayDirectoryContents(folderPointer);
+		try {
+			displayDirectoryContents(folderPointer);
+		} catch (Exception e) {
+			response.sendRedirect("dfdsfds");
+		}
 		if (!lastLeaf) {
 			request.setAttribute("folderArray", listItem);
 			request.setAttribute("tiposuccessivo", tipoSuccessivo);
@@ -163,24 +167,27 @@ public class GestoreRicerca extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-/**
- * Inserisce in un array il contenuto di una folder
- * @param dir
- * @author Tropeano Domenico Antonio
- */
-	public static void displayDirectoryContents(File dir) {
-		File[] files = dir.listFiles();
-		for (File file : files) {
-			if (file.isDirectory()) {
-				Item f = new Item(file.getName());
-				listItem.add(f);
-			} else {
-				int id = Integer.parseInt(file.getName());
-				Risorsa r = DatabaseGM.getRisorsaByID(id);
-				listRisorse.add(r);
-				lastLeaf = true;
+
+	/**
+	 * Inserisce in un array il contenuto di una folder
+	 * 
+	 * @param dir
+	 * @author Tropeano Domenico Antonio
+	 */
+	public static void displayDirectoryContents(File dir) throws Exception {
+		File[] files = null;
+			files = dir.listFiles();
+			for (File file : files) {
+				if (file.isDirectory()) {
+					Item f = new Item(file.getName());
+					listItem.add(f);
+				} else {
+					int id = Integer.parseInt(file.getName());
+					Risorsa r = DatabaseGM.getRisorsaByID(id);
+					listRisorse.add(r);
+					lastLeaf = true;
+				}
 			}
-		}
 	}
 
 }

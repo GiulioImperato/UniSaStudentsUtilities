@@ -321,7 +321,7 @@ public class DatabaseGM {
 
 		if(result != 0)
 			return like;
-		else return 0;
+		else return like-1;
 
 	}
 
@@ -360,7 +360,7 @@ public class DatabaseGM {
 
 		if(result != 0)
 			return like;
-		else return 0;
+		else return like-1;
 
 	}
 
