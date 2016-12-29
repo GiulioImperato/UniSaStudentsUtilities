@@ -4,6 +4,13 @@
 
 <%
 	Utente utente = (Utente) session.getAttribute("utente");
+
+	String home = (String) request.getAttribute("home");
+	String dip = (String) request.getAttribute("dip");
+	String degree = (String) request.getAttribute("degree");
+	String corso = (String) request.getAttribute("corso");
+	String materiale = (String) request.getAttribute("materiale");
+
 	if (utente == null) {
 		// SIMULA LA SESSIONE
 		//utente = new Utente("a","a","a","a",true,true);
@@ -65,11 +72,14 @@
 			<!-- NavPath-->
 
 			<ol class="breadcrumb">
-				<li><a href="#">Corso di laurea</a></li>
-				<li><a href="#">Informatica</a></li>
-				<li><a href="#">Triennale</a></li>
-				<li><a href="#">Programmazione 1</a></li>
-				<li><a href="#">Slides</a></li>
+				<li><a id="department"
+					href="GestoreRicerca?typeClicked=department&folderClicked=<%=dip%>"><%=dip%></a></li>
+				<li><a id="degree"
+					href="GestoreRicerca?typeClicked=degree&folderClicked=<%=degree%>"><%=degree%></a></li>
+				<li><a id="corso"
+					href="GestoreRicerca?typeClicked=corso&folderClicked=<%=corso%>"><%=corso%></a></li>
+				<li><a id="materiale"
+					href="GestoreRicerca?typeClicked=materiale&folderClicked=<%=materiale%>"><%=materiale%></a></li>
 
 			</ol>
 
@@ -85,46 +95,157 @@
 						<th>Dislike</th>
 						<th>Data upload</th>
 						<th>Dimensione</th>
-						<th>Tipo</th>
 						<th>Download</th>
 					</tr>
 				</thead>
 
 				<tbody>
 					<c:forEach var="risorsa" items="${requestScope.resourceArray}">
-					<tr>
-						<td>${risorsa.nome}C</td>
-						<td>${risorsa.proprietario}C</td>
-						<td><a href="#">${risorsa.like}C<span
-								class="glyphicon glyphicon-thumbs-up"></span></a></td>
-						<td><a href="#">${risorsa.dislike}C<span class="glyphicon glyphicon-thumbs-down"></span></a></td>
-						<td>${risorsa.dataUpload}C</td>
-						<td>${risorsa.dimensione}C</td>
-						<td>${risorsa.tipo}C</td>
-						<td><a href="#"><span class="glyphicon glyphicon-save"></span></a></td>
+						<tr>
+							<td>${risorsa.nome}</td>
+							<td>${risorsa.proprietario}</td>
+							<td><a id="likefeed" name="${risorsa.idRisorsa}"
+								onclick=jasonLike(this);>${risorsa.like}<span
+									class="glyphicon glyphicon-thumbs-up"></span></a></td>
+							<td><a id="dislikefeed" name="${risorsa.idRisorsa}"
+								onclick=jasonDislike(this);>${risorsa.dislike}<span
+									class="glyphicon glyphicon-thumbs-down"></span></a></td>
+							<td>${risorsa.dataUpload}</td>
+							<td>${risorsa.dimensione}</td>
+							<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}"><span
+									class="glyphicon glyphicon-save"></span></a></td>
 						</tr>
 					</c:forEach>
-					<tr>
-						<td>Programmazione C</td>
-						<td>a.esposito5</td>
-						<td><a href="#"><span
-								class="glyphicon glyphicon-thumbs-up"></span></a></td>
-						<td><span class="glyphicon glyphicon-thumbs-down"></span></td>
-						<td>30/12/2016</td>
-						<td>20Mb</td>
-						<td>Pdf</td>
-						<td><a href="#"><span class="glyphicon glyphicon-save"></span></a></td>
-					</tr>
 				</tbody>
 			</table>
 			<!-- /TabellaLibri -->
-			<label class="btn btn-file btn-success" style="margin-bottom: 10px"><span
-				class="glyphicon glyphicon-open"></span> Upload file<input
-				type="file" style="display: none;"> </label>
+			<form id="uploadForm" action="GestoreUpload" method="post"
+				enctype="multipart/form-data">
+				<label class="btn btn-file btn-success" style="margin-bottom: 10px"><span
+					class="glyphicon glyphicon-open"></span> Upload file<input
+					type="file" onchange="sendFile()" name="uploadable" id="uploadable" style="display: none;"> </label>
+			</form>
+
 		</div>
 	</div>
 	<!-- works -->
 
+<script type="text/javascript">
+	
+	var clicklike =false;
+	var clickdislike = false;
+	
+function jasonLike(obj){
+	
+	//alert("in likejason ");	
+	
+	if(clicklike == true){
+		alert("Hai gia lasciato un Like");
+	}
+	
+	if(clicklike ==false){
+		
+		clickdislike = false;
+		clicklike =true;
+	
+	var off =document.getElementById("likefeed");
+	   	      
+	var on =document.getElementById("dislikefeed");
+	 
+	// $(off).css({"background":"red"});
+    // $(on).css({"background":"green"});
+		
+	  $.ajax({
+		  type:'GET',
+		 url:'GestoreFeedback?numlike='+$(obj).text()+'&numdislike='+$(on).text()+'&cliccato=like'+'&idRis='+$(obj).attr("name"),
+				
+		headedrs:{
+			Accept: "application/json; charset=utf-8",
+    "Content-type": "application/json; charset=utf-8",
+		},
+		
+		success:function(result){			
+			var risultato = $.parseJSON(result);
+			
+			document.getElementById("likefeed").innerHTML = risultato[0];
+			document.getElementById("dislikefeed").innerHTML = risultato[1];
+			
+			
+			alert("Feedback inserito con successo !")
+			
+			  
+				},
+		error : function (richiesta,stato,errori) {
+			
+		//	$(off).css({"background":"none"});
+		//  $(on).css({"background":"none"});
+			     clicklike =false;
+			     clickdislike = false;
+			        alert("C'è stato un problema con il server. Impossibile registrare il feedback");
+			    }	  
+	  })	 
+	  
+	}
+};
+
+
+function jasonDislike(obj){
+	
+	//alert("in dislike jason ");
+	
+	if(clickdislike == true){
+		alert("Hai gia lasciato un Dislike");
+	}
+	
+	if(clickdislike ==false){
+		
+		clicklike = false;
+		clickdislike =true;
+
+	var off =document.getElementById("dislikefeed");
+    
+    var on =document.getElementById("likefeed");
+
+     $(off).css({"background":"red"});
+     $(on).css({"background":"green"});
+	
+	
+	  $.ajax({
+		  type:'GET',
+		 url:'GestoreFeedback?numdislike='+$(obj).text()+'&numlike='+$(on).text()+'&cliccato=dislike'+'&idRis='+$(obj).attr("name"),
+				
+		headedrs:{
+			Accept: "application/json; charset=utf-8",
+    "Content-type": "application/json; charset=utf-8",
+		},
+		
+		success:function(result){
+			
+			var risultato = $.parseJSON(result);
+			
+			document.getElementById("likefeed").innerHTML = risultato[0];
+			document.getElementById("dislikefeed").innerHTML = risultato[1];
+			
+			alert("feedback inserito con successo !")
+						
+			  
+				},
+		error : function (richiesta,stato,errori) {
+			
+			$(off).css({"background":"none"});
+			$(on).css({"background":"none"});
+			     clicklike =false;
+			     clickdislike = false;
+			     alert("C'è stato un problema con il server. Impossibile registrare il feedback");
+				    }	
+				
+	  })	
+	  
+	}
+};
+
+
+</script>
 
 
 
@@ -136,4 +257,17 @@
 
 
 </body>
+<script>
+function sendFile() {
+	var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	      alert("ok")
+	    }
+	  };
+	  xhttp.open("POST", "GestoreUpload", true);
+	  xhttp.send();
+	};
+</script>
 </html>
+
