@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import storageLayer.DatabaseGM;
 
 /**
@@ -19,18 +18,17 @@ import storageLayer.DatabaseGM;
 @WebServlet("/GestoreRicerca")
 public class GestoreRicerca extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String previousPath="";
-	static ArrayList<Item> listItem=null;
-	static ArrayList<Risorsa>listRisorse=null;
-	static boolean lastLeaf=false;
+	private String previousPath = "";
+	static ArrayList<Item> listItem = null;
+	static ArrayList<Risorsa> listRisorse = null;
+	static boolean lastLeaf = false;
 
-
-	private String home="";
-	private String dip="";
-	private String degree="";
-	private String corso="";
-	private String materiale="";
-	String tipoSuccessivo="";
+	private String home = "";
+	private String dip = "";
+	private String degree = "";
+	private String corso = "";
+	private String materiale = "";
+	String tipoSuccessivo = "";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -41,155 +39,143 @@ public class GestoreRicerca extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-		String folderClicked=request.getParameter("folderClicked");
-		String typeClicked=request.getParameter("typeClicked");
+		String folderClicked = request.getParameter("folderClicked");
+		String typeClicked = request.getParameter("typeClicked");
 
-		String errore="";
-		String requestPath	=request.getSession().getServletContext().getRealPath("res/");
+		String errore = "";
+		String requestPath = request.getSession().getServletContext().getRealPath("res/");
 
-
-
-		System.out.println(" folderClicked = " + folderClicked);
-		System.out.println(" folderClicked = " + typeClicked);
-
-		if(typeClicked.equals("home")){
-			home="";
-			dip="";
-			degree="";
-			corso="";
-			materiale="";
-			tipoSuccessivo="department";
-			home=folderClicked;
-			previousPath="";
-			lastLeaf=false;
-			listItem=null;
-			listRisorse=null;
+		if (typeClicked.equals("home")) {
+			home = "";
+			dip = "";
+			degree = "";
+			corso = "";
+			materiale = "";
+			tipoSuccessivo = "department";
+			home = folderClicked;
+			previousPath = "";
+			lastLeaf = false;
+			listItem = null;
+			listRisorse = null;
 
 		}
 
-		else if(typeClicked.equals("department")){
+		else if (typeClicked.equals("department")) {
 
-			errore =home+"/";
+			errore = home + "/";
 
-			tipoSuccessivo="degree";
-			dip=folderClicked;
-			degree="";
-			corso="";
-			materiale="";
-			lastLeaf=false;
-			listItem=null;
-			listRisorse=null;
+			tipoSuccessivo = "degree";
+			dip = folderClicked;
+			degree = "";
+			corso = "";
+			materiale = "";
+			lastLeaf = false;
+			listItem = null;
+			listRisorse = null;
 		}
 
-		else if(typeClicked.equals("degree")){
+		else if (typeClicked.equals("degree")) {
 
-			errore =home+"/"+dip+"/";
+			errore = home + "/" + dip + "/";
 
-			tipoSuccessivo="corso";
-			degree=folderClicked;
-			corso="";
-			materiale="";
-			lastLeaf=false;
-			listItem=null;
-			listRisorse=null;
+			tipoSuccessivo = "corso";
+			degree = folderClicked;
+			corso = "";
+			materiale = "";
+			lastLeaf = false;
+			listItem = null;
+			listRisorse = null;
 		}
 
-		else if(typeClicked.equals("corso")){
+		else if (typeClicked.equals("corso")) {
 
-			errore =home+"/"+dip+"/"+degree+"/";
+			errore = home + "/" + dip + "/" + degree + "/";
 
-			tipoSuccessivo="materiale";
-			corso=folderClicked;
-			materiale="";
-			lastLeaf=false;
-			listItem=null;
-			listRisorse=null;
+			tipoSuccessivo = "materiale";
+			corso = folderClicked;
+			materiale = "";
+			lastLeaf = false;
+			listItem = null;
+			listRisorse = null;
 		}
 
-		else if(typeClicked.equals("materiale")){
+		else if (typeClicked.equals("materiale")) {
 
-			errore =home+"/"+dip+"/"+degree+"/"+corso+"/";
+			errore = home + "/" + dip + "/" + degree + "/" + corso + "/";
 
-			tipoSuccessivo="";
-			materiale=folderClicked;
-			lastLeaf=false;
-			listItem=null;
-			listRisorse=null;
+			tipoSuccessivo = "";
+			materiale = folderClicked;
+			lastLeaf = false;
+			listItem = null;
+			listRisorse = null;
 		}
 
-		else{
-			//redirect error page
+		else {
+			// redirect error page
 		}
-
-
 
 		String folderPath;
 
-		listItem=new ArrayList<>();
-		listRisorse=new ArrayList<>();
+		listItem = new ArrayList<>();
+		listRisorse = new ArrayList<>();
 
-		if(previousPath!=""){
-			previousPath=requestPath+errore;
-			folderPath=previousPath+folderClicked;
-			System.out.println("previousPath "+previousPath);
+		if (previousPath != "") {
+			previousPath = requestPath + errore;
+			folderPath = previousPath + folderClicked;
 
-		}else{
-			folderPath=request.getSession().getServletContext().getRealPath("res/"+folderClicked);
+		} else {
+			folderPath = request.getSession().getServletContext().getRealPath("res/" + folderClicked);
 		}
-		previousPath=folderPath+"/";
+		previousPath = folderPath + "/";
 
-		System.out.println(" folderPath = " + folderPath);
-		System.out.println("previousPath "+previousPath);
+		File folderPointer = new File(folderPath + "/");
 
-		File folderPointer=new File(folderPath+"/");
-		
 		request.setAttribute("home", home);
 		request.setAttribute("dip", dip);
 		request.setAttribute("degree", degree);
 		request.setAttribute("corso", corso);
 		request.setAttribute("materiale", materiale);
 
-
 		displayDirectoryContents(folderPointer);
-		if(!lastLeaf){
+		if (!lastLeaf) {
 			request.setAttribute("folderArray", listItem);
-			request.setAttribute("tiposuccessivo",tipoSuccessivo);			
+			request.setAttribute("tiposuccessivo", tipoSuccessivo);
 			request.getRequestDispatcher("MD-navigazione.jsp").forward(request, response);
-		}else{
+		} else {
 			request.setAttribute("resourceArray", listRisorse);
 			request.getRequestDispatcher("MD-DownloadUpload.jsp").forward(request, response);
 		}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 
 	public static void displayDirectoryContents(File dir) {
 		File[] files = dir.listFiles();
 		for (File file : files) {
 			if (file.isDirectory()) {
-				Item f=new Item(file.getName());
+				Item f = new Item(file.getName());
 				listItem.add(f);
 			} else {
-				int id=Integer.parseInt(file.getName());
-				Risorsa r=DatabaseGM.getRisorsaByID(id);
-				System.out.println(r);
-				System.out.println(id);
+				int id = Integer.parseInt(file.getName());
+				Risorsa r = DatabaseGM.getRisorsaByID(id);
 				listRisorse.add(r);
-				lastLeaf=true;
+				lastLeaf = true;
 			}
 		}
 	}
-
 
 }
