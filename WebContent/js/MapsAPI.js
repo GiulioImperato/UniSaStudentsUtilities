@@ -6,7 +6,7 @@ function initMap() {
 	                 ];
 
 	map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 20,
+		zoom: 19,
 		center: new google.maps.LatLng(40.77469, 14.78922),
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	});
