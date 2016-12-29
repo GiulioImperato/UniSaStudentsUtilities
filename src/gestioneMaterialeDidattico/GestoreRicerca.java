@@ -146,6 +146,12 @@ public class GestoreRicerca extends HttpServlet {
 		System.out.println("previousPath "+previousPath);
 
 		File folderPointer=new File(folderPath+"/");
+		
+		request.setAttribute("home", home);
+		request.setAttribute("dip", dip);
+		request.setAttribute("degree", degree);
+		request.setAttribute("corso", corso);
+		request.setAttribute("materiale", materiale);
 
 
 		displayDirectoryContents(folderPointer);
