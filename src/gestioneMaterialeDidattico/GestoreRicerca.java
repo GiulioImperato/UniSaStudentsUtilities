@@ -41,6 +41,7 @@ public class GestoreRicerca extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
+	 *      @author Antonio Corsuto & Domenico Antonio Tropeano
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -162,7 +163,11 @@ public class GestoreRicerca extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+/**
+ * Inserisce in un array il contenuto di una folder
+ * @param dir
+ * @author Tropeano Domenico Antonio
+ */
 	public static void displayDirectoryContents(File dir) {
 		File[] files = dir.listFiles();
 		for (File file : files) {
