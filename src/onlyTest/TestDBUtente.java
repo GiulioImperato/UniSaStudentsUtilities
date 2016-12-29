@@ -17,12 +17,12 @@ public class TestDBUtente {
 		System.out.println("INSERISCO UN UTENTE");
 
 		
-		aspetto = DatabaseGU.AddUser(new Utente("NOME","COGNOME", "email", "PASSWORD", false, false));
+		aspetto = DatabaseGU.addUser(new Utente("NOME","COGNOME", "email", "PASSWORD", false, false));
 
 
 		System.out.println("CONTROLLO CHE SIA STATO INSERITO");
 
-		u = DatabaseGU.GetUtenteByID("email");
+		u = DatabaseGU.getUtenteByID("email");
 
 		if(u!= null){
 			System.out.println("L' utene essite \n "+ u.toString());
@@ -38,14 +38,14 @@ public class TestDBUtente {
 		
 		System.out.println("IMPOSTO ENTRAMBI I PRIVILIEGI A TRUE");
 		
-		DatabaseGU.ChangePrivilegiAdmin("email", true);
-		DatabaseGU.ChangeStatus("email", true);
+		DatabaseGU.changePrivilegiAdmin("email", true);
+		DatabaseGU.changeStatus("email", true);
 
-		u = DatabaseGU.GetUtenteByID("email");
+		u = DatabaseGU.getUtenteByID("email");
 
 		if(u!= null){
 			System.out.println("L' utene essite \n "+ u.toString());
-			aspetto = DatabaseGU.DeleteUser("email");
+			aspetto = DatabaseGU.deleteUser("email");
 			
 			}
 
@@ -59,7 +59,7 @@ public class TestDBUtente {
 			/*
 		System.out.println("CONTROLLO CHE SIA STATO INSERITO");
 
-		utenti = DatabaseGU.DoRetrieveAll();
+		utenti = DatabaseGU.doRetrieveAll();
 
 		if(utenti != null){
 
@@ -77,11 +77,11 @@ public class TestDBUtente {
 
 		System.out.println("ELIMINO L'UTENTE INSERITO UTENTE");
 
-		aspetto = DatabaseGU.DeleteUser("email");
+		aspetto = DatabaseGU.deleteUser("email");
 
 		System.out.println("CONTROLLO CHE SIA STATO ELIMINATO");
 
-		utenti = DatabaseGU.DoRetrieveAll();
+		utenti = DatabaseGU.doRetrieveAll();
 
 		if(utenti != null){
 

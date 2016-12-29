@@ -85,42 +85,35 @@
 						<th>Dislike</th>
 						<th>Data upload</th>
 						<th>Dimensione</th>
-						<th>Tipo</th>
 						<th>Download</th>
 					</tr>
 				</thead>
 
 				<tbody>
 					<c:forEach var="risorsa" items="${requestScope.resourceArray}">
-					<tr>
-						<td>${risorsa.nome}C</td>
-						<td>${risorsa.proprietario}C</td>
-						<td><a href="#">${risorsa.like}C<span
-								class="glyphicon glyphicon-thumbs-up"></span></a></td>
-						<td><a href="#">${risorsa.dislike}C<span class="glyphicon glyphicon-thumbs-down"></span></a></td>
-						<td>${risorsa.dataUpload}C</td>
-						<td>${risorsa.dimensione}C</td>
-						<td>${risorsa.tipo}C</td>
-						<td><a href="#"><span class="glyphicon glyphicon-save"></span></a></td>
+						<tr>
+							<td>${risorsa.nome}</td>
+							<td>${risorsa.proprietario}</td>
+							<td><a href="#">${risorsa.like} <span
+									class="glyphicon glyphicon-thumbs-up"></span></a></td>
+							<td><a href="#">${risorsa.dislike} <span
+									class="glyphicon glyphicon-thumbs-down"></span></a></td>
+							<td>${risorsa.dataUpload}</td>
+							<td>${risorsa.dimensione}</td>
+							<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}"><span
+									class="glyphicon glyphicon-save"></span></a></td>
 						</tr>
 					</c:forEach>
-					<tr>
-						<td>Programmazione C</td>
-						<td>a.esposito5</td>
-						<td><a href="#"><span
-								class="glyphicon glyphicon-thumbs-up"></span></a></td>
-						<td><span class="glyphicon glyphicon-thumbs-down"></span></td>
-						<td>30/12/2016</td>
-						<td>20Mb</td>
-						<td>Pdf</td>
-						<td><a href="#"><span class="glyphicon glyphicon-save"></span></a></td>
-					</tr>
 				</tbody>
 			</table>
 			<!-- /TabellaLibri -->
-			<label class="btn btn-file btn-success" style="margin-bottom: 10px"><span
-				class="glyphicon glyphicon-open"></span> Upload file<input
-				type="file" style="display: none;"> </label>
+			<form id="uploadForm" action="GestoreUpload" method="post"
+				enctype="multipart/form-data">
+				<label class="btn btn-file btn-success" style="margin-bottom: 10px"><span
+					class="glyphicon glyphicon-open"></span> Upload file<input
+					type="file" name="uploadable" id="uploadable" style="display: none;"> </label>
+			</form>
+
 		</div>
 	</div>
 	<!-- works -->
@@ -136,4 +129,10 @@
 
 
 </body>
+<script>
+$('#uploadable').change(function() {
+	  $('#uploadForm').submit();
+	});
+</script>
 </html>
+
