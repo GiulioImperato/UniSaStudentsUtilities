@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
+	HttpSession s = request.getSession();
+	String email = (String)s.getAttribute("email");
+	
 	Utente utente = (Utente) session.getAttribute("utente");
 	//String email = utente.getEmail();
 	if (utente == null) {
@@ -39,7 +42,6 @@
 	<%@ include file="-menuLogged.html"%>
 
          
-
   <!-- works -->
 
   <div id="works"  class=" clearfix grid">
@@ -98,7 +100,7 @@
                   </select>
                 </li>
                 <li>
-                  <textarea id="textarea-libro" class="form-control" placeholder="Descrizione" tabindex="6" rows="7" ></textarea>
+                  <textarea id="textarea-libro" class="form-control"  maxlength="2000" placeholder="Descrizione" tabindex="6" rows="7" ></textarea>
                 </li>
               </ul>
             </td>
@@ -109,6 +111,8 @@
         <input id="checkAnnuncio" type="button" name="inserisci-annuncio" value="inserisci annuncio" class="btn btn-success">
       </div>
       </form>
+      <!-- input type per prendere il source dell'immagine  -->
+      <input type="text" id="pr" value="" style="visibility:hidden;"></input>
 
       <!-- /TabellaLibri -->
     </div>

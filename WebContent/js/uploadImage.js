@@ -22,9 +22,8 @@ function postFilesData(data) {
 		processData : false,
 		contentType : false,
 		success : function(result) {
+			$("#pr").attr("value",result);
 			$("#image").attr("src",result);
-			var src = document.getElementById('image').src;
-			alert('NEW SRC'+src);
 		},
 		error : function(result) {
 			alert('ERRORS:');

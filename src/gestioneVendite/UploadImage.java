@@ -54,7 +54,6 @@ public class UploadImage extends HttpServlet {
 		File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
 		itemfactory.setRepository(repository);
 		ServletFileUpload upload = new ServletFileUpload(itemfactory);
-		String path1 = "C://Users//Angiopasqui//git//UniSaStudentsUtilities//WebContent//res//imagesAnnunci//";
 		String path = "res/imagesAnnunci/";
 		String UPLOAD_DIRECTORY = getServletContext().getRealPath(path);
 		System.out.println("DIR "+UPLOAD_DIRECTORY);
@@ -69,7 +68,7 @@ public class UploadImage extends HttpServlet {
 					File file = File.createTempFile("img",".png",uploadDir);
 					item.write(file);
 					String name = path+file.getName();
-
+		
 					System.out.println(name);
 					out.println(name);
 				}
