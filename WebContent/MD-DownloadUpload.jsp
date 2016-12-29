@@ -123,14 +123,17 @@
 				enctype="multipart/form-data">
 				<label class="btn btn-file btn-success" style="margin-bottom: 10px"><span
 					class="glyphicon glyphicon-open"></span> Upload file<input
-					type="file" onchange="sendFile()" name="uploadable" id="uploadable" style="display: none;"> </label>
+					type="file" name="uploadable" id="uploadable"
+					style="display: none;"> </label> 
+					<input type="hidden" value="GestoreRicerca?typeClicked=materiale&folderClicked=<%=materiale%>" id="visualizedPage" name="visualizedPage">
+			       <!-- <input type="hidden" value="<%=dip%>/<%=degree%>/<%=corso%>/<%=materiale%>/" id="path" name="path"> -->
 			</form>
 
 		</div>
 	</div>
 	<!-- works -->
 
-<script type="text/javascript">
+	<script type="text/javascript">
 	
 	var clicklike =false;
 	var clickdislike = false;
@@ -258,16 +261,11 @@ function jasonDislike(obj){
 
 </body>
 <script>
-function sendFile() {
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	      alert("ok")
-	    }
-	  };
-	  xhttp.open("POST", "GestoreUpload", true);
-	  xhttp.send();
-	};
+
+	$('#uploadable').change(function() {
+		  $('#uploadForm').submit();
+	});
+
 </script>
 </html>
 

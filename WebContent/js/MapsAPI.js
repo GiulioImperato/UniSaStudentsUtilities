@@ -1,29 +1,74 @@
+
+//Gets the browser specific XmlHttpRequest Object
+function getXmlHttpRequestObject2() {
+
+	if (window.XMLHttpRequest) {
+		return new XMLHttpRequest(); //To support the browsers IE7+, Firefox, Chrome, Opera, Safari
+	} 
+	else if(window.ActiveXObject) {
+		return new ActiveXObject("Microsoft.XMLHTTP"); // For the browsers IE6, IE5
+	} 
+	else {
+		alert("Error due to old verion of browser upgrade your browser");
+	}
+}
+
+//Store the browser specific XmlHttpRequest Object in a variable
+var rcvReq2 = getXmlHttpRequestObject2();
+
+//Gets the current messages from the server
+function alterContent2() {
+	if (rcvReq2.readyState == 4 || rcvReq2.readyState == 0) {			//Se l'operazione è stata caricata oppure l'oggetto esiste ma ancora non è stato richiamato
+
+//		The servlet url is GestoreAuleServlet as configured in the XML file
+		rcvReq2.open("GET", "gestoreAule?azione=visualizzaMappa", true);
+		rcvReq2.onreadystatechange = handleAlterContent2; 
+		rcvReq2.send("null");
+	} 
+}
+
+//Function for handling the return of servlet data
+
 var map;
-function initMap() {
-	var locations = [
-	                 ['F1',40.77462, 14.78981],
-	                 ['F2',40.77455, 14.78987]
-	                 ];
+function handleAlterContent2() {
+	if (rcvReq2.readyState == 4) {
 
-	map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 19,
-		center: new google.maps.LatLng(40.77469, 14.78922),
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	});
-	
-	var contentString = '10:00-12:00';
-	
-	var infowindow = new google.maps.InfoWindow({});
+		var responseTextVar = rcvReq2.responseText;				//Stringa ricevuta dalla servlet
 
-	var marker, i, j;
-	var icon_green = {
-			url :'images/green-circle-hi.png',
-			scaledSize: new google.maps.Size(30, 30)
-	};
+		
+//		-------------------------------------------------------// Ajax code end
 
-	for (i = 0; i < locations.length; i++) {  
+//		-------------------------------------------------------// Google map code
+		
+
+		map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 19,
+			center: new google.maps.LatLng(40.77469, 14.78922),
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+
+		var contentString = '10:00-12:00';
+
+		var infowindow = new google.maps.InfoWindow({});
+
+
+		var marker, i, j;
+		var icon_green = {
+				url :'images/green-circle-hi.png',
+				scaledSize: new google.maps.Size(30, 30)
+		};
+
+		var lat = new Array();
+		var lng = new Array();
+
+//		Script load coordinates on the map
+		for (i = 0; i<=30; i++) {
+			var item=responseTextVar.split(' ');
+			item = item[i].split(',');
+			lat[i] =item[0];
+			lng[i] = item[1];
 		marker = new google.maps.Marker({
-			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			position: new google.maps.LatLng(lat[i], lng[i]),
 			map: map,
 			icon: {
 				url: "images/redbutton-hi.png",
@@ -32,10 +77,15 @@ function initMap() {
 		});
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
-				infowindow.setContent(locations[i][0]+" "+contentString);
+				infowindow.setContent("F1"+" "+contentString);
 				marker.setIcon(icon_green);
 				infowindow.open(map, marker);
 			}
 		})(marker, i));	
+		}
 	}
 }
+
+//Load function
+google.maps.event.addDomListener(window, 'load', handleAlterContent2);
+

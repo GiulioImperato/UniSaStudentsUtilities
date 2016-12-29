@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
+	HttpSession s = request.getSession();
+	String email = (String)s.getAttribute("email");
+	
 	Utente utente = (Utente) session.getAttribute("utente");
 	//String email = utente.getEmail();
 	if (utente == null) {
@@ -22,6 +25,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
   <script type="text/javascript" src="js/AnnuncioValidator.js"></script>
+  <script type="text/javascript" src="js/uploadImage.js"></script>
+  <script type="text/javascript" src="js/jquery.form.js"></script>
   
   <title>Student Utilities</title>
 
@@ -36,23 +41,28 @@
  	
 	<%@ include file="-menuLogged.html"%>
 
-
+         
   <!-- works -->
 
   <div id="works"  class=" clearfix grid">
     <div class="container col-lg-8 col-md-offset-2">
+           
       <h2 style="text-align: left;">Inserisci annuncio</h2> 
       <!-- TabellaLibri -->
-      <form name="insertform" method="post" role="form">
+      
+      <form id="insertform" name="insertform" action="UploadImage" method="post" enctype="multipart/form-data">
       
       <table class="table">
         <tbody>
           <tr>
             <td>
-            <img src="images/is.jpeg" width="199" height="283"> <br><br>
-                          <label class="btn btn-file btn-success"><span class="glyphicon glyphicon-open"></span>
-                Image...<input type="file" style="display: none;">
-              </label>
+            <img id="image" src="" width="199" height="283"> <br><br>
+               <label class="btn btn-file btn-success"><span class="glyphicon glyphicon-open"></span>
+                Scegli foto...<input id="file" name="file" type="file" style="display: none;">
+              </label><br><br>
+               <label class="btn btn-file btn-success"><span class="glyphicon glyphicon-open"></span>
+               Carica<input id="submit" name="submit" type="submit"  style="display: none;">
+               </label>
             </td>
             <td>
               <ul class="list-unstyled stylish-insert-ad">
@@ -90,7 +100,7 @@
                   </select>
                 </li>
                 <li>
-                  <textarea id="textarea-libro" class="form-control" placeholder="Descrizione" tabindex="6" rows="7" ></textarea>
+                  <textarea id="textarea-libro" class="form-control"  maxlength="2000" placeholder="Descrizione" tabindex="6" rows="7" ></textarea>
                 </li>
               </ul>
             </td>
@@ -101,6 +111,8 @@
         <input id="checkAnnuncio" type="button" name="inserisci-annuncio" value="inserisci annuncio" class="btn btn-success">
       </div>
       </form>
+      <!-- input type per prendere il source dell'immagine  -->
+      <input type="text" id="pr" value="" style="visibility:hidden;"></input>
 
       <!-- /TabellaLibri -->
     </div>

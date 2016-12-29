@@ -47,14 +47,15 @@ public class GestoreUpload extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
+	 *      @author Tropeano Domenico Antonio
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String visualizedPage = null;
 		if (ServletFileUpload.isMultipartContent(request)) {
-			String path = "res/uni/Informatica/Triennale/Programmazione_1/Slides/";
+			String path = "res/uni/Informatica/Triennale/Programmazione_1/Slides";
 			String UPLOAD_DIRECTORY = getServletContext().getRealPath(path);
 			File uploadDirectory = new File(UPLOAD_DIRECTORY);
-
 			// Create a factory for disk-based file items
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			// Configure a repository (to ensure a secure temp location is used)
@@ -71,7 +72,7 @@ public class GestoreUpload extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if (multiparts != null ) { //&& multiparts.size() > 0
+			if (multiparts != null) { // && multiparts.size() > 0
 				// iterates over form's fields
 				Iterator<FileItem> parameters = multiparts.iterator();
 				for (FileItem item : multiparts) {
@@ -80,7 +81,7 @@ public class GestoreUpload extends HttpServlet {
 						String name = new File(item.getName()).getName();
 						String proprietario = "ang@hotmail.it"; // da
 																// risolvereeeeeeeeeeeee
-						double dimensione = item.getSize()/1024; //fix it
+						double dimensione = item.getSize() / 1024; // fix it
 						Date dataUpload = new java.sql.Date(System.currentTimeMillis());
 						int like = 0;
 						int dislike = 0;
@@ -99,11 +100,13 @@ public class GestoreUpload extends HttpServlet {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} 
+					} else {
+							visualizedPage = item.getString();
+					}
 				}
-			} 
-		} 
-		response.addHeader("Refresh", "1");
+			}
+		}
+		response.sendRedirect(visualizedPage);
 	}
 
 }
