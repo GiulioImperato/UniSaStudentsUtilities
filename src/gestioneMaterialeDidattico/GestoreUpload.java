@@ -103,6 +103,7 @@ public class GestoreUpload extends HttpServlet {
 				}
 			} 
 		} 
+		response.addHeader("Refresh", "1");
 	}
 
 }

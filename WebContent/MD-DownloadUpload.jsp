@@ -110,7 +110,7 @@
 				enctype="multipart/form-data">
 				<label class="btn btn-file btn-success" style="margin-bottom: 10px"><span
 					class="glyphicon glyphicon-open"></span> Upload file<input
-					type="file" name="uploadable" id="uploadable" style="display: none;"> </label>
+					type="file" onchange="sendFile()" name="uploadable" id="uploadable" style="display: none;"> </label>
 			</form>
 
 		</div>
@@ -129,9 +129,16 @@
 
 </body>
 <script>
-$('#uploadable').change(function() {
-	  $('#uploadForm').submit();
-	});
+function sendFile() {
+	var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	      alert("ok")
+	    }
+	  };
+	  xhttp.open("POST", "GestoreUpload", true);
+	  xhttp.send();
+	};
 </script>
 </html>
 
