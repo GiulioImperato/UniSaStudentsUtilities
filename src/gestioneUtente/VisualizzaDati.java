@@ -35,7 +35,7 @@ public class VisualizzaDati extends HttpServlet {
 		
 		try {
 			
-			Utente u = DatabaseGU.GetUtenteByID("a.esposito164@studenti.unisa.it");
+			Utente u = DatabaseGU.getUtenteByID("a.esposito164@studenti.unisa.it");
 		
 			request.setAttribute("user", u);
 			request.getRequestDispatcher("modifica-account.jsp").forward(request, response);
