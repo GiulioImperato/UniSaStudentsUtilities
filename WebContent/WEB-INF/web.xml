@@ -20,6 +20,6 @@
     
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
-        <url-pattern>/Logout</url-pattern>
+        <url-pattern>/src/Logout</url-pattern>
     </servlet-mapping>
 </web-app>
