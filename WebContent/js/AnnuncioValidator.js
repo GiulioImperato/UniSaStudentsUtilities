@@ -16,6 +16,10 @@ $(document).ready(function(){
 		var cor = document.insertform.corso;
 		var corso = cor.value;
 		var descrizione = $('#textarea-libro').val();
+		
+		var pathFile = document.getElementById('image').src;
+		
+		
 
 		if(checkTitle(titolo)){
 			if(checkAutore(autore)){
@@ -25,6 +29,7 @@ $(document).ready(function(){
 							if(checkPrezzo(prezzo)){
 								if(checkCorso(cor)){
 									if(checkDescrizione(descrizione)){
+										alert('pathFile');
 										if (document.getElementById) {      //rende visibile la loading gif
 											document.getElementById('hidepage').style.visibility = 'visible'; 
 											} 
@@ -39,6 +44,7 @@ $(document).ready(function(){
 												"prezzo-libro":prezzo,
 												"corso-libro":corso,
 												"descrizione":descrizione,
+												"path":pathFile,
 												azione:"inserisciAnnuncio"	
 											},
 											url:'GestoreLibriServlet',
@@ -61,7 +67,7 @@ $(document).ready(function(){
 function checkTitle(titolo){
 	var letters = /^[A-Za-z0-9]+$/;
 	if(titolo==""){
-		alert('Il titolo non può essere vuoto');
+		alert('Il campo titolo è vuoto');
 		return false;
 	}
 	if(titolo.match(letters)){
