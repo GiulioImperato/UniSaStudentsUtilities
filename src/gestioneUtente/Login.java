@@ -42,7 +42,14 @@ public class Login extends HttpServlet {
 			{
 				if(u.getPassword().equals(password))
 				{
-					System.out.println("login effettuato");
+					if(u.isStatus()==true)
+					{
+						System.out.println("login effettuato");
+					}
+					else
+					{
+						System.out.println("Account non attivato");
+					}
 				}
 				else
 				{
