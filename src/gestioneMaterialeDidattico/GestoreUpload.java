@@ -53,7 +53,7 @@ public class GestoreUpload extends HttpServlet {
 			throws ServletException, IOException {
 		String visualizedPage = null;
 		if (ServletFileUpload.isMultipartContent(request)) {
-			String path = "res/uni/Informatica/Triennale/Programmazione_1/Slides/";
+			String path = "res/uni/Informatica/Triennale/Programmazione_1/Slides";
 			String UPLOAD_DIRECTORY = getServletContext().getRealPath(path);
 			File uploadDirectory = new File(UPLOAD_DIRECTORY);
 			// Create a factory for disk-based file items
@@ -101,7 +101,7 @@ public class GestoreUpload extends HttpServlet {
 							e.printStackTrace();
 						}
 					} else {
-						visualizedPage = item.getString();
+							visualizedPage = item.getString();
 					}
 				}
 			}
