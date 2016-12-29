@@ -122,7 +122,8 @@ public class GestoreRicerca extends HttpServlet {
 		}
 
 		else{
-			//redirect error page
+			System.out.println("imput error");
+			response.sendRedirect("ErrorPage1.jsp");
 		}
 
 
@@ -154,7 +155,13 @@ public class GestoreRicerca extends HttpServlet {
 		request.setAttribute("materiale", materiale);
 
 
-		displayDirectoryContents(folderPointer);
+		try {
+			displayDirectoryContents(folderPointer);
+		} catch (Throwable e) {			
+			response.sendRedirect("ErrorPage1.jsp");
+			System.out.println("catturqto");
+			e.printStackTrace();
+		}
 		if(!lastLeaf){
 			request.setAttribute("folderArray", listItem);
 			request.setAttribute("tiposuccessivo",tipoSuccessivo);			
@@ -174,7 +181,7 @@ public class GestoreRicerca extends HttpServlet {
 	}
 
 
-	public static void displayDirectoryContents(File dir) {
+	public static void displayDirectoryContents(File dir) throws Throwable {
 		File[] files = dir.listFiles();
 		for (File file : files) {
 			if (file.isDirectory()) {

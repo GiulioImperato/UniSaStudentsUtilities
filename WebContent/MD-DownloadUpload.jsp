@@ -107,15 +107,16 @@
 						<tr>
 							<td>${risorsa.nome}</td>
 							<td>${risorsa.proprietario}</td>
-							<td><a id="likefeed" name="${risorsa.idRisorsa}"
-								onclick=jasonLike(this);>${risorsa.like}<span
+							<td>
+							<a id="likefeed" name="${risorsa.idRisorsa}"
+								onclick=jasonLike(this);>${risorsa.like}<span id="upFeed"
 									class="glyphicon glyphicon-thumbs-up"></span></a></td>
 							<td><a id="dislikefeed" name="${risorsa.idRisorsa}"
-								onclick=jasonDislike(this);>${risorsa.dislike}<span
+								onclick=jasonDislike(this);>${risorsa.dislike}<span id="downFeed" 
 									class="glyphicon glyphicon-thumbs-down"></span></a></td>
 							<td>${risorsa.dataUpload}</td>
 							<td>${risorsa.dimensione}</td>
-							<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}"><span
+							<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}"><span 
 									class="glyphicon glyphicon-save"></span></a></td>
 						</tr>
 					</c:forEach>
@@ -138,6 +139,9 @@
 	
 	var clicklike =false;
 	var clickdislike = false;
+	var up   =document.getElementById("upFeed");	
+	var down =document.getElementById("downFeed");
+	
 	
 function jasonLike(obj){
 	
@@ -170,9 +174,16 @@ function jasonLike(obj){
 		
 		success:function(result){			
 			var risultato = $.parseJSON(result);
-			
-			document.getElementById("likefeed").innerHTML = risultato[0];
-			document.getElementById("dislikefeed").innerHTML = risultato[1];
+						
+	var a =document.getElementById("likefeed");
+	a.innerHTML = risultato[0];
+	//a.text( up);
+	a.appendChild(up); 
+	
+	var b =document.getElementById("dislikefeed");
+	b.innerHTML = risultato[1];
+	//b.text( down);
+	b.appendChild(down);
 			
 			
 			alert("Feedback inserito con successo !")
@@ -187,7 +198,7 @@ function jasonLike(obj){
 			     clickdislike = false;
 			        alert("C'è stato un problema con il server. Impossibile registrare il feedback");
 			    }	  
-	  })	 
+	  })
 	  
 	}
 };
@@ -210,8 +221,8 @@ function jasonDislike(obj){
     
     var on =document.getElementById("likefeed");
 
-     $(off).css({"background":"red"});
-     $(on).css({"background":"green"});
+    // $(off).css({"background":"red"});
+     //$(on).css({"background":"green"});
 	
 	
 	  $.ajax({
@@ -226,9 +237,16 @@ function jasonDislike(obj){
 		success:function(result){
 			
 			var risultato = $.parseJSON(result);
+						
+			var a =document.getElementById("likefeed");
+			a.innerHTML = risultato[0];
+			//a.text( up);
+			a.appendChild(up); 
 			
-			document.getElementById("likefeed").innerHTML = risultato[0];
-			document.getElementById("dislikefeed").innerHTML = risultato[1];
+			var b =document.getElementById("dislikefeed");
+			b.innerHTML = risultato[1];
+			//b.text( down);
+			b.appendChild(down);
 			
 			alert("feedback inserito con successo !")
 						
@@ -236,8 +254,8 @@ function jasonDislike(obj){
 				},
 		error : function (richiesta,stato,errori) {
 			
-			$(off).css({"background":"none"});
-			$(on).css({"background":"none"});
+			//$(off).css({"background":"none"});
+			//$(on).css({"background":"none"});
 			     clicklike =false;
 			     clickdislike = false;
 			     alert("C'è stato un problema con il server. Impossibile registrare il feedback");
