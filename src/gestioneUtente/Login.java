@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import storageLayer.DatabaseGU;
 
@@ -44,7 +45,9 @@ public class Login extends HttpServlet {
 				{
 					if(u.isStatus()==true)
 					{
-						System.out.println("login effettuato");
+						HttpSession session = request.getSession();
+						session.setAttribute("user", u);
+						request.getRequestDispatcher("index.jsp").forward(request, response);
 					}
 					else
 					{
