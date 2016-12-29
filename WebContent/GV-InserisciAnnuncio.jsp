@@ -59,7 +59,7 @@
                 Scegli foto...<input id="file" name="file" type="file" style="display: none;">
               </label><br><br>
                <label class="btn btn-file btn-success"><span class="glyphicon glyphicon-open"></span>
-               Carica<input id="submit" type="submit"  style="display: none;">
+               Carica<input id="submit" name="submit" type="submit"  style="display: none;">
                </label>
             </td>
             <td>

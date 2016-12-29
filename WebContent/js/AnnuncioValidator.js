@@ -16,10 +16,8 @@ $(document).ready(function(){
 		var cor = document.insertform.corso;
 		var corso = cor.value;
 		var descrizione = $('#textarea-libro').val();
-		
+
 		var pathFile = document.getElementById('image').src;
-		
-		
 
 		if(checkTitle(titolo)){
 			if(checkAutore(autore)){
@@ -29,30 +27,31 @@ $(document).ready(function(){
 							if(checkPrezzo(prezzo)){
 								if(checkCorso(cor)){
 									if(checkDescrizione(descrizione)){
-										alert('pathFile');
-										if (document.getElementById) {      //rende visibile la loading gif
-											document.getElementById('hidepage').style.visibility = 'visible'; 
+										if(checkPath(pathFile)){
+											if (document.getElementById) {      //rende visibile la loading gif
+												document.getElementById('hidepage').style.visibility = 'visible'; 
 											} 
-										$.ajax({
-											type:'POST',
-											data: {
-												"titolo-libro":titolo,
-												"autore-libro":autore,
-												"editore-libro":editore,
-												"anno-libro":anno,
-												"condizioni":cond,
-												"prezzo-libro":prezzo,
-												"corso-libro":corso,
-												"descrizione":descrizione,
-												"path":pathFile,
-												azione:"inserisciAnnuncio"	
-											},
-											url:'GestoreLibriServlet',
-											success: function(){
-												alert('INSERIMENTO EFFETTUATO');
-												location.href='/usu/GV-MieiAnnunci.jsp';
-											}
-										});
+											$.ajax({
+												type:'POST',
+												data: {
+													"titolo-libro":titolo,
+													"autore-libro":autore,
+													"editore-libro":editore,
+													"anno-libro":anno,
+													"condizioni":cond,
+													"prezzo-libro":prezzo,
+													"corso-libro":corso,
+													"descrizione":descrizione,
+													"path":pathFile,
+													azione:"inserisciAnnuncio"	
+												},
+												url:'GestoreLibriServlet',
+												success: function(){
+													alert('INSERIMENTO EFFETTUATO');
+													location.href='/usu/GV-MieiAnnunci.jsp';
+												}
+											});
+										}
 									}
 								}
 							}
@@ -67,7 +66,8 @@ $(document).ready(function(){
 function checkTitle(titolo){
 	var letters = /^[A-Za-z0-9]+$/;
 	if(titolo==""){
-		alert('Il campo titolo è vuoto');
+		alert('Il campo titolo è vuoto'+pathFile);
+		alert('dsadsa0'+pathFile);
 		return false;
 	}
 	if(titolo.match(letters)){
@@ -161,5 +161,14 @@ function checkDescrizione(descrizione){
 		return false;
 	}
 	else
+		return true;
+}
+
+function checkPath(pathfile){
+	if(pathFile==""){
+		alert('Inserire una foto');
+		return false;
+	}
+	else 
 		return true;
 }

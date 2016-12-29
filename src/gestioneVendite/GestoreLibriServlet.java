@@ -59,19 +59,19 @@ public class GestoreLibriServlet extends HttpServlet {
 			String corso = request.getParameter("corso-libro");
 			String descrizione = request.getParameter("descrizione");
 			
-			DettagliAnnuncio dt = new DettagliAnnuncio(editore, anno, descrizione, new Date(), "pathProva");
+			DettagliAnnuncio dt = new DettagliAnnuncio(editore, anno, descrizione, new Date(), path);
 			Annuncio annuncio = new Annuncio(titoloLibro, autore, corso, proprietario, condizione, prezzo, dt);
-			/*try {
+			try {
 				DatabaseGV.addAnnuncio(annuncio, dt);
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}*/
-			try {
+			}
+			/*try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 		}
 	}
 
