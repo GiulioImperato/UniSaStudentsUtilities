@@ -91,22 +91,22 @@
       
       <tr>
         <td>Nome</td>
-        <td><input type="text" id="nome" class="form-control" placeholder="Nome"></td>
+        <td><input type="text" id="nome" class="form-control" value="${user.nome}" readonly></td>
       </tr>
       
       <tr>
         <td>Cognome</td>
-        <td><input type="text" id="cognome" class="form-control" placeholder="Cognome"></td>
+        <td><input type="text" id="cognome" class="form-control" value="${user.cognome }" readonly></td>
       </tr>
       
       <tr>
         <td>Email</td>
-        <td><input type="text" id="email" class="form-control" placeholder="Email"></td>
+        <td><input type="text" id="email" class="form-control" value="${user.email }" readonly></td>
       </tr>
       
       <tr>
         <td>Password</td>
-        <td><input type="password" id="password" class="form-control" placeholder="Password"></td>
+        <td><input type="password" id="password" class="form-control" value="${user.password }" placeholder="Password"></td>
       </tr>
       <tr>
       	<td>Conferma Password</td>

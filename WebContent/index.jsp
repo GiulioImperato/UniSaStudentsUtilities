@@ -1,18 +1,10 @@
 <%@ page language="java"  contentType="text/html; charset=UTF-8"  
 import="java.util.*,gestioneUtente.*,storageLayer.*"%>
+<%@ taglib
+    prefix="c"
+    uri="http://java.sun.com/jsp/jstl/core" 
+%>
 
-  <%	
-   Utente utente = (Utente)session.getAttribute("utente");
-        if(utente==null){
-        	// SIMULA LA SESSIONE
-        	//utente = new Utente("a","a","a","a",true,true);
-     
-     }
-     else{
-    	
-     }	
-     
-     %>
      
 
 
@@ -33,7 +25,7 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
   
   
 
-	<%if(utente != null)  { %>
+<%-- 	<%if(utente != null)  { %>
 	<%@ include file="-menuLogged.html"%>
 
 	<% }  else  {%>
@@ -41,8 +33,16 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
 	<%@ include file="-menu.html"%>
 
 	<% }%>
+ --%>
 
-
+<c:choose>
+  <c:when test="${empty user}">
+    <%@ include file="-menu.html"%>
+  </c:when>
+  <c:otherwise>
+    <%@ include file="-menuLogged.html"%>
+  </c:otherwise>
+</c:choose>
 
 
 

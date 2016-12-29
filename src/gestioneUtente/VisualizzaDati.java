@@ -8,21 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import storageLayer.DatabaseGU;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class VisualizzaDati
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/VisualizzaDati")
+public class VisualizzaDati extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public VisualizzaDati() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,39 +31,20 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String email = request.getParameter("emailLogin");
-		String password = request.getParameter("passwordLogin");
+		
 		
 		try {
 			
-			Utente u = DatabaseGU.getUtenteByID(email);
-			
-			if(u!=null)
-			{
-				if(u.getPassword().equals(password))
-				{
-					if(u.isStatus()==true)
-					{
-						HttpSession session = request.getSession();
-						session.setAttribute("user", u);
-						request.getRequestDispatcher("index.jsp").forward(request, response);
-					}
-					else
-					{
-						System.out.println("Account non attivato");
-					}
-				}
-				else
-				{
-					System.out.println("Email o password errati");
-				}
-			}
-
-			
+			Utente u = DatabaseGU.getUtenteByID("a.esposito164@studenti.unisa.it");
+		
+			request.setAttribute("user", u);
+			request.getRequestDispatcher("modifica-account.jsp").forward(request, response);
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 	}
 
