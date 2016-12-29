@@ -34,7 +34,6 @@ function handleAlterContent2() {
 	if (rcvReq2.readyState == 4) {
 
 		var responseTextVar = rcvReq2.responseText;				//Stringa ricevuta dalla servlet
-		console.log(rcvReq2.responseText);
 
 		
 //		-------------------------------------------------------// Ajax code end
@@ -65,13 +64,9 @@ function handleAlterContent2() {
 //		Script load coordinates on the map
 		for (i = 0; i<=30; i++) {
 			var item=responseTextVar.split(' ');
-			console.log(item);
 			item = item[i].split(',');
-			console.log(item);
 			lat[i] =item[0];
-			console.log(lat[1]);
 			lng[i] = item[1];
-			console.log(lng[1]);
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(lat[i], lng[i]),
 			map: map,
