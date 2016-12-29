@@ -17,9 +17,10 @@ $(document).ready(function(){
 		var corso = cor.value;
 		var descrizione = $('#textarea-libro').val();
 		
+		var path2 = document.getElementById('pr').value;
+		
+		//PATHFILE:http://localhost:8080/usu/res/imagesAnnuncio/...
 		var pathFile = document.getElementById('image').src;
-		
-		
 
 		if(checkTitle(titolo)){
 			if(checkAutore(autore)){
@@ -29,10 +30,9 @@ $(document).ready(function(){
 							if(checkPrezzo(prezzo)){
 								if(checkCorso(cor)){
 									if(checkDescrizione(descrizione)){
-										alert('pathFile');
 										if (document.getElementById) {      //rende visibile la loading gif
 											document.getElementById('hidepage').style.visibility = 'visible'; 
-											} 
+										} 
 										$.ajax({
 											type:'POST',
 											data: {
@@ -44,7 +44,7 @@ $(document).ready(function(){
 												"prezzo-libro":prezzo,
 												"corso-libro":corso,
 												"descrizione":descrizione,
-												"path":pathFile,
+												"path":path2,
 												azione:"inserisciAnnuncio"	
 											},
 											url:'GestoreLibriServlet',
@@ -53,6 +53,7 @@ $(document).ready(function(){
 												location.href='/usu/GV-MieiAnnunci.jsp';
 											}
 										});
+
 									}
 								}
 							}
@@ -65,12 +66,17 @@ $(document).ready(function(){
 });
 
 function checkTitle(titolo){
-	var letters = /^[A-Za-z0-9]+$/;
+	var lett="^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$"
+	var numb = /^[0-9]+$/;
 	if(titolo==""){
 		alert('Il campo titolo è vuoto');
 		return false;
 	}
-	if(titolo.match(letters)){
+	if(titolo.match(numb)){
+		alert('Il titolo deve contere anche caratteri');
+		return false;
+	}
+	if(titolo.match(lett)){
 		return true;
 	}else{
 		alert('Titolo non valido');
@@ -79,7 +85,7 @@ function checkTitle(titolo){
 }
 
 function checkAutore(autore){
-	var letters = /^[A-Za-z]+$/;
+	var letters = /^[A-Za-z _]+$/;
 	if(autore==""){
 		alert('Il campo autore non può essere vuoto');
 		return false;
@@ -93,7 +99,7 @@ function checkAutore(autore){
 }
 
 function checkEditore(editore){
-	var letters = /^[A-Za-z]+$/;
+	var letters = /^[A-Za-z _]+$/;
 	if(editore==""){
 		alert('Il campo editore non può essere vuoto');
 		return false;
