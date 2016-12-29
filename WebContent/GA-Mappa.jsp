@@ -54,11 +54,13 @@
   <div id="works"  class=" clearfix grid">
     <div class="container col-lg-8 col-md-offset-2">
       	<div id="map"></div>
+      	<script>getXmlHttpRequestObject2()</script>			<!-- Verifica compatibilità del browser -->
+      	<script>alterContent2()</script>
       	<iframe
   			width="600"
   			height="450"
   			frameborder="0" style="border:0"
-  			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd1SnqQOoCKVRD8zVyiNYEttyPnxQSMnw&callback=initMap" onload="initMap();" allowfullscreen>
+  			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd1SnqQOoCKVRD8zVyiNYEttyPnxQSMnw&callback=initMap" onload="handleAlterContent2();" allowfullscreen>
 			</iframe>
     </div>
    </div>
