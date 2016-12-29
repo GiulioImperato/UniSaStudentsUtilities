@@ -12,4 +12,14 @@
 		<servlet-name>gestoreAule</servlet-name>
 		<url-pattern>/gestoreAule</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>gestioneUtente.Logout</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
 </web-app>
