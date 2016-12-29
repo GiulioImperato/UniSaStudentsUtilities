@@ -31,11 +31,17 @@ function alterContent2() {
 
 var map;
 var user;
+var infowindow;
+var marker;
+var icon_prova = {
+		url :'images/logo.png',
+		scaledSize: new google.maps.Size(30, 30)	
+}
 function handleAlterContent2() {
-	
+
 	user = document.getElementById('user').value;
 	alert('utente '+user)
-	
+
 	if (rcvReq2.readyState == 4) {
 
 		var responseTextVar = rcvReq2.responseText;				//Stringa ricevuta dalla servlet
@@ -51,10 +57,10 @@ function handleAlterContent2() {
 			center: new google.maps.LatLng(40.77469, 14.78922),
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
-		
-				
-		var infowindow = new google.maps.InfoWindow({});
-		
+
+
+		infowindow = new google.maps.InfoWindow({});
+
 
 		var nome = responseTextVar.split(' ');
 		nome.splice(0,31);				//Divisione dell'array, prendendo solo il nome delle aule
@@ -62,11 +68,13 @@ function handleAlterContent2() {
 		var nomi_aule = nome;
 		console.log(nomi_aule);
 
-		var marker, i, j;
+		var i, j;
 		var icon_green = {
 				url :'images/green-circle-hi.png',
 				scaledSize: new google.maps.Size(30, 30)
 		};
+
+		
 
 		var lat = new Array();
 		var lng = new Array();
@@ -74,7 +82,7 @@ function handleAlterContent2() {
 		var oraF;
 		var contentString;
 		var space = '<br>';
-		
+
 //		Script load coordinates and name of the Aule on the map
 		for (i = 0; i<=30; i++) {
 			var aule = nomi_aule[i];
@@ -110,7 +118,7 @@ function handleAlterContent2() {
 							console.log(ore);
 							ore.splice(0,2);
 							console.log(ore);
-							
+
 							var numero = result.split(' ');
 							console.log(numero);
 							numero.splice(2,6);
@@ -127,17 +135,18 @@ function handleAlterContent2() {
 								oraI[i] = pw[0];
 								oraF[i] = pw[1];
 								console.log(oraI[i]+oraF[i]);
-								contentString[i] = "["+oraI[i]+"-"+oraF[i]+"]";
+								contentString[i] = "<br>["+oraI[i]+"-"+oraF[i]+"]</br>";
 								console.log(contentString);
 							}
 							console.log(contentString);
 							console.log(aula);
 							aula.splice(1,4);
 							console.log(aula);
-							infowindow.setContent(aula+space+contentString+'<br><button onclick="myFunction()">Click me</button>');
+							infowindow.setContent("<u>"+aula+"</u>"+contentString+'<br><button onclick="myFunction()">Click me</button>');
 						}	
 					});
-					marker.setIcon(icon_green);
+					marker.setIcon(icon_prova);
+					//marker.setIcon(icon_green);
 					infowindow.open(map, this);
 				}
 			})(marker, i));	
@@ -149,7 +158,5 @@ google.maps.event.addDomListener(window, 'load', handleAlterContent2);
 
 
 function myFunction(){
-	console.log(infowindow.getContent());
-	alert("fa"+infowindow.getContent());
-	alert('ciao '+user);
+	infowindow.setContent('<div style="background-color: green">' + infowindow.getContent() +user+ "</div>");
 }
