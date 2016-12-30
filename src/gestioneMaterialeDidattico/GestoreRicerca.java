@@ -53,8 +53,8 @@ public class GestoreRicerca extends HttpServlet {
 
 
 
-		System.out.println(" folderClicked = " + folderClicked);
-		System.out.println(" folderClicked = " + typeClicked);
+		//System.out.println(" folderClicked = " + folderClicked);
+		//System.out.println(" folderClicked = " + typeClicked);
 
 		if(typeClicked.equals("home")){
 			home="";
@@ -122,7 +122,6 @@ public class GestoreRicerca extends HttpServlet {
 		}
 
 		else{
-			System.out.println("imput error");
 			request.getRequestDispatcher("ErrorPage1.jsp").forward(request, response);
 			//response.sendRedirect("ErrorPage1.jsp");
 		}
@@ -144,8 +143,8 @@ public class GestoreRicerca extends HttpServlet {
 		}
 		previousPath=folderPath+"/";
 
-		System.out.println(" folderPath = " + folderPath);
-		System.out.println("previousPath "+previousPath);
+		//System.out.println(" folderPath = " + folderPath);
+		//System.out.println("previousPath "+previousPath);
 
 		File folderPointer=new File(folderPath+"/");
 		
@@ -159,9 +158,9 @@ public class GestoreRicerca extends HttpServlet {
 		try {
 			displayDirectoryContents(folderPointer);
 		} catch (Throwable e) {	
-			System.out.println("catturato");
+			System.out.println("Catturato "+ e.getClass());
 			request.getRequestDispatcher("ErrorPage1.jsp").forward(request, response);			
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		if(!lastLeaf){
 			request.setAttribute("folderArray", listItem);

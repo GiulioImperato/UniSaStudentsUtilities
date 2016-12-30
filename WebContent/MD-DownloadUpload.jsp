@@ -13,7 +13,7 @@
 
 	if (utente == null) {
 		// SIMULA LA SESSIONE
-		//utente = new Utente("a","a","a","a",true,true);
+		utente = new Utente("a","a","a","a",true,true);
 
 	} else {
 

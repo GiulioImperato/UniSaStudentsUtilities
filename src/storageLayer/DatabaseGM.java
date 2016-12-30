@@ -130,6 +130,37 @@ public class DatabaseGM {
 		}
 		return (result != 0);
 	}
+	
+	/**
+	 * <b>Elimina tutte le Risorsa publicate da un utente</b>
+	 * @param idUtente email utente
+	 * @return {@code true}  se l'eliminazione è ok, {@code false}  altrimenti.
+	 * @throws SQLException
+	 * @author Antonio Corsuto
+	 */
+	public synchronized static boolean deleteRisorseOfUtente(String idUtente) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		int result = 0;
+
+		try {
+			connection = Database.getConnection();
+			preparedStatement = connection.prepareStatement(queryDeleteRisorsaOfUtente);
+			preparedStatement.setString(1, idUtente);
+
+			result = preparedStatement.executeUpdate();
+			connection.commit();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				Database.releaseConnection(connection);
+			}
+		}
+		return (result != 0);
+	}
 
 	/**
 	 * Restituisce tutti le risorse del database
@@ -371,6 +402,7 @@ public class DatabaseGM {
 	private static String queryGetRisorsa;
 	private static String queryInsertRisorsa;	
 	private static String queryDeleteRisorsa;
+	private static String queryDeleteRisorsaOfUtente;
 	private static String queryGetAllRisorse;	
 	private static String queryGetRisorseUtente;
 	private static String queryGetRisorsePath;
@@ -381,7 +413,9 @@ public class DatabaseGM {
 		queryGetRisorsa = "SELECT * FROM redteam.risorsa WHERE risorsa.idRisorsa=?";
 		queryInsertRisorsa = "INSERT INTO `redteam`.`risorsa` (`Nome`, `Dimensione`, `dataUpload`, `Proprietario`, `Like`, `Dislike`, `PathCaricamento`) VALUES (?,?,?,?,?,?,?);";
 		queryDeleteRisorsa = "DELETE FROM `redteam`.`risorsa` WHERE `idRisorsa`=?;";
-		queryGetAllRisorse = "SELECT * From redteam.risorsa";
+		queryDeleteRisorsaOfUtente = "DELETE FROM `redteam`.`risorsa` WHERE `proprietario`=?;";
+		
+		queryGetAllRisorse = "SELECT * From redteam.risorsa";		
 		queryGetRisorseUtente = "SELECT * FROM `redteam`.`risorsa` WHERE `proprietaio`=?;";
 		queryGetRisorsePath = "SELECT * FROM `redteam`.`risorsa` WHERE `pathCaricamento`=?;";
 		queryAggiornaLike =  "UPDATE `redteam`.`risorsa` SET `like`=? WHERE `idRisorsa`=?;";
