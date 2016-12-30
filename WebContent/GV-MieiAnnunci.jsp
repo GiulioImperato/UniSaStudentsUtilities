@@ -42,12 +42,12 @@
 			<table class="table table-hover">
 				<tbody>
 					<tr>
-						<td><img src=""></td>
+						<td><img src="<% String Foto = request.getParameter("foto"); out.print(Foto); %>"></td>
 						<td>
 							<ul id="dettagli-libro" class="list-unstyled li-left">
-								<li>Titolo libro</li>
-								<li>Prezzo</li>
-								<li>Data annuncio</li>
+								<li><% String Titolo = request.getParameter("titolo"); out.print(Titolo); %></li>
+								<li><% String Prezzo = request.getParameter("prezzo"); out.print(Prezzo); %></li>
+								<li><% String DataAnnuncio = request.getParameter("dataAnnuncio"); out.print(DataAnnuncio); %></li>
 							</ul>
 						</td>
 						<td><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
