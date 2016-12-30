@@ -59,6 +59,9 @@ public class GestoreAuleServlet extends HttpServlet {
 						out.write(String.valueOf(x.get(i))+",");
 						out.write(String.valueOf(y.get(i))+" ");
 					}
+					for(int i=0;i<= 30;i++){
+						out.write(nome.get(i)+" ");
+					}
 				}
 			}
 		}

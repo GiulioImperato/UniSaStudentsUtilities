@@ -34,12 +34,12 @@ function handleAlterContent2() {
 	if (rcvReq2.readyState == 4) {
 
 		var responseTextVar = rcvReq2.responseText;				//Stringa ricevuta dalla servlet
+		console.log(responseTextVar);
 
-		
 //		-------------------------------------------------------// Ajax code end
 
 //		-------------------------------------------------------// Google map code
-		
+
 
 		map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 19,
@@ -47,11 +47,18 @@ function handleAlterContent2() {
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 
+		
+
 		var contentString = '10:00-12:00';
 
 		var infowindow = new google.maps.InfoWindow({});
 
-
+		var nome = responseTextVar.split(' ');
+		nome.splice(0,31);				//Divisione dell'array, prendendo solo il nome delle aule
+		console.log(nome);
+		var a = nome;
+		console.log(a);
+		
 		var marker, i, j;
 		var icon_green = {
 				url :'images/green-circle-hi.png',
@@ -61,31 +68,32 @@ function handleAlterContent2() {
 		var lat = new Array();
 		var lng = new Array();
 
-//		Script load coordinates on the map
+//		Script load coordinates and name of the Aule on the map
 		for (i = 0; i<=30; i++) {
-			var item=responseTextVar.split(' ');
+			var aule = a[i];
+			item=responseTextVar.split(' ');
 			item = item[i].split(',');
 			lat[i] =item[0];
 			lng[i] = item[1];
-		marker = new google.maps.Marker({
-			position: new google.maps.LatLng(lat[i], lng[i]),
-			map: map,
-			icon: {
-				url: "images/redbutton-hi.png",
-				scaledSize: new google.maps.Size(30, 30)
-			}
-		});
-		google.maps.event.addListener(marker, 'click', (function(marker, i) {
-			return function() {
-				infowindow.setContent("F1"+" "+contentString);
-				marker.setIcon(icon_green);
-				infowindow.open(map, marker);
-			}
-		})(marker, i));	
+			marker = new google.maps.Marker({
+				position: new google.maps.LatLng(lat[i], lng[i]),
+				map: map,
+				title : aule,
+				icon: {
+					url: "images/redbutton-hi.png",
+					scaledSize: new google.maps.Size(30, 30)
+				}
+			});
+			google.maps.event.addListener(marker, 'click', (function(marker, i) {
+				return function() {
+					infowindow.setContent(this.title+" "+contentString);
+					marker.setIcon(icon_green);
+					infowindow.open(map, this);
+				}
+			})(marker, i));	
 		}
 	}
 }
-
 //Load function
 google.maps.event.addDomListener(window, 'load', handleAlterContent2);
 
