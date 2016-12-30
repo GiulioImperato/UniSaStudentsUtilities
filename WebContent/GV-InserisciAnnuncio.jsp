@@ -131,7 +131,7 @@
               		<option value="Elementi di Crittografia">Elementi di Crittografia</option>
               		<option value="Intelligenza Artificiale">Intelligenza Artificiale</option>
               		<option value="Programmazione Concorrente e Parallela">Programmazione Concorrente e Parallela</option>
-              		<option value="Reti ad Hot">Reti ad Hot</option>
+              		<option value="Reti ad Hot">Reti ad Hoc</option>
               		<option value="Reti Sociali">Reti Sociali</option>
               		<option value="Reti Wireless">Reti Wireless</option>
               		<option value="Sicurezza dei Dati">Sicurezza dei Dati</option>
