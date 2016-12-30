@@ -49,12 +49,16 @@ public class GestoreEliminaRisorsa extends HttpServlet {
 			if(azione.equals("all")){
 
 				try {
-					DatabaseGM.deleteRisorseOfUtente(elimina);
-					risorse =null;
+					System.out.println("elimina tutto");
+					boolean b =DatabaseGM.deleteRisorseOfUtente(utente);
+					//risorse =DatabaseGM.doRetrieveAllByUtente(utente);
+					risorse=null;
+					///System.out.println("result "+b);
+					
 				} catch (Exception  e) {
 					request.getRequestDispatcher("ErrorPage1.jsp").forward(request, response);
 				}
-
+				request.removeAttribute("listaRisorseUtente");
 				request.setAttribute("listaRisorseUtente", risorse);
 				request.getRequestDispatcher("MD-fileUtente.jsp").forward(request, response);
 
@@ -72,7 +76,8 @@ public class GestoreEliminaRisorsa extends HttpServlet {
 				}catch (Exception e) {
 					request.getRequestDispatcher("ErrorPage1.jsp").forward(request, response);
 				}
-
+				
+				request.removeAttribute("listaRisorseUtente");
 				request.setAttribute("listaRisorseUtente", risorse);
 				request.getRequestDispatcher("MD-fileUtente.jsp").forward(request, response);
 

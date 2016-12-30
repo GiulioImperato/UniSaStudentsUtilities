@@ -416,7 +416,7 @@ public class DatabaseGM {
 		queryDeleteRisorsaOfUtente = "DELETE FROM `redteam`.`risorsa` WHERE `proprietario`=?;";
 		
 		queryGetAllRisorse = "SELECT * From redteam.risorsa";		
-		queryGetRisorseUtente = "SELECT * FROM `redteam`.`risorsa` WHERE `proprietaio`=?;";
+		queryGetRisorseUtente = "SELECT * FROM `redteam`.`risorsa` WHERE `proprietario`=?;";
 		queryGetRisorsePath = "SELECT * FROM `redteam`.`risorsa` WHERE `pathCaricamento`=?;";
 		queryAggiornaLike =  "UPDATE `redteam`.`risorsa` SET `like`=? WHERE `idRisorsa`=?;";
 		queryAggiornaDislike ="UPDATE `redteam`.`risorsa` SET `dislike`=? WHERE `idRisorsa`=?;";

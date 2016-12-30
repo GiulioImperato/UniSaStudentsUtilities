@@ -13,7 +13,7 @@
 
 	if (utente == null) {
 		// SIMULA LA SESSIONE
-		utente = new Utente("a","a","a","a",true,true);
+		//utente = new Utente("a","a","a","a",true,true);
 
 	} else {
 
@@ -224,7 +224,7 @@ function jasonLike(obj){
 			     clickdislike = false;
 			        alert("C'è stato un problema con il server. Impossibile registrare il feedback");
 			    }	  
-	  })
+	  });
 	  
 	}
 };
@@ -287,7 +287,7 @@ function jasonDislike(obj){
 			     alert("C'è stato un problema con il server. Impossibile registrare il feedback");
 				    }	
 				
-	  })	
+	  });
 	  
 	}
 };

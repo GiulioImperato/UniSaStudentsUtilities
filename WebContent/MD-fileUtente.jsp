@@ -4,19 +4,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
-	Utente utente = (Utente) session.getAttribute("utente");
+	Utente utente = (Utente)session.getAttribute("utente");
     ArrayList<Risorsa> risorse ;
     
     risorse=(ArrayList<Risorsa>)request.getAttribute("listaRisorseUtente");
 
 
 	if (utente == null) {
+		response.sendRedirect("index.jsp");
 		// SIMULA LA SESSIONE
-		utente = new Utente("a","a","a","a",true,true);
+		//utente = new Utente("a","a","a","a",true,true);
 
-	} else {
-
-	}
+	} else {	}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,10 +32,12 @@
 
 <body>
 	<div class="topbar animated fadeInLeftBig"></div>
+	
+	<%if (utente != null) { %>
 
 	<%@ include file="-menuLogged.html"%>
 	
-	
+	<%} %>
 	
 	 <!-- works -->
 
