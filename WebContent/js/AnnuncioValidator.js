@@ -142,7 +142,7 @@ $(document).ready(function(){
 											url:'GestoreLibriServlet',
 											success: function(){
 												alert('INSERIMENTO EFFETTUATO');
-												location.href='/usu/GV-MieiAnnunci.jsp';
+												location.href='GestoreLibriServlet?azione=visualizzaMieiAnnunci';
 											}
 										});
 

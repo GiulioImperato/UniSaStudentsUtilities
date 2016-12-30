@@ -3,6 +3,7 @@ package gestioneVendite;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import gestioneUtente.Utente;
 import storageLayer.DatabaseGV;
 
 /**
@@ -21,7 +23,9 @@ import storageLayer.DatabaseGV;
 @WebServlet("/GestoreLibriServlet")
 public class GestoreLibriServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	static ArrayList<Annuncio>listAnnunci=null;
+	static ArrayList<DettagliAnnuncio>listDettagli=null;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -34,7 +38,32 @@ public class GestoreLibriServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		String azione = request.getParameter("azione");
+		System.out.println("az "+azione);
+		
+		HttpSession session = request.getSession();
+		Utente u = (Utente) session.getAttribute("user");
+		String proprietario = u.getEmail();
+		if(azione.equalsIgnoreCase("visualizzaMieiAnnunci")){
+			try {
+				listAnnunci = DatabaseGV.getListaAnnunciUtente(proprietario);
+				listDettagli = DatabaseGV.getListaDettagli();
+				request.setAttribute("listaAnnunci", listAnnunci);
+				request.setAttribute("listDettagli", listDettagli);
+				/*for(Annuncio a: listAnnunci){
+					System.out.println(a.toString());
+				}
+
+				for(DettagliAnnuncio dett: listDettagli){
+					System.out.println(dett.toString());
+				}*/
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+
+			request.getRequestDispatcher("GV-MieiAnnunci.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -46,7 +75,7 @@ public class GestoreLibriServlet extends HttpServlet {
 		String path = request.getParameter("path");
 		System.out.println("PATH "+path);
 		if(azione.equalsIgnoreCase("inserisciAnnuncio")){
-			
+
 			String titoloLibro = request.getParameter("titolo-libro");	 
 			String autore = request.getParameter("autore-libro");
 			String editore = request.getParameter("editore-libro");
@@ -59,7 +88,7 @@ public class GestoreLibriServlet extends HttpServlet {
 			double prezzo = Double.parseDouble(price);
 			String corso = request.getParameter("corso-libro");
 			String descrizione = request.getParameter("descrizione");
-			
+
 			DettagliAnnuncio dt = new DettagliAnnuncio(editore, anno, descrizione, new Date(), path);
 			Annuncio annuncio = new Annuncio(titoloLibro, autore, corso, proprietario, condizione, prezzo, dt);
 			try {
