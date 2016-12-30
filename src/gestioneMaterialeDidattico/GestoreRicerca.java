@@ -118,7 +118,8 @@ public class GestoreRicerca extends HttpServlet {
 		}
 
 		else {
-			// redirect error page
+			request.getRequestDispatcher("ErrorPage1.jsp").forward(request, response);
+			//response.sendRedirect("ErrorPage1.jsp");
 		}
 
 		String folderPath;
@@ -145,10 +146,12 @@ public class GestoreRicerca extends HttpServlet {
 
 		try {
 			displayDirectoryContents(folderPointer);
-		} catch (Exception e) {
-			response.sendRedirect("dfdsfds");
+		} catch (Throwable e) {	
+			System.out.println("Catturato "+ e.getClass());
+			request.getRequestDispatcher("ErrorPage1.jsp").forward(request, response);			
+			//e.printStackTrace();
 		}
-		if (!lastLeaf) {
+		if(!lastLeaf){
 			request.setAttribute("folderArray", listItem);
 			request.setAttribute("tiposuccessivo", tipoSuccessivo);
 			request.getRequestDispatcher("MD-navigazione.jsp").forward(request, response);

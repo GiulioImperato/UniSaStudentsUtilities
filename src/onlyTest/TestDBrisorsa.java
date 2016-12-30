@@ -14,6 +14,18 @@ public class TestDBrisorsa {
 
 	public static void main(String[] args) throws SQLException {	
 		
+		
+		
+		DatabaseGM.deleteRisorseOfUtente("buon@anno.it");
+		
+		ArrayList<Risorsa> r =DatabaseGM.doRetrieveAllByUtente("buon@anno.it");
+		
+		for(Risorsa s : r){
+			System.out.println(" "+s.toString());
+		}
+		
+		
+		
 		//DatabaseGU.AddUser(new Utente("NOME","COGNOME",  email, "PASSWORD", false, false));		
 		//Utente u = DatabaseGU.getUtenteByID(email);
 	/*

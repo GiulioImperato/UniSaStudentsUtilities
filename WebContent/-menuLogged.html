@@ -11,7 +11,7 @@
     <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
       <li class="active"><a href="index.jsp">Home</a></li>
-      <li><a href="MD-navigazione.jsp">Materiali didattico</a></li>
+      <li><a href="GestoreRicerca?typeClicked=home&&folderClicked=uni">Materiali didattico</a></li>
       <li><a href="GV-RicercaLibri.jsp">Vendita libri</a></li>
       <li><a href="GA-Mappa.jsp">Mappa aule</a></li>
     </ul>
@@ -20,11 +20,15 @@
       <a> Benvenuto</a>
     </li>
     <li class="dropdown">
+<<<<<<< HEAD
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-right:10px;">${user.nome}<span class="caret"></span></a>
+=======
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-right:10px;"><%=utente.getNome()%> <span class="caret"></span></a>
+>>>>>>> refs/remotes/origin/Antonio
       <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
         <li><a href="#">Modifica account</a></li>
-        <li><a href="GV-MieiAnnunci.jsp">I miei annunci</a></li>
-        <li><a href="#">I miei file</a></li>
+        <li><a href="#">I miei annunci</a></li>
+        <li><a href="GestoreFileUtente?typeClicked=a">I miei file</a></li>
         <li role="separator" class="divider"></li>
         <li><a href="${pageContext.request.contextPath}/Logout">Logout</a></li>
       </ul>
