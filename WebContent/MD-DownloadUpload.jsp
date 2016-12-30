@@ -107,16 +107,42 @@
 						<tr>
 							<td>${risorsa.nome}</td>
 							<td>${risorsa.proprietario}</td>
-							<td>
-							<a id="likefeed" name="${risorsa.idRisorsa}"
+							
+							
+
+							<%
+								if (utente != null) {
+							%>
+
+							<td><a id="likefeed" name="${risorsa.idRisorsa}"
 								onclick=jasonLike(this);>${risorsa.like}<span id="upFeed"
-									class="glyphicon glyphicon-thumbs-up"></span></a></td>
+									class="glyphicon glyphicon-thumbs-up"></span>
+							</a></td>
 							<td><a id="dislikefeed" name="${risorsa.idRisorsa}"
-								onclick=jasonDislike(this);>${risorsa.dislike}<span id="downFeed" 
-									class="glyphicon glyphicon-thumbs-down"></span></a></td>
+								onclick=jasonDislike(this);>${risorsa.dislike}<span
+									id="downFeed" class="glyphicon glyphicon-thumbs-down"></span>
+							</a></td>
+
+							<%
+								} else {
+							%>
+							<td><a id="likefeed" name="${risorsa.idRisorsa}">${risorsa.like}
+							<span id="upFeed" class="glyphicon glyphicon-thumbs-up"></span>
+							</a></td>
+							<td><a id="dislikefeed" name="${risorsa.idRisorsa}">${risorsa.dislike}
+									<span id="downFeed" class="glyphicon glyphicon-thumbs-down"></span>
+							</a></td>
+
+							<%
+								}
+							%>
+
+
+
+
 							<td>${risorsa.dataUpload}</td>
 							<td>${risorsa.dimensione}</td>
-							<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}"><span 
+							<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}"><span
 									class="glyphicon glyphicon-save"></span></a></td>
 						</tr>
 					</c:forEach>
@@ -135,7 +161,7 @@
 	</div>
 	<!-- works -->
 
-<script type="text/javascript">
+	<script type="text/javascript">
 	
 	var clicklike =false;
 	var clickdislike = false;

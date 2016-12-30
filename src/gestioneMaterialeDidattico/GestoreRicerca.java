@@ -123,7 +123,8 @@ public class GestoreRicerca extends HttpServlet {
 
 		else{
 			System.out.println("imput error");
-			response.sendRedirect("ErrorPage1.jsp");
+			request.getRequestDispatcher("ErrorPage1.jsp").forward(request, response);
+			//response.sendRedirect("ErrorPage1.jsp");
 		}
 
 
@@ -157,9 +158,9 @@ public class GestoreRicerca extends HttpServlet {
 
 		try {
 			displayDirectoryContents(folderPointer);
-		} catch (Throwable e) {			
-			response.sendRedirect("ErrorPage1.jsp");
-			System.out.println("catturqto");
+		} catch (Throwable e) {	
+			System.out.println("catturato");
+			request.getRequestDispatcher("ErrorPage1.jsp").forward(request, response);			
 			e.printStackTrace();
 		}
 		if(!lastLeaf){
