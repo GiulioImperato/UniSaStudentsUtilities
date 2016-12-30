@@ -1,3 +1,90 @@
+/*
+	$(document).ready(function(){
+	$('#insertform').bootstrapValidator({
+		message : 'This value is not valid',
+		feedbackIcons : {
+			valid : 'glyphicon glyphicon-ok',
+			invalid : 'glyphicon glyphicon-remove',
+			validating : 'glyphicon glyphicon-refresh'
+		},
+		fields : {
+			titolo : {
+				validators : {
+					notEmpty : {
+						message : 'Inserisci il titolo'
+					},
+					regexp : {
+						regexp : '^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$',
+						message : 'Titolo non valido'
+					}
+				}
+			},
+			autore : {
+				validators :{
+					notEmpty : {
+						message : 'Inserisci autore'
+					},
+					regexp : {
+						regexp : /^[A-Za-z _]+$/,
+						message : 'Autore non valido'
+					}
+				}
+			},
+			editore : {
+				validators :{
+					notEmpty : {
+						message : 'Inserisci editore'
+					},
+					regexp : {
+						regexp : /^[A-Za-z _]+$/,
+						message : 'Editore non valido'
+					}
+				}
+			},
+			anno : {
+				validators : {
+					notEmpty : {
+						message : 'Inserire anno'
+					},
+					between : {
+						min : 1920,
+						max : new Date().getFullYear(),
+						message : "L'anno deve essere tra il 1920 e il "+new Date().getFullYear()
+					}
+				}
+			},
+			corso : {
+				validators : {
+					notEmpty: {
+						message: 'Selezionare un corso'
+					}
+				}
+			},
+			prezzo : {
+				validators : {				
+					notEmpty : {
+						message: 'Inserire il prezzo'
+					},
+					regexp : {
+						regexp : /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/,
+						message : 'Prezzo non valido'
+					}
+				}
+			},
+			textarea : {
+				validators : {
+					notEmpty : {
+						message : 'Inserire descrizione'
+					}
+				}
+			}
+		}
+	});
+	 */
+
+
+
+
 function hideLoadingPage(){            //NASCONDE LA LOADING GIF 
 	if (document.getElementById) { 
 		document.getElementById('hidepage').style.visibility = 'hidden'; 
@@ -17,7 +104,11 @@ $(document).ready(function(){
 		var corso = cor.value;
 		var descrizione = $('#textarea-libro').val();
 		
+		var email = document.getElementById('user').value;
+		
 		var path2 = document.getElementById('pr').value;
+		
+		
 		
 		//PATHFILE:http://localhost:8080/usu/res/imagesAnnuncio/...
 		var pathFile = document.getElementById('image').src;
@@ -45,6 +136,7 @@ $(document).ready(function(){
 												"corso-libro":corso,
 												"descrizione":descrizione,
 												"path":path2,
+												"email":email,
 												azione:"inserisciAnnuncio"	
 											},
 											url:'GestoreLibriServlet',

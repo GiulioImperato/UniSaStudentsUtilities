@@ -51,7 +51,8 @@ public class GestoreLibriServlet extends HttpServlet {
 			String autore = request.getParameter("autore-libro");
 			String editore = request.getParameter("editore-libro");
 			String year = request.getParameter("anno-libro");
-			String proprietario = (String) s.getAttribute("email");
+			String proprietario = request.getParameter("email");
+			System.out.println("prop "+proprietario);
 			int anno = Integer.parseInt(year);
 			CondizioneLibro condizione = CondizioneLibro.valueOf(request.getParameter("condizioni"));
 			String price = request.getParameter("prezzo-libro");
@@ -66,7 +67,8 @@ public class GestoreLibriServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			/*try {
+			/*
+			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
