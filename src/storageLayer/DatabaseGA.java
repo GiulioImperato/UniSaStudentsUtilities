@@ -95,10 +95,10 @@ public class DatabaseGA {
  * @author Tropeano Domenico Antonio
  * @throws SQLException 
  */
-	public static OraAula visualizzaInfoAula(String nome, Giorno giorno) throws SQLException {			
+	public static ArrayList<OraAula> visualizzaInfoAula(String nome, Giorno giorno) throws SQLException {			
 		Connection connection = null;
 		PreparedStatement psVisualizzaInfoAula = null;
-		OraAula a = null;
+		ArrayList<OraAula> listaInfoAula = new ArrayList<OraAula>();
 		try {
 			connection = Database.getConnection();
 			psVisualizzaInfoAula = connection.prepareStatement(queryVisualizzaInfoAule);
@@ -108,8 +108,9 @@ public class DatabaseGA {
 			ResultSet rs = psVisualizzaInfoAula.executeQuery();
 			while (rs.next()) {
 				Giorno g = Giorno.valueOf(rs.getString("giorno"));
-				a = new OraAula(rs.getString("Nome"), g, rs.getTime("oraInizio"), rs.getTime("oraFine"),
+				OraAula a = new OraAula(rs.getString("Nome"), g, rs.getTime("oraInizio"), rs.getTime("oraFine"),
 						rs.getBoolean("defaultStatus"), rs.getBoolean("feedStatus"), rs.getString("emailUtente"));
+				listaInfoAula.add(a);
 			}
 			connection.commit();
 		} catch (SQLException e) {
@@ -125,7 +126,7 @@ public class DatabaseGA {
 			}
 		}
 
-		return a;
+		return listaInfoAula;
 
 	}
 /**
@@ -214,7 +215,7 @@ public class DatabaseGA {
 				+ "FROM redteam.aula as a,redteam.oraaula as oa "
 				+ "WHERE oa.giorno =?  and oa.oraInizio >= ? and oa.oraFine <= ? and oa.defaultStatus = true and a.nome = oa.nome";
 		queryVisualizzaInfoAule = "SELECT Nome, Giorno ,OraInizio, OraFine, defaultStatus, feedStatus, emailUtente "
-				+ "FROM redteam.oraaula " + "WHERE nome = ?  and giorno = ? and defaultStatus = true";
+				+ "FROM redteam.oraaula " + "WHERE nome = ?  and giorno = ? and defaultStatus = false";
 		queryInvioFeedback = "UPDATE redteam.oraaula " + "SET feedStatus = ?, emailUtente = ?"
 				+ "where nome = ? and giorno = ?";
 		queryResetFeedback = "UPDATE redteam.oraaula " + "SET feedStatus = defaultStatus, emailUtente = null"
