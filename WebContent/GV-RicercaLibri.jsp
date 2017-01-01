@@ -47,35 +47,78 @@
 
 	<div id="works" class=" clearfix grid">
 		<div class="container col-lg-8 col-md-offset-2">
-			<!-- SearchBar -->
+			<!-- SearchBar Titolo-->
 			<div class="input-group stylish-input-group">
-				<input type="text" class="form-control" placeholder="Search">
+				<input type="text" class="form-control" placeholder="Cerca per Titolo">
 				<span class="input-group-addon">
 					<button type="submit">
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
 				</span>
 			</div>
-			<!-- /SearchBar -->
+			<!-- /SearchBar Titolo -->
+			<br>
+			<!-- SearchBar Autore-->
+			<div class="input-group stylish-input-group">
+				<input type="text" class="form-control" placeholder="Cerca per Autore">
+				<span class="input-group-addon">
+					<button type="submit">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
+			<!-- /SearchBar Autore -->
 			<hr>
-			<!-- NavPath-->
+			
+			<!-- TabellaLibri -->
+			<table class="table table-hover">
+				<thead class="th-center">
+					<tr>
+						<th>Titolo</th>
+						<th>Autore</th>
+						<th>Corso</th>
+						<th>Proprietario</th>
+						<th>Condizione Libro</th>
+						<th>Prezzo</th>
+						<th>Acquista Libro</th>
+					</tr>
+				</thead>
 
-			<ol class="breadcrumb">
-				<li><a href="#">MY TOPICS</a></li>
-				<li><a href="#">WORLD</a></li>
-				<li><a href="#">LOCAL</a></li>
-				<li><a href="#">US</a></li>
-			</ol>
+				<tbody>
+					<c:forEach var="annuncio" items="${requestScope.annuncioArray}">
+						<tr>
+							<td>${annuncio.titolo}</td>
+							<td>${annuncio.autore}</td>
+							<td>${annuncio.corso}</td>
+							<td>${annuncio.proprietario}</td>
+							<td>${annuncio.condizione}</td>
+							<td>${annuncio.prezzo}</td>
+							<%
+								if (utente != null) {
+							%>
 
-			<!-- /NavPath -->
-
-			<!-- ListaCorsi -->
-			<ul class="list-unstyled">
-				<a href="#"><li class="well">Informatica</li></a>
-				<a href="#"><li class="well">Matematica</li></a>
-				<a href="#"><li class="well">Biologia</li></a>
-			</ul>
-			<!-- /ListaCorsi -->
+							<td><a id="acquista" name="${annuncio.idRisorsa}"
+								onclick=jasonLike(this);>${annuncio.acquista}<span id="acquistaicon"
+									class="glyphicon glyphicon-envelope"></span>
+							</a></td>
+							
+							<%
+								} else {
+							%>
+							<td><a id="acquista" name="${risorsa.acquista}">${risorsa.acquista}
+							<span id="acquistaicon" class="gglyphicon glyphicon-envelope"></span>
+							</a></td>
+							<%
+								}
+							%>
+							
+							
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<!-- /TabellaLibri -->
+			
 		</div>
 	</div>
 	<!-- works -->

@@ -19,8 +19,12 @@ public class DatabaseGV {
 	private static String queryDettagliAnnuncio;
 	private static String queryListAnnunciUtente;
 	private static String queryDettagliAnnunci;
+	private static String queryRicercaTitolo;
+	private static String queryRicercaAutore;
 	static ArrayList<DettagliAnnuncio>listDettagli;
 	static ArrayList<Annuncio>listAnnunci;
+	static ArrayList<Annuncio>listAnnunciTitolo;
+	static ArrayList<Annuncio>listAnnunciAutore;
 
 	/**
 	 * @author Pasquale Settembre
@@ -180,11 +184,109 @@ public class DatabaseGV {
 		return listDettagli;
 	}
 	
+	/**
+	 * @author Francesco Garofalo
+	 * <b>Permette di cercare nel database la lista degli annunci con il titolo desiderato</b>
+	 * @param titolo dell'annuncio 
+	 * @return restituisce la lista degli annunci correlati al titolo inserito
+	 * @throws SQLException
+	 */
+	public static ArrayList<Annuncio>getListaAnnunciRicercaTitolo(String titolo) throws SQLException{
+		Connection connection = null;
+		PreparedStatement psListAnnunciTitolo = null;
+		listAnnunciTitolo = new ArrayList();
+		try{
+			connection = Database.getConnection();
+			psListAnnunciTitolo = connection.prepareStatement(queryRicercaTitolo);
+			
+			psListAnnunciTitolo.setString(1, titolo);
+			ResultSet rs = psListAnnunciTitolo.executeQuery();
+			
+			while(rs.next()){
+				Annuncio ann = new Annuncio();
+				ann.setTitolo(rs.getString("Titolo"));
+				ann.setAutore(rs.getString("Autore"));
+				ann.setCorso(rs.getString("Corso"));
+				ann.setProprietario(rs.getString("Proprietario"));
+				//CONDIZIONE LIBRO ENUM VA CONVERTITO IN STRING
+				//ann.setCondizioneLibro(rs.getObject("Condizione"));
+				ann.setPrezzo(rs.getDouble("prezzo"));
+				
+				listAnnunciTitolo.add(ann);
+			}
+		}
+		finally {
+			try {
+				if(psListAnnunciTitolo != null)
+					psListAnnunciTitolo.close();
+				if(psListAnnunciTitolo !=null)
+					psListAnnunciTitolo.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			 finally {
+				connection.close();
+				Database.releaseConnection(connection);
+			}
+		}
+		return listAnnunciTitolo;
+	}
+	
+	/**
+	 * @author Francesco Garofalo
+	 * <b>Permette di cercare nel database la lista degli annunci con l'autore desiderato</b>
+	 * @param autore del libro 
+	 * @return restituisce la lista degli annunci correlati all'autore del libro inserito
+	 * @throws SQLException
+	 */
+	public static ArrayList<Annuncio>getListaAnnunciRicercaAutore(String autore) throws SQLException{
+		Connection connection = null;
+		PreparedStatement psListAnnunciAutore = null;
+		listAnnunciAutore = new ArrayList();
+		try{
+			connection = Database.getConnection();
+			psListAnnunciAutore = connection.prepareStatement(queryRicercaAutore);
+			
+			psListAnnunciAutore.setString(1, autore);
+			ResultSet rs = psListAnnunciAutore.executeQuery();
+			
+			while(rs.next()){
+				Annuncio ann = new Annuncio();
+				ann.setTitolo(rs.getString("Titolo"));
+				ann.setAutore(rs.getString("Autore"));
+				ann.setCorso(rs.getString("Corso"));
+				ann.setProprietario(rs.getString("Proprietario"));
+				//CONDIZIONE LIBRO ENUM VA CONVERTITO IN STRING
+				//ann.setCondizioneLibro(rs.getObject("Condizione"));
+				ann.setPrezzo(rs.getDouble("prezzo"));
+
+				listAnnunciAutore.add(ann);
+			}
+		}
+		finally {
+			try {
+				if(psListAnnunciAutore != null)
+					psListAnnunciAutore.close();
+				if(psListAnnunciAutore !=null)
+					psListAnnunciAutore.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			 finally {
+				connection.close();
+				Database.releaseConnection(connection);
+			}
+		}
+		return listAnnunciAutore;
+	}
+	
 	
 	static {
 		queryAddAnnuncio = "INSERT INTO redteam.annuncio (Titolo, Autore, Corso, Proprietario, CondizioneLibro,Prezzo) VALUES (?,?,?,?,?,?)";
 		queryDettagliAnnuncio = "INSERT INTO redteam.dettagliannuncio (id, Editore, Anno, Descrizione, Data, Foto) VALUES (?,?,?,?,?,?)";
 		queryDettagliAnnunci = "SELECT data,foto FROM dettagliannuncio WHERE id=?";
 		queryListAnnunciUtente = "SELECT a.idAnnuncio,a.titolo,a.prezzo,det.data,det.foto from Annuncio as a, Dettagliannuncio as det where a.proprietario=? and a.idAnnuncio=det.id;";
+		queryRicercaTitolo = "SELECT * FROM Annuncio WHERE titolo = ?";
+		queryRicercaAutore = "SELECT * FROM Annuncio WHERE autore = ?";
 	}
 }
