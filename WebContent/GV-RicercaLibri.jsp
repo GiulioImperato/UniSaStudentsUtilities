@@ -19,6 +19,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<script type="text/javascript" src="js/jquery-3.1.1.js"></script>	
+<script type="text/javascript" src="js/ricercaLibro.js"></script>
+	
 <title>Student Utilities</title>
 
 <%@ include file="-UPimport.html"%>
@@ -48,30 +51,38 @@
 	<div id="works" class=" clearfix grid">
 		<div class="container col-lg-8 col-md-offset-2">
 			<!-- SearchBar Titolo-->
+			<form action="GestoreLibriServlet?azione=ricercaAnnunci" method="post">
 			<div class="input-group stylish-input-group">
-				<input type="text" class="form-control" placeholder="Cerca per Titolo">
+				<input id="searchbar" name="titolo" type="text" class="form-control" placeholder="Cerca per Titolo">
 				<span class="input-group-addon">
-					<button type="submit">
+					
+					<button id="search" type="submit" >
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
 				</span>
 			</div>
 			<!-- /SearchBar Titolo -->
+			</form>
 			<br>
 			<!-- SearchBar Autore-->
-			<div class="input-group stylish-input-group">
+			<!-- <div class="input-group stylish-input-group">
 				<input type="text" class="form-control" placeholder="Cerca per Autore">
 				<span class="input-group-addon">
 					<button type="submit">
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
 				</span>
-			</div>
+			</div> -->
 			<!-- /SearchBar Autore -->
 			<hr>
+		
+		
+		<!-- <form>
+		<input id="test" type="button">
+		</form> -->
 			
 			<!-- TabellaLibri -->
-			<table class="table table-hover">
+			<table id="tableresult" class="table table-hover">
 				<thead class="th-center">
 					<tr>
 						<th>Titolo</th>
@@ -85,13 +96,13 @@
 				</thead>
 
 				<tbody>
-					<c:forEach var="annuncio" items="${requestScope.annuncioArray}">
+					<c:forEach var="annuncio" items="${requestScope.listaAnnunciByTitle}">
 						<tr>
 							<td>${annuncio.titolo}</td>
 							<td>${annuncio.autore}</td>
 							<td>${annuncio.corso}</td>
 							<td>${annuncio.proprietario}</td>
-							<td>${annuncio.condizione}</td>
+							<td>${annuncio.condizioneLibro}</td>
 							<td>${annuncio.prezzo}</td>
 							<%
 								if (utente != null) {

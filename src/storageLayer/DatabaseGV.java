@@ -195,6 +195,7 @@ public class DatabaseGV {
 		Connection connection = null;
 		PreparedStatement psListAnnunciTitolo = null;
 		listAnnunciTitolo = new ArrayList();
+		System.out.println("fdsfsdfdsfs");
 		try{
 			connection = Database.getConnection();
 			psListAnnunciTitolo = connection.prepareStatement(queryRicercaTitolo);
@@ -208,12 +209,17 @@ public class DatabaseGV {
 				ann.setAutore(rs.getString("Autore"));
 				ann.setCorso(rs.getString("Corso"));
 				ann.setProprietario(rs.getString("Proprietario"));
-				//CONDIZIONE LIBRO ENUM VA CONVERTITO IN STRING
-				//ann.setCondizioneLibro(rs.getObject("Condizione"));
+				String cond = rs.getString("CondizioneLibro");
+				String upperLetter=cond.substring(0, 1).toUpperCase();
+				cond = upperLetter+cond.substring(1);
+				ann.setCondizioneLibro(CondizioneLibro.valueOf(cond));
 				ann.setPrezzo(rs.getDouble("prezzo"));
 				
 				listAnnunciTitolo.add(ann);
+				for(Annuncio a : listAnnunciTitolo)
+					System.out.println("DB"+a.toString());
 			}
+			
 		}
 		finally {
 			try {
