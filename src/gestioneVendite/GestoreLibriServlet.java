@@ -34,8 +34,8 @@ public class GestoreLibriServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	/**<b>Permette di visualizzare gli annunci di un utente</b>
+	 * @author Pasquale Settembre
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String azione = request.getParameter("azione");
@@ -50,13 +50,6 @@ public class GestoreLibriServlet extends HttpServlet {
 				listDettagli = DatabaseGV.getListaDettagli();
 				request.setAttribute("listaAnnunci", listAnnunci);
 				request.setAttribute("listDettagli", listDettagli);
-				/*for(Annuncio a: listAnnunci){
-					System.out.println(a.toString());
-				}
-
-				for(DettagliAnnuncio dett: listDettagli){
-					System.out.println(dett.toString());
-				}*/
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -66,8 +59,8 @@ public class GestoreLibriServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	/**<b>Permette l'inserimento di un annuncio chiamando DatabaseGV</b>
+	 *@author Pasquale Settembre
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession s = request.getSession();

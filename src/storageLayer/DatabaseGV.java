@@ -97,7 +97,7 @@ public class DatabaseGV {
 	public static ArrayList<Annuncio>getListaAnnunciUtente(String email) throws SQLException{
 		Connection connection = null;
 		PreparedStatement psListAnnunciUtente= null;
-		listAnnunci = new ArrayList();
+		listAnnunci = new ArrayList<>();
 		listDettagli = new ArrayList<>();
 		try{
 			connection = Database.getConnection();
@@ -110,13 +110,10 @@ public class DatabaseGV {
 				Annuncio ann = new Annuncio();
 				ann.setTitolo(rs.getString("Titolo"));
 				ann.setPrezzo(rs.getDouble("prezzo"));
-				//Date data = rs.getDate("Data");
-				//String foto = rs.getString("Foto");
 				listAnnunci.add(ann);
-				selectDettagliAnnuncio(rs.getInt("idAnnuncio"));
+				selectDettagliAnnuncio(rs.getInt("idAnnuncio"));    //chiamata al metodo, per effettuare la query su quel determinato annuncio
 			}
-			for(Annuncio a:listAnnunci)
-				System.out.println("LIST FROM DB "+ a.toString());
+			
 		}
 		finally {
 			try {
@@ -135,7 +132,12 @@ public class DatabaseGV {
 		return listAnnunci;
 	}
 	
-	
+	/**
+	 * @author Pasquale Settembre
+	 * <b>Effettua la query al db dei dettagli di un determinato annuncio</b>
+	 * @param id dell'annuncio
+	 * @throws SQLException
+	 */
 	public static void selectDettagliAnnuncio(int id) throws SQLException{
 		Connection connection = null;
 		PreparedStatement psListAnnunciUtente= null;
@@ -151,8 +153,6 @@ public class DatabaseGV {
 				DettagliAnnuncio dett = new DettagliAnnuncio();
 				dett.setData(rs.getDate("Data"));
 				dett.setFoto(rs.getString("Foto"));
-				//Date data = rs.getDate("Data");
-				//String foto = rs.getString("Foto");
 				listDettagli.add(dett);	
 			}
 		}
@@ -171,6 +171,11 @@ public class DatabaseGV {
 		}
 	}
 	
+	/**
+	 * @author Pasquale Settembre
+	 * <b>Restituisce la lista dei dettagli di un annuncio</b>
+	 * @return arraylist di tipo DettagliAnnuncio
+	 */
 	public static ArrayList<DettagliAnnuncio>getListaDettagli(){
 		return listDettagli;
 	}

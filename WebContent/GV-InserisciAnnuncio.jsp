@@ -153,7 +153,7 @@
         <input id="checkAnnuncio" type="button" name="inserisci-annuncio" value="inserisci annuncio" class="btn btn-success">
       </div>
       </form>
-      <!-- input type per prendere il source dell'immagine e email  -->
+      <!-- input type per prendere il source dell'immagine e email dell'utente  -->
       <input type="text" id="pr" value="" style="visibility:hidden;"></input>
       <input type="text" id="user" value="${user.email}" style="visibility:hidden;"></input>
 
