@@ -81,7 +81,8 @@ function handleAlterContent2() {
 		var oraI;
 		var oraF;
 		var contentString;
-		var space = '<br>';
+		var border = '<div style="width:200px;height:320px;border:5px solid black;">'
+		var border_close = '</div>';
 
 //		Script load coordinates and name of the Aule on the map
 		for (i = 0; i<=30; i++) {
@@ -140,13 +141,14 @@ function handleAlterContent2() {
 							}
 							console.log(contentString);
 							console.log(aula);
-							aula.splice(1,4);
+							aula.splice(1,5);
 							console.log(aula);
-							infowindow.setContent("<u>"+aula+"</u>"+contentString+'<br><button onclick="myFunction()">Click me</button>');
+							var name = aula[0];
+							infowindow.setContent("<u>"+name+"</u>"+"<br><br>"+border+contentString+border_close+'<br><button onclick="myFunction()">Click me</button>');
 						}	
 					});
-					marker.setIcon(icon_prova);
-					//marker.setIcon(icon_green);
+					//marker.setIcon(icon_prova);
+					marker.setIcon(icon_green);
 					infowindow.open(map, this);
 				}
 			})(marker, i));	
