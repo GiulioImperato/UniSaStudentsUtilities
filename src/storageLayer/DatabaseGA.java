@@ -213,7 +213,7 @@ public class DatabaseGA {
 		queryGetListaAule = "SELECT * FROM redteam.aula";
 		queryRicercaAule = "SELECT distinct a.Nome,CoordinateX,CoordinateY "
 				+ "FROM redteam.aula as a,redteam.oraaula as oa "
-				+ "WHERE oa.giorno =?  and oa.oraInizio >= ? and oa.oraFine <= ? and oa.defaultStatus = true and a.nome = oa.nome";
+				+ "WHERE oa.giorno =?  and oa.oraInizio >= ? and oa.oraFine <= ? and oa.defaultStatus = false and a.nome = oa.nome";
 		queryVisualizzaInfoAule = "SELECT Nome, Giorno ,OraInizio, OraFine, defaultStatus, feedStatus, emailUtente "
 				+ "FROM redteam.oraaula " + "WHERE nome = ?  and giorno = ? and defaultStatus = false";
 		queryInvioFeedback = "UPDATE redteam.oraaula " + "SET feedStatus = ?, emailUtente = ?"

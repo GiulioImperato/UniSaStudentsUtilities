@@ -33,14 +33,18 @@ var map;
 var user;
 var infowindow;
 var marker;
-var icon_prova = {
-		url :'images/logo.png',
-		scaledSize: new google.maps.Size(30, 30)	
-}
+var icon_red = {
+		url: "images/redbutton-hi.png",
+		scaledSize: new google.maps.Size(30, 30)
+};
+var icon_green = {
+		url :'images/green-circle-hi.png',
+		scaledSize: new google.maps.Size(30, 30)
+};
+
 function handleAlterContent2() {
 
 	user = document.getElementById('user').value;
-	alert('utente '+user)
 
 	if (rcvReq2.readyState == 4) {
 
@@ -69,19 +73,13 @@ function handleAlterContent2() {
 		console.log(nomi_aule);
 
 		var i, j;
-		var icon_green = {
-				url :'images/green-circle-hi.png',
-				scaledSize: new google.maps.Size(30, 30)
-		};
-
-		
-
+	
 		var lat = new Array();
 		var lng = new Array();
 		var oraI;
 		var oraF;
 		var contentString;
-		var border = '<div style="width:200px;height:320px;border:5px solid black;">'
+		var border = '<div style="width:200px;height:100%;padding-bottom:10px;border:5px solid black;">'
 		var border_close = '</div>';
 
 //		Script load coordinates and name of the Aule on the map
@@ -95,10 +93,7 @@ function handleAlterContent2() {
 				position: new google.maps.LatLng(lat[i], lng[i]),
 				map: map,
 				title : aule,
-				icon: {
-					url: "images/redbutton-hi.png",
-					scaledSize: new google.maps.Size(30, 30)
-				}
+				icon: icon_red
 			});
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {					
@@ -144,11 +139,10 @@ function handleAlterContent2() {
 							aula.splice(1,5);
 							console.log(aula);
 							var name = aula[0];
-							infowindow.setContent("<u>"+name+"</u>"+"<br><br>"+border+contentString+border_close+'<br><button onclick="myFunction()">Click me</button>');
+							infowindow.setContent("<h2><b><u>"+name+"</u></b></h2>"+"<br><h5>Ore in cui è libera:</h5>"+border+contentString+border_close+'<br><button onclick="myFunction()">Click me</button>');
 						}	
 					});
-					//marker.setIcon(icon_prova);
-					marker.setIcon(icon_green);
+					//marker.setIcon(icon_green);
 					infowindow.open(map, this);
 				}
 			})(marker, i));	
@@ -160,5 +154,7 @@ google.maps.event.addDomListener(window, 'load', handleAlterContent2);
 
 
 function myFunction(){
-	infowindow.setContent('<div style="background-color: green">' + infowindow.getContent() +user+ "</div>");
+	console.log(infowindow.getContent());
+	infowindow.setContent('<div>' + infowindow.getContent() +"<br>"+user+ "</div>");
+	marker.setIcon(icon_green);
 }
