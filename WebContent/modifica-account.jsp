@@ -43,41 +43,15 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
 <body>
 <div class="topbar animated fadeInLeftBig"></div>
 <!--NAVBAR-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header" style="margin-top:-10px">
-      <a class="navbar-brand" href="#"><img src="images/logo.png"></a>
-      <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Materiali didattico</a></li>
-        <li><a href="#">Vendita libri</a></li>
-        <li><a href="#">Mappa aule</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a> Benvenuto</a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-right:10px;">${user.nome } <span class="caret"></span></a>
-          <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
-            <li><a href="#">Modifica account</a></li>
-            <li><a href="#">I miei annunci</a></li>
-            <li><a href="#">I miei file</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<c:choose>
+  <c:when test="${empty user}">
+    <%@ include file="-menu.html"%>
+  </c:when>
+  <c:otherwise>
+    <%@ include file="-menuLogged.html"%>
+  </c:otherwise>
+</c:choose>
+
 <!--FINENAV-->
 
 
