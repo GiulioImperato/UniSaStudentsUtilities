@@ -67,7 +67,11 @@
 					class="glyphicon glyphicon-search"></span> CERCA<input id="submit"
 					name="submit" type="submit" style="display: none;"> </label>
 			</form>
-
+			
+			<%if(request.getAttribute("noresult")!=null){ %>
+				<h3>NESSUNA CORRISPONDENZA TROVATA</h3>
+			<%} %>
+			
 			<!-- TabellaLibri -->
 			<%
 				if (visible != null) {

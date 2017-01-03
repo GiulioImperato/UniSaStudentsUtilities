@@ -132,8 +132,15 @@ public class GestoreLibriServlet extends HttpServlet {
 				if(!titolo.equalsIgnoreCase("") && !autore.equalsIgnoreCase("")){   //se vengono immessi titolo e autore nella ricerca
 					try {
 						listAnnunciByTitleAuthor = DatabaseGV.getListaAnnunciRicercaTitleAuthor(titolo,autore);
-						request.setAttribute("listaAnnunci", listAnnunciByTitleAuthor);
-						request.setAttribute("vis", "visible");
+						if(listAnnunciByTitleAuthor.size()==0){
+							request.setAttribute("noresult", "noresult");
+							request.getRequestDispatcher("GV-RicercaLibri.jsp").forward(request, response);
+							return;
+						}
+						else{
+							request.setAttribute("listaAnnunci", listAnnunciByTitleAuthor);
+							request.setAttribute("vis", "visible");
+						}
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
@@ -142,8 +149,15 @@ public class GestoreLibriServlet extends HttpServlet {
 				else{      //se viene immesso il titolo o l'autore nella ricerca
 					try {
 						listAnnunciByTitle = DatabaseGV.getListaAnnunciRicerca(titolo,autore);
-						request.setAttribute("listaAnnunci", listAnnunciByTitle);
-						request.setAttribute("vis", "visible");
+						if(listAnnunciByTitle.size()==0){
+							request.setAttribute("noresult", "noresult");
+							request.getRequestDispatcher("GV-RicercaLibri.jsp").forward(request, response);
+							return;
+						}
+						else{
+							request.setAttribute("listaAnnunci", listAnnunciByTitle);
+							request.setAttribute("vis", "visible");
+						}
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
