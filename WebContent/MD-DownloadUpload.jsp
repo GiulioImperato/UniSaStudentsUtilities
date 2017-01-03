@@ -104,8 +104,8 @@
 						<tr>
 							<td>${risorsa.nome}</td>
 							<td>${risorsa.proprietario}</td>
-							
-							
+
+
 
 							<%
 								if (utente != null) {
@@ -124,7 +124,7 @@
 								} else {
 							%>
 							<td><a id="likefeed" name="${risorsa.idRisorsa}">${risorsa.like}
-							<span id="upFeed" class="glyphicon glyphicon-thumbs-up"></span>
+									<span id="upFeed" class="glyphicon glyphicon-thumbs-up"></span>
 							</a></td>
 							<td><a id="dislikefeed" name="${risorsa.idRisorsa}">${risorsa.dislike}
 									<span id="downFeed" class="glyphicon glyphicon-thumbs-down"></span>
@@ -148,12 +148,29 @@
 			<!-- /TabellaLibri -->
 			<form id="uploadForm" action="GestoreUpload" method="post"
 				enctype="multipart/form-data">
-				<label class="btn btn-file btn-success" style="margin-bottom: 10px"><span
-					class="glyphicon glyphicon-open"></span> Upload file<input
-					type="file" name="uploadable" id="uploadable"
-					style="display: none;"> </label> 
-					<input type="hidden" value="GestoreRicerca?typeClicked=materiale&folderClicked=<%=materiale%>" id="visualizedPage" name="visualizedPage">
-			       <!-- <input type="hidden" value="<%=dip%>/<%=degree%>/<%=corso%>/<%=materiale%>/" id="path" name="path"> -->
+				<label class="btn btn-file btn-success" style="margin-bottom: 10px">
+					<input type="hidden"
+					value="res/uni/<%=dip%>/<%=degree%>/<%=corso%>/<%=materiale%>/"
+					id="path" name="path">
+					<input type="hidden" name="user" id="user" value="${user.email}"> <span
+					class="glyphicon glyphicon-open"></span>
+				<c:choose>
+						<c:when test="${empty user}">
+						Devi essere loggato
+							<input type="file" disabled="disabled" name="uploadable"
+								id="uploadable" style="display: none;">
+						</c:when>
+				<c:otherwise>
+						Upload file
+							<input type="file" name="uploadable" id="uploadable"
+						style="display: none;">
+				</c:otherwise>
+				</c:choose>
+				</label> 
+				<input type="hidden"
+					value="GestoreRicerca?typeClicked=materiale&folderClicked=<%=materiale%>"
+					id="visualizedPage" name="visualizedPage">
+
 			</form>
 
 		</div>
