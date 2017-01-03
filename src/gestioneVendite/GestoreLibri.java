@@ -82,7 +82,7 @@ public class GestoreLibri {
 	 * @return lista degli annunci
 	 * @throws SQLException
 	 */
-	public ArrayList <String> getAnnunciUtente(String email) throws SQLException {
+	public ArrayList<Annuncio> getAnnunciUtente(String email) throws SQLException {
 		return DatabaseGV.getListaAnnunciUtente(email);
 	}
 	
