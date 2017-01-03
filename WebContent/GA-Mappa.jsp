@@ -32,11 +32,7 @@
   		}
        #map {
        		width:100% !important; 
-<<<<<<< HEAD
 			height:89% !important;
-=======
-			height:100% !important;
->>>>>>> refs/remotes/origin/Pasquale
 			top:0px !important; 
 			left:0px !important; 
 			position: fixed !important;
@@ -59,12 +55,13 @@
       	<iframe
   			width="600"
   			height="450"
-  			frameborder="0" style="border:0"
+  			frameborder="0" style="border:0"    
   			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd1SnqQOoCKVRD8zVyiNYEttyPnxQSMnw&callback=initMap" onload="handleAlterContent2();" allowfullscreen>
 			</iframe>
     </div>
    </div>
    
+      <input type="text" id="user" value="${user.email}" style="visibility:hidden;"></input>
    <!--Contact Starts-->
 	<div id="contact" class="spacer">
 
@@ -75,10 +72,6 @@
 	<!-- works -->
 	<%@ include file="-footer.html"%>
 
-<<<<<<< HEAD
 	<%@ include file="-DOWNimport.html"%>
-=======
-	
->>>>>>> refs/remotes/origin/Pasquale
 </body>
 </html>
