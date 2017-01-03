@@ -229,7 +229,7 @@ function checkCondizione(condizione){
 
 function checkPrezzo(prezzo){
 	var regex = /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/;
-	if(prezzo==""){
+	if(prezzo=="" || prezzo.length >19){
 		alert('Il campo prezzo è vuoto o non valido');
 		return false;
 	}

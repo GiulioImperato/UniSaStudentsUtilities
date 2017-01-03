@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gestioneVendite.CondizioneLibro;
-import gestioneVendite.GestoreLibri;
 import storageLayer.DatabaseGA;
 import storageLayer.DatabaseGM;
 import storageLayer.DatabaseGU;
