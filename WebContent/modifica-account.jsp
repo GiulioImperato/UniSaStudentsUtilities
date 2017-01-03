@@ -1,3 +1,11 @@
+<%@ page language="java"  contentType="text/html; charset=UTF-8"  
+import="java.util.*,gestioneUtente.*,storageLayer.*"%>
+<%@ taglib
+    prefix="c"
+    uri="http://java.sun.com/jsp/jstl/core" 
+%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +65,7 @@
           <a> Benvenuto</a>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-right:10px;">Giulio <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-right:10px;">${user.nome } <span class="caret"></span></a>
           <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
             <li><a href="#">Modifica account</a></li>
             <li><a href="#">I miei annunci</a></li>
@@ -153,9 +161,9 @@ Copyright 2014 Cyrus Creative Studio. All rights reserved.
 <div class="slides"></div>
 <!-- Controls for the borderless lightbox -->
 <h3 class="title">Title</h3>
-<a class="prev">‹</a>
-<a class="next">›</a>
-<a class="close">×</a>
+<a class="prev">â¹</a>
+<a class="next">âº</a>
+<a class="close">Ã</a>
 <!-- The modal dialog, which will be used to wrap the lightbox content -->
 </div>
 
