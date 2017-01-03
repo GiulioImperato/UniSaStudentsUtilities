@@ -1,3 +1,90 @@
+/*
+	$(document).ready(function(){
+	$('#insertform').bootstrapValidator({
+		message : 'This value is not valid',
+		feedbackIcons : {
+			valid : 'glyphicon glyphicon-ok',
+			invalid : 'glyphicon glyphicon-remove',
+			validating : 'glyphicon glyphicon-refresh'
+		},
+		fields : {
+			titolo : {
+				validators : {
+					notEmpty : {
+						message : 'Inserisci il titolo'
+					},
+					regexp : {
+						regexp : '^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$',
+						message : 'Titolo non valido'
+					}
+				}
+			},
+			autore : {
+				validators :{
+					notEmpty : {
+						message : 'Inserisci autore'
+					},
+					regexp : {
+						regexp : /^[A-Za-z _]+$/,
+						message : 'Autore non valido'
+					}
+				}
+			},
+			editore : {
+				validators :{
+					notEmpty : {
+						message : 'Inserisci editore'
+					},
+					regexp : {
+						regexp : /^[A-Za-z _]+$/,
+						message : 'Editore non valido'
+					}
+				}
+			},
+			anno : {
+				validators : {
+					notEmpty : {
+						message : 'Inserire anno'
+					},
+					between : {
+						min : 1920,
+						max : new Date().getFullYear(),
+						message : "L'anno deve essere tra il 1920 e il "+new Date().getFullYear()
+					}
+				}
+			},
+			corso : {
+				validators : {
+					notEmpty: {
+						message: 'Selezionare un corso'
+					}
+				}
+			},
+			prezzo : {
+				validators : {				
+					notEmpty : {
+						message: 'Inserire il prezzo'
+					},
+					regexp : {
+						regexp : /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/,
+						message : 'Prezzo non valido'
+					}
+				}
+			},
+			textarea : {
+				validators : {
+					notEmpty : {
+						message : 'Inserire descrizione'
+					}
+				}
+			}
+		}
+	});
+	 */
+
+
+
+
 function hideLoadingPage(){            //NASCONDE LA LOADING GIF 
 	if (document.getElementById) { 
 		document.getElementById('hidepage').style.visibility = 'hidden'; 
@@ -5,8 +92,8 @@ function hideLoadingPage(){            //NASCONDE LA LOADING GIF
 }
 
 $(document).ready(function(){
-	$('#checkAnnuncio').click(function(){
-		var titolo = $('#titolo').val();
+	$('#checkAnnuncio').click(function(){    //appena viene cliccato il pulsante "inserisci annuncio
+		var titolo = $('#titolo').val();	 //vengono presi i parametri dalla form
 		var autore = $('#autore').val();
 		var editore = $('#editore').val();
 		var anno = $('#anno').val();
@@ -16,6 +103,8 @@ $(document).ready(function(){
 		var cor = document.insertform.corso;
 		var corso = cor.value;
 		var descrizione = $('#textarea-libro').val();
+		
+		var email = document.getElementById('user').value;
 		
 		var path2 = document.getElementById('pr').value;
 		
@@ -33,7 +122,7 @@ $(document).ready(function(){
 										if (document.getElementById) {      //rende visibile la loading gif
 											document.getElementById('hidepage').style.visibility = 'visible'; 
 										} 
-										$.ajax({
+										$.ajax({            //chiamata ajax alla servlet
 											type:'POST',
 											data: {
 												"titolo-libro":titolo,
@@ -45,12 +134,13 @@ $(document).ready(function(){
 												"corso-libro":corso,
 												"descrizione":descrizione,
 												"path":path2,
+												"email":email,
 												azione:"inserisciAnnuncio"	
 											},
 											url:'GestoreLibriServlet',
 											success: function(){
 												alert('INSERIMENTO EFFETTUATO');
-												location.href='/usu/GV-MieiAnnunci.jsp';
+												location.href='GestoreLibriServlet?azione=visualizzaMieiAnnunci';
 											}
 										});
 
