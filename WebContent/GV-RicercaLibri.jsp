@@ -63,6 +63,64 @@
 						class="input-group-addon"> </span>
 				</div>
 				<!-- /SearchBar Autore -->
+				
+				<!-- SearchBar Corso-->
+					<br><select class="form-control" name="corso" id="select-corso">
+                    <option disabled value="selected" selected>--- Cerca per corso ---</option>
+                    <option disabled> -- Informatica (LT) -- </option>
+                    <option disabled> - Primo Anno - </option>
+                    <option value="Programmazione 1">Programmazione 1</option>
+                    <option value="Architettura degli Elaboratori">Architettura degli Elaboratori</option>
+                    <option value="Matematica Discreta">Matematica Discreta</option>
+                    <option value="Analisi Matematica">Analisi Matematica</option>
+                    <option value="Metodi Matematici per l'Informatica">Metodi Matematici per l'Informatica</option>
+                    <option value="Introduzione agli Algoritmi e Strutture Dati">Introduzione agli Algoritmi e Strutture Dati</option>
+                    <option disabled> - Secondo Anno - </option>
+                    <option value="Programmazione 2">Programmazione 2</option>
+                    <option value="Basi di Dati">Basi di Dati</option>
+                    <option value="CPSM">CPSM</option>
+                    <option value="Progettazione di Algoritmi">Progettazione di Algoritmi</option>
+                    <option value="Sistemi Operativi">Sistemi Operativi</option>
+                    <option value="Programmazione Web">Programmazione Web</option>
+                    <option value="Ricerca Operativa">Ricerca Operativa</option>
+                    <option value="Reti di Calcolatori">Reti di Calcolatori</option>
+                    <option disabled> - Terzo Anno - </option>
+                  	<option value="Ingegneria del Software">Ingegneria del Software</option>
+                    <option value="Programmazione Distribuita">Programmazione Distribuita</option>
+                    <option value="Mobile Programming">Mobile Programming</option>
+                    <option value="Interazione Uomo Macchina">Interazione Uomo Macchina</option>
+                    <option value="Calcolo Scentifico">Calcolo Scentifico</option>
+                    <option value="Sicurezza">Sicurezza</option>
+               		<option value="Grafica">Grafica</option>
+               		<option value="Elementi di teoria della computazione">Elementi di teoria della computazione</option>
+                    <option value="Fisica">Fisica</option>
+                    <option value="Simulazione">Simulazione</option>
+                    <option disabled> </option>
+                    
+                    <option disabled> -- Informatica (LM) -- </option>
+                    <option value="Affidabilità di Sistemi">Affidabilità di Sistemi</option>
+                  	<option value="Algoritmi Avanzati">Algoritmi Avanzati</option>
+                  	<option value="Automi, Linguagi e Complessità">Automi, Linguagi e Complessità</option>
+                    <option value="Basi di Dati II">Basi di Dati II</option>
+                    <option value="Bio-Informatica">Bio-Informatica</option>
+                    <option value="Compressione Dati">Compressione Dati</option>
+              		<option value="Cybersecurity">Cybersecurity</option>
+              		<option value="Elementi di Crittografia">Elementi di Crittografia</option>
+              		<option value="Intelligenza Artificiale">Intelligenza Artificiale</option>
+              		<option value="Programmazione Concorrente e Parallela">Programmazione Concorrente e Parallela</option>
+              		<option value="Reti ad Hot">Reti ad Hoc</option>
+              		<option value="Reti Sociali">Reti Sociali</option>
+              		<option value="Reti Wireless">Reti Wireless</option>
+              		<option value="Sicurezza dei Dati">Sicurezza dei Dati</option>
+                  	<option disabled> </option>
+                    
+                    <option disabled> -- Scienze Biologiche, Chimica, VCA (LM) -- </option>
+                    <option value="corso">Corso</option>
+                  </select>
+				
+				<!-- SearchBar Corso-->
+				
+				<!-- /SearchBar Autore -->
 				<br> <label class="btn btn-file btn-success"><span
 					class="glyphicon glyphicon-search"></span> CERCA<input id="submit"
 					name="submit" type="submit" style="display: none;"> </label>

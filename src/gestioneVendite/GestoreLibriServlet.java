@@ -28,6 +28,7 @@ public class GestoreLibriServlet extends HttpServlet {
 	static ArrayList<DettagliAnnuncio>listDettagli;
 	static ArrayList<Annuncio>listAnnunciByTitle;
 	static ArrayList<Annuncio>listAnnunciByTitleAuthor;
+	static ArrayList<Annuncio>listAnnunciByCorso;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -103,8 +104,6 @@ public class GestoreLibriServlet extends HttpServlet {
 			String user = request.getParameter("user");
 			String destinatario = request.getParameter("dest");
 			
-			System.out.println("user "+user+" dest"+destinatario);
-
 			try {
 				EmailUtility.sendEmail(host, port, user, pass, destinatario, subject,content);
 				out.println("<script>");
@@ -126,9 +125,20 @@ public class GestoreLibriServlet extends HttpServlet {
 		if(azione.equalsIgnoreCase("ricercaAnnunci")){
 			String titolo = request.getParameter("titolo");
 			String autore = request.getParameter("autore");
-			
-			if(!titolo.equalsIgnoreCase("") || !autore.equalsIgnoreCase("")){
-
+			String corso = request.getParameter("corso");
+			if(!titolo.equalsIgnoreCase("") || !autore.equalsIgnoreCase("") || corso!=null){
+				if(corso!=null){
+					try{
+						listAnnunciByCorso = DatabaseGV.getListaAnnunciRicercaByCorso(corso);
+						request.setAttribute("listaAnnunci", listAnnunciByCorso);
+						request.setAttribute("vis", "visible");
+					}catch (SQLException e) {
+						e.printStackTrace();
+					}
+					request.getRequestDispatcher("GV-RicercaLibri.jsp").forward(request, response);
+					return;
+				}
+				
 				if(!titolo.equalsIgnoreCase("") && !autore.equalsIgnoreCase("")){   //se vengono immessi titolo e autore nella ricerca
 					try {
 						listAnnunciByTitleAuthor = DatabaseGV.getListaAnnunciRicercaTitleAuthor(titolo,autore);

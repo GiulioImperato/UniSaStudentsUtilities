@@ -21,10 +21,12 @@ public class DatabaseGV {
 	private static String queryDettagliAnnunci;
 	private static String queryRicercaTitolo;
 	private static String queryRicercaTitoloAutore;
+	private static String queryRicercaByCorso;
 	static ArrayList<DettagliAnnuncio>listDettagli;
 	static ArrayList<Annuncio>listAnnunci;
 	static ArrayList<Annuncio>listAnnunciSearch;
 	static ArrayList<Annuncio>listAnnunciTitleAutore;
+	static ArrayList<Annuncio>listAnnunciCorso;
 
 	/**
 	 * @author Pasquale Settembre
@@ -287,6 +289,55 @@ public class DatabaseGV {
 		return listAnnunciTitleAutore;
 	}
 	
+	/**
+	 * @author Pasquale Settembre
+	 * <b>Effettua la ricerca di annunci in base al corso</b>
+	 * @param corso scelto per la ricerca
+	 * @return lista di annunci
+	 * @throws SQLException
+	 */
+	public static ArrayList<Annuncio>getListaAnnunciRicercaByCorso(String corso) throws SQLException{
+		Connection connection = null;
+		PreparedStatement psListAnnunciCorso = null;
+		listAnnunciCorso = new ArrayList();
+		try{
+			connection = Database.getConnection();
+			psListAnnunciCorso = connection.prepareStatement(queryRicercaByCorso);
+			
+			psListAnnunciCorso.setString(1, corso);
+			ResultSet rs = psListAnnunciCorso.executeQuery();
+			
+			while(rs.next()){
+				Annuncio ann = new Annuncio();
+				ann.setIdAnnuncio(Integer.parseInt(rs.getString("idAnnuncio")));
+				ann.setTitolo(rs.getString("Titolo"));
+				ann.setAutore(rs.getString("Autore"));
+				ann.setCorso(rs.getString("Corso"));
+				ann.setProprietario(rs.getString("Proprietario"));
+				String cond = rs.getString("CondizioneLibro");
+				String upperLetter=cond.substring(0, 1).toUpperCase();
+				cond = upperLetter+cond.substring(1);
+				ann.setCondizioneLibro(CondizioneLibro.valueOf(cond));
+				ann.setPrezzo(rs.getBigDecimal("prezzo"));
+
+				listAnnunciCorso.add(ann);
+			}
+		}
+		finally {
+			try {
+				if(psListAnnunciCorso != null)
+					psListAnnunciCorso.close();
+				if(psListAnnunciCorso !=null)
+					psListAnnunciCorso.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			 finally {
+				Database.releaseConnection(connection);
+			}
+		}
+		return listAnnunciCorso;
+	}
 	
 	static {
 		queryAddAnnuncio = "INSERT INTO redteam.annuncio (Titolo, Autore, Corso, Proprietario, CondizioneLibro,Prezzo) VALUES (?,?,?,?,?,?)";
@@ -295,5 +346,7 @@ public class DatabaseGV {
 		queryListAnnunciUtente = "SELECT a.idAnnuncio,a.titolo,a.prezzo,det.data,det.foto from Annuncio as a, Dettagliannuncio as det where a.proprietario=? and a.idAnnuncio=det.id;";
 		queryRicercaTitolo = "SELECT * FROM Annuncio WHERE titolo = ? or autore = ?";
 		queryRicercaTitoloAutore = "SELECT * FROM Annuncio WHERE titolo = ? and autore = ?";
+		queryRicercaByCorso = "SELECT * FROM Annuncio WHERE corso = ?";
+
 	}
 }
