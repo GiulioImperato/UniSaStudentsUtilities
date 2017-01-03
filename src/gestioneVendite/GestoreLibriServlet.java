@@ -2,6 +2,7 @@ package gestioneVendite;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,9 +24,10 @@ import storageLayer.DatabaseGV;
 @WebServlet("/GestoreLibriServlet")
 public class GestoreLibriServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static ArrayList<Annuncio>listAnnunci;
+	static ArrayList<Annuncio>listMyAnnunci;
 	static ArrayList<DettagliAnnuncio>listDettagli;
 	static ArrayList<Annuncio>listAnnunciByTitle;
+	static ArrayList<Annuncio>listAnnunciByTitleAuthor;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -46,21 +48,21 @@ public class GestoreLibriServlet extends HttpServlet {
 			Utente u = (Utente) session.getAttribute("user");
 			String proprietario = u.getEmail();
 			try {
-				listAnnunci = DatabaseGV.getListaAnnunciUtente(proprietario);
+				listMyAnnunci = DatabaseGV.getListaAnnunciUtente(proprietario);
 				listDettagli = DatabaseGV.getListaDettagli();
-				request.setAttribute("listaAnnunci", listAnnunci);
+				request.setAttribute("listaAnnunci", listMyAnnunci);
 				request.setAttribute("listDettagli", listDettagli);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			request.getRequestDispatcher("GV-MieiAnnunci.jsp").forward(request, response);
 		}
-		
-		
-		
+
+
+
 	}
 
-	/**<b>Permette l'inserimento di un annuncio chiamando DatabaseGV</b>
+	/**<b>In base al parametro azione, permette l'inserimento o ricerca di un annuncio  chiamando DatabaseGV</b>
 	 *@author Pasquale Settembre
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -78,7 +80,7 @@ public class GestoreLibriServlet extends HttpServlet {
 			int anno = Integer.parseInt(year);
 			CondizioneLibro condizione = CondizioneLibro.valueOf(request.getParameter("condizioni"));
 			String price = request.getParameter("prezzo-libro");
-			double prezzo = Double.parseDouble(price);
+			BigDecimal prezzo = new BigDecimal(price);
 			String corso = request.getParameter("corso-libro");
 			String descrizione = request.getParameter("descrizione");
 
@@ -89,28 +91,68 @@ public class GestoreLibriServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			/*
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
 		}
+		
+		if(azione.equalsIgnoreCase("inviamessaggio")){
+			PrintWriter out = response.getWriter();
+			String pass = request.getParameter("passwordSender");
+			String subject = request.getParameter("subject");
+			String content = request.getParameter("content");
+			String host = "unisa.smtpauth.cineca.it";
+			String port = "465";
+			String user = request.getParameter("user");
+			String destinatario = request.getParameter("dest");
+			
+			System.out.println("user "+user+" dest"+destinatario);
+
+			try {
+				EmailUtility.sendEmail(host, port, user, pass, destinatario, subject,content);
+				out.println("<script>");
+	            out.println("alert('E-MAIL INVIATA CORRETTAMENTE !')");
+	            out.println("window.history.back()");
+	            out.println("</script>");
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				out.println("<script>");
+	            out.println("alert('Errore: password errata !')");
+	            out.println("window.history.back()");
+	            out.println("</script>");
+			} finally {
+				System.out.println("finito");
+			}
+		}
+		
 		
 		if(azione.equalsIgnoreCase("ricercaAnnunci")){
 			String titolo = request.getParameter("titolo");
-			try {
-				listAnnunciByTitle = DatabaseGV.getListaAnnunciRicercaTitolo(titolo);
-				System.out.println(listAnnunciByTitle.toString());
-				request.setAttribute("listaAnnunciByTitle", listAnnunciByTitle);
-				System.out.println("dsadsad");
-			} catch (SQLException e) {
-				e.printStackTrace();
+			String autore = request.getParameter("autore");
+			
+			if(!titolo.equalsIgnoreCase("") || !autore.equalsIgnoreCase("")){
+
+				if(!titolo.equalsIgnoreCase("") && !autore.equalsIgnoreCase("")){   //se vengono immessi titolo e autore nella ricerca
+					try {
+						listAnnunciByTitleAuthor = DatabaseGV.getListaAnnunciRicercaTitleAuthor(titolo,autore);
+						request.setAttribute("listaAnnunci", listAnnunciByTitleAuthor);
+						request.setAttribute("vis", "visible");
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					request.getRequestDispatcher("GV-RicercaLibri.jsp").forward(request, response);
+				}
+				else{      //se viene immesso il titolo o l'autore nella ricerca
+					try {
+						listAnnunciByTitle = DatabaseGV.getListaAnnunciRicerca(titolo,autore);
+						request.setAttribute("listaAnnunci", listAnnunciByTitle);
+						request.setAttribute("vis", "visible");
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					request.getRequestDispatcher("GV-RicercaLibri.jsp").forward(request, response);
+				}
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/GV-RicercaLibri.jsp");
-			dispatcher.forward(request, response);
+			else{
+				response.sendRedirect("/usu/GV-RicercaLibri.jsp");
+			}
 		}
 	}
-
 }

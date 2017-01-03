@@ -16,8 +16,8 @@ public class TestRicercaAnnuncio {
 		*/
 		
 		String titolo = "Programmazione Distribuita";
-		ArrayList<Annuncio> listaTitoli = DatabaseGV.getListaAnnunciRicercaTitolo(titolo);
-		System.out.println(listaTitoli);
+		//ArrayList<Annuncio> listaTitoli = DatabaseGV.getListaAnnunciRicercaTitolo(titolo);
+		//System.out.println(listaTitoli);
 	}
 
 }

@@ -62,9 +62,9 @@
             </td>
             <td>
               <ul class="list-unstyled stylish-insert-ad">
-               	<li><input id="titolo" type="text" name="titolo-libro" class="form-control" placeholder="Titolo" tabindex="1" ></li>
-                <li><input id="autore" type="text" name="autore-libro" class="form-control" placeholder="Autore" tabindex="2" ></li>                
-                <li><input id="editore" type="text" name="editore-libro" class="form-control" placeholder="Editore" tabindex="3" ></li>
+               	<li><input id="titolo" type="text" name="titolo-libro" class="form-control" maxlength="100" placeholder="Titolo" tabindex="1" ></li>
+                <li><input id="autore" type="text" name="autore-libro" class="form-control" maxlength="45" placeholder="Autore" tabindex="2" ></li>                
+                <li><input id="editore" type="text" name="editore-libro" class="form-control" maxlength="45" placeholder="Editore" tabindex="3" ></li>
                 <li><input id="anno" type="number" min="00.00" name="anno-libro" class="form-control" placeholder="Anno: aaaa" tabindex="4" ></li>
                 
                 <!-- LOADING GIF -->
@@ -104,7 +104,7 @@
                     <option value="CPSM">CPSM</option>
                     <option value="Progettazione di Algoritmi">Progettazione di Algoritmi</option>
                     <option value="Sistemi Operativi">Sistemi Operativi</option>
-                    <option value="Progettazione Web">Progettazione Web</option>
+                    <option value="Programmazione Web">Programmazione Web</option>
                     <option value="Ricerca Operativa">Ricerca Operativa</option>
                     <option value="Reti di Calcolatori">Reti di Calcolatori</option>
                     <option disabled> - Terzo Anno - </option>
