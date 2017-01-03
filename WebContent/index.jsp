@@ -23,18 +23,6 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
 <body>
   <div class="topbar animated fadeInLeftBig"></div>
   
-  
-
-<%-- 	<%if(utente != null)  { %>
-	<%@ include file="-menuLogged.html"%>
-
-	<% }  else  {%>
-
-	<%@ include file="-menu.html"%>
-
-	<% }%>
- --%>
-
 <c:choose>
   <c:when test="${empty user}">
     <%@ include file="-menu.html"%>
