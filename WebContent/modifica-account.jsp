@@ -65,6 +65,7 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
   <div class="container col-lg-8 col-md-offset-2">
   <h2 style="text-align: left;">Impostazioni account</h2>
   <hr>
+  <form id="modifica_account" action="ModificaAccount" method="post">
     <table class="table table-striped">
      <tr>
       <th colspan="2"><span class="glyphicon glyphicon-cog"></span> <b>Impostazioni account</b></th>
@@ -98,9 +99,10 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
     </tbody>
   </table>
   <div class="form-group pull-right">
-    <input type="button" id="update" name="update" class="btn btn-success" value="Update">
-    <input type="button" id="elimina" name="elimina" class="btn btn-danger" value="Elimina">
+    <input type="submit" id="update" name="action" class="btn btn-success" value="Update">
+    <input type="submit" id="elimina" name="action" class="btn btn-danger" value="Elimina">
   </div>
+  </form>
 </div>
 
 </div>
