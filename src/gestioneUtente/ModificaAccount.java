@@ -37,11 +37,24 @@ public class ModificaAccount extends HttpServlet {
 		
 		String action = request.getParameter("action");
 
+		String pass = request.getParameter("password");
+		String cpass = request.getParameter("confirmpassword");
+		
+		boolean flag=false;
+		
+		if(pass.equals(cpass))
+		{
+			flag=true;
+		}
+		
 		if ("Update".equals(action)) {
 			
-			DatabaseGU.cambiaPassword(user.getEmail(), request.getParameter("confirmpassword"));
-			
-			request.getRequestDispatcher("modifica-account.jsp").forward(request, response);
+			if(flag)
+			{
+				DatabaseGU.cambiaPassword(user.getEmail(), request.getParameter("confirmpassword"));
+				request.setAttribute("flag",flag);
+				request.getRequestDispatcher("modifica-account.jsp").forward(request, response);
+			}
 			//System.out.println("Update account");
 			
 		} else if ("Elimina".equals(action)) {
