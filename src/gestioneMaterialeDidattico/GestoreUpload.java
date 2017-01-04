@@ -47,15 +47,14 @@ public class GestoreUpload extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
-	 *      @author Tropeano Domenico Antonio
+	 * @author Tropeano Domenico Antonio
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String visualizedPage = null;
+		String proprietario = "";
 		if (ServletFileUpload.isMultipartContent(request)) {
-			String path = "res/uni/Informatica/Triennale/Programmazione_1/Slides";
-			String UPLOAD_DIRECTORY = getServletContext().getRealPath(path);
-			File uploadDirectory = new File(UPLOAD_DIRECTORY);
+			String path = "res/uni/Informatica/Triennale/Programmazione_1/Slidesss";
 			// Create a factory for disk-based file items
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			// Configure a repository (to ensure a secure temp location is used)
@@ -78,9 +77,8 @@ public class GestoreUpload extends HttpServlet {
 				for (FileItem item : multiparts) {
 					// processes only fields that are not form fields
 					if (!item.isFormField()) {
+						String UPLOAD_DIRECTORY = getServletContext().getRealPath(path);
 						String name = new File(item.getName()).getName();
-						String proprietario = "ang@hotmail.it"; // da
-																// risolvereeeeeeeeeeeee
 						double dimensione = item.getSize() / 1024; // fix it
 						Date dataUpload = new java.sql.Date(System.currentTimeMillis());
 						int like = 0;
@@ -101,7 +99,14 @@ public class GestoreUpload extends HttpServlet {
 							e.printStackTrace();
 						}
 					} else {
+						if (item.getFieldName().equals("path")) {
+							path = item.getString();
+						} else if (item.getFieldName().equals("visualizedPage")) {
 							visualizedPage = item.getString();
+						} else if (item.getFieldName().equals("user")) {
+							proprietario = item.getString();
+							System.out.println("questo è il proprietario"+proprietario);
+						}
 					}
 				}
 			}

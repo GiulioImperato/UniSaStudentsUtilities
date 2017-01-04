@@ -9,17 +9,16 @@ import java.util.ArrayList;
 
 import gestioneMaterialeDidattico.Risorsa;
 
-
 public class DatabaseGM {
 
-	
-	
 	/**
 	 * Restituisce ,se esiste, un oggetto Risorsa data un ID
+	 * 
 	 * @param idRisorsa
-	 * @return {@code null}  se l'utene non esiste, {@code Risorsa Utente }  altrimenti.
+	 * @return {@code null} se l'utene non esiste, {@code Risorsa Utente }
+	 *         altrimenti.
 	 * @throws SQLException
-	  * @author Domenico Tropeano
+	 * @author Domenico Tropeano
 	 */
 
 	public static Risorsa getRisorsaByID(int idRisorsa) {
@@ -29,16 +28,15 @@ public class DatabaseGM {
 		try {
 			connection = Database.getConnection();
 			psGetRisorsaByID = connection.prepareStatement(queryGetRisorsa);
-			
+
 			psGetRisorsaByID.setInt(1, idRisorsa);
 			System.out.println(psGetRisorsaByID);
 			ResultSet rs = psGetRisorsaByID.executeQuery();
-			
-			
-			if (!rs.isBeforeFirst() ) {    
-			    return null; 
-			} 
-											
+
+			if (!rs.isBeforeFirst()) {
+				return null;
+			}
+
 			while (rs.next()) {
 				risorsa.setIdRisorsa(rs.getInt("idRisorsa"));
 				risorsa.setNome(rs.getString("Nome"));
@@ -62,14 +60,15 @@ public class DatabaseGM {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return risorsa;
 	}
 
 	/**
 	 * <b>Salva una risorsa nel database</b>
+	 * 
 	 * @param risorsa
-	 * @return {@code true} se il salvataggio è ok, {@code false}  altrimenti.
+	 * @return {@code true} se il salvataggio è ok, {@code false} altrimenti.
 	 * @throws SQLException
 	 * @author Domenico Tropeano
 	 */
@@ -102,8 +101,9 @@ public class DatabaseGM {
 
 	/**
 	 * <b>Elimina una Risorsa dal database</b>
-	 * @param id 
-	 * @return {@code true}  se l'eliminazione è ok, {@code false}  altrimenti.
+	 * 
+	 * @param id
+	 * @return {@code true} se l'eliminazione è ok, {@code false} altrimenti.
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
@@ -132,8 +132,43 @@ public class DatabaseGM {
 	}
 
 	/**
+	 * <b>Elimina tutte le Risorsa publicate da un utente</b>
+	 * 
+	 * @param idUtente
+	 *            email utente
+	 * @return {@code true} se l'eliminazione è ok, {@code false} altrimenti.
+	 * @throws SQLException
+	 * @author Antonio Corsuto
+	 */
+	public synchronized static boolean deleteRisorseOfUtente(String idUtente) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		int result = 0;
+
+		try {
+			connection = Database.getConnection();
+			preparedStatement = connection.prepareStatement(queryDeleteRisorsaOfUtente);
+			preparedStatement.setString(1, idUtente);
+
+			result = preparedStatement.executeUpdate();
+			connection.commit();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				Database.releaseConnection(connection);
+			}
+		}
+		return (result != 0);
+	}
+
+	/**
 	 * Restituisce tutti le risorse del database
-	 * @return {@code null}  se non esistono risorse, {@code ArrayListRisorse }  altrimenti.
+	 * 
+	 * @return {@code null} se non esistono risorse, {@code ArrayListRisorse }
+	 *         altrimenti.
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
@@ -151,8 +186,8 @@ public class DatabaseGM {
 			connection.commit();
 
 			while (rs.next()) {
-				Risorsa risorsa = new Risorsa();	
-				
+				Risorsa risorsa = new Risorsa();
+
 				risorsa.setIdRisorsa(rs.getInt("idRisorsa"));
 				risorsa.setNome(rs.getString("Nome"));
 				risorsa.setDimensione(rs.getDouble("Dimensione"));
@@ -160,7 +195,7 @@ public class DatabaseGM {
 				risorsa.setProprietario(rs.getString("Proprietario"));
 				risorsa.setLike(rs.getInt("Like"));
 				risorsa.setDislike(rs.getInt("Dislike"));
-				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));	
+				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));
 
 				risorse.add(risorsa);
 			}
@@ -174,17 +209,19 @@ public class DatabaseGM {
 			}
 		}
 
-		if(risorse.size()<1)
+		if (risorse.size() < 1)
 			return null;
-		else  		
-			return risorse ;
+		else
+			return risorse;
 	}
-
 
 	/**
 	 * Restituisce tutti le risorse pubblicate da un utente
-	 * @return {@code null}  se non esistono risorse, {@code ArrayListRisorse }  altrimenti.
-	 * @param idUtente emeil del utente 
+	 * 
+	 * @return {@code null} se non esistono risorse, {@code ArrayListRisorse }
+	 *         altrimenti.
+	 * @param idUtente
+	 *            emeil del utente
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
@@ -203,7 +240,7 @@ public class DatabaseGM {
 			connection.commit();
 
 			while (rs.next()) {
-				Risorsa risorsa = new Risorsa();	
+				Risorsa risorsa = new Risorsa();
 
 				risorsa.setIdRisorsa(rs.getInt("idRisorsa"));
 				risorsa.setNome(rs.getString("Nome"));
@@ -212,7 +249,7 @@ public class DatabaseGM {
 				risorsa.setProprietario(rs.getString("Proprietario"));
 				risorsa.setLike(rs.getInt("Like"));
 				risorsa.setDislike(rs.getInt("Dislike"));
-				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));	
+				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));
 
 				risorse.add(risorsa);
 			}
@@ -226,17 +263,19 @@ public class DatabaseGM {
 			}
 		}
 
-		if(risorse.size()<1)
+		if (risorse.size() < 1)
 			return null;
-		else  		
-			return risorse ;
+		else
+			return risorse;
 	}
-
 
 	/**
 	 * Restituisce tutti le risorse in un determinata directory
-	 * @return {@code null}  se non esistono risorse, {@code ArrayListRisorse }  altrimenti.
-	 * @param path directory
+	 * 
+	 * @return {@code null} se non esistono risorse, {@code ArrayListRisorse }
+	 *         altrimenti.
+	 * @param path
+	 *            directory
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
@@ -255,7 +294,7 @@ public class DatabaseGM {
 			connection.commit();
 
 			while (rs.next()) {
-				Risorsa risorsa = new Risorsa();	
+				Risorsa risorsa = new Risorsa();
 
 				risorsa.setIdRisorsa(rs.getInt("idRisorsa"));
 				risorsa.setNome(rs.getString("Nome"));
@@ -264,7 +303,7 @@ public class DatabaseGM {
 				risorsa.setProprietario(rs.getString("Proprietario"));
 				risorsa.setLike(rs.getInt("Like"));
 				risorsa.setDislike(rs.getInt("Dislike"));
-				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));	
+				risorsa.setPathCaricamento(rs.getString("PathCaricamento"));
 
 				risorse.add(risorsa);
 			}
@@ -278,22 +317,24 @@ public class DatabaseGM {
 			}
 		}
 
-		if(risorse.size()<1)
+		if (risorse.size() < 1)
 			return null;
-		else  		
-			return risorse ;
+		else
+			return risorse;
 	}
-
 
 	/**
 	 * Aggiorna i like di una risorsa
-	  *@return il numero dei like aggiornato se la modifica è ok, 0  altrimenti.
-	 * @param id id della risorsa 
-	 * @param like  valore aggiornato
+	 * 
+	 * @return il numero dei like aggiornato se la modifica è ok, 0 altrimenti.
+	 * @param id
+	 *            id della risorsa
+	 * @param like
+	 *            valore aggiornato
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static int aggiornaLike(int id ,int like) throws SQLException {
+	public synchronized static int aggiornaLike(int id, int like) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -302,13 +343,11 @@ public class DatabaseGM {
 		try {
 			connection = Database.getConnection();
 			preparedStatement = connection.prepareStatement(queryAggiornaLike);
-			preparedStatement.setInt(1,like);			
-			preparedStatement.setInt(2,id);
+			preparedStatement.setInt(1, like);
+			preparedStatement.setInt(2, id);
 
 			result = preparedStatement.executeUpdate();
 			connection.commit();
-
-
 
 		} finally {
 			try {
@@ -319,22 +358,26 @@ public class DatabaseGM {
 			}
 		}
 
-		if(result != 0)
+		if (result != 0)
 			return like;
-		else return like-1;
+		else
+			return like - 1;
 
 	}
 
-
 	/**
 	 * Aggiorna i dislike di una risorsa
-	 *@return il numero dei dislike aggiornato se la modifica è ok, 0  altrimenti.
-	 * @param id identificativo della risorsa 
-	 * @param like valore aggiornato
+	 * 
+	 * @return il numero dei dislike aggiornato se la modifica è ok, 0
+	 *         altrimenti.
+	 * @param id
+	 *            identificativo della risorsa
+	 * @param like
+	 *            valore aggiornato
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static int aggiornaDislike(int id ,int like) throws SQLException {
+	public synchronized static int aggiornaDislike(int id, int like) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -343,8 +386,8 @@ public class DatabaseGM {
 		try {
 			connection = Database.getConnection();
 			preparedStatement = connection.prepareStatement(queryAggiornaDislike);
-			preparedStatement.setInt(1,like);			
-			preparedStatement.setInt(2,id);
+			preparedStatement.setInt(1, like);
+			preparedStatement.setInt(2, id);
 
 			result = preparedStatement.executeUpdate();
 			connection.commit();
@@ -358,20 +401,18 @@ public class DatabaseGM {
 			}
 		}
 
-		if(result != 0)
+		if (result != 0)
 			return like;
-		else return like-1;
+		else
+			return like - 1;
 
 	}
 
-
-
-
-
 	private static String queryGetRisorsa;
-	private static String queryInsertRisorsa;	
+	private static String queryInsertRisorsa;
 	private static String queryDeleteRisorsa;
-	private static String queryGetAllRisorse;	
+	private static String queryDeleteRisorsaOfUtente;
+	private static String queryGetAllRisorse;
 	private static String queryGetRisorseUtente;
 	private static String queryGetRisorsePath;
 	private static String queryAggiornaLike;
@@ -381,10 +422,12 @@ public class DatabaseGM {
 		queryGetRisorsa = "SELECT * FROM redteam.risorsa WHERE risorsa.idRisorsa=?";
 		queryInsertRisorsa = "INSERT INTO `redteam`.`risorsa` (`Nome`, `Dimensione`, `dataUpload`, `Proprietario`, `Like`, `Dislike`, `PathCaricamento`) VALUES (?,?,?,?,?,?,?);";
 		queryDeleteRisorsa = "DELETE FROM `redteam`.`risorsa` WHERE `idRisorsa`=?;";
+		queryDeleteRisorsaOfUtente = "DELETE FROM `redteam`.`risorsa` WHERE `proprietario`=?;";
+
 		queryGetAllRisorse = "SELECT * From redteam.risorsa";
-		queryGetRisorseUtente = "SELECT * FROM `redteam`.`risorsa` WHERE `proprietaio`=?;";
+		queryGetRisorseUtente = "SELECT * FROM `redteam`.`risorsa` WHERE `proprietario`=?;";
 		queryGetRisorsePath = "SELECT * FROM `redteam`.`risorsa` WHERE `pathCaricamento`=?;";
-		queryAggiornaLike =  "UPDATE `redteam`.`risorsa` SET `like`=? WHERE `idRisorsa`=?;";
-		queryAggiornaDislike ="UPDATE `redteam`.`risorsa` SET `dislike`=? WHERE `idRisorsa`=?;";
+		queryAggiornaLike = "UPDATE `redteam`.`risorsa` SET `like`=? WHERE `idRisorsa`=?;";
+		queryAggiornaDislike = "UPDATE `redteam`.`risorsa` SET `dislike`=? WHERE `idRisorsa`=?;";
 	}
 }

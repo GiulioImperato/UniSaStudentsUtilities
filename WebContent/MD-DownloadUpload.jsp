@@ -3,13 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
-	Utente utente = (Utente) session.getAttribute("utente");
+	Utente utente = (Utente) session.getAttribute("user");
 
 	String home = (String) request.getAttribute("home");
 	String dip = (String) request.getAttribute("dip");
 	String degree = (String) request.getAttribute("degree");
 	String corso = (String) request.getAttribute("corso");
 	String materiale = (String) request.getAttribute("materiale");
+	int i=0;
+	
 
 	if (utente == null) {
 		// SIMULA LA SESSIONE
@@ -85,7 +87,7 @@
 
 			<!-- /NavPath -->
 
-			<!-- TabellaLibri -->
+			<!-- TabellaRisorse -->
 			<table class="table table-hover">
 				<thead class="th-center">
 					<tr>
@@ -101,32 +103,71 @@
 
 				<tbody>
 					<c:forEach var="risorsa" items="${requestScope.resourceArray}">
-						<tr>
+						<tr id="<%=++i%>">
 							<td>${risorsa.nome}</td>
 							<td>${risorsa.proprietario}</td>
-							<td><a id="likefeed" name="${risorsa.idRisorsa}"
-								onclick=jasonLike(this);>${risorsa.like}<span
-									class="glyphicon glyphicon-thumbs-up"></span></a></td>
-							<td><a id="dislikefeed" name="${risorsa.idRisorsa}"
+							<%
+								if (utente != null) {
+									
+							%>
+
+							<td><a id="likefeed<%=i%>" indice="<%=i%>" name="${risorsa.idRisorsa}"
+								onclick=jasonLike(this);>${risorsa.like}<span id="upFeed<%=i%>"
+									class="glyphicon glyphicon-thumbs-up"></span>
+							</a></td>
+							<td><a id="dislikefeed<%=i%>" indice="<%=i%>" name="${risorsa.idRisorsa}"
 								onclick=jasonDislike(this);>${risorsa.dislike}<span
-									class="glyphicon glyphicon-thumbs-down"></span></a></td>
+									id="downFeed<%=i%>" class="glyphicon glyphicon-thumbs-down"></span>
+							</a></td>
+
+							<%
+							} else {
+							%>
+							<td><a id="likefeed" name="${risorsa.idRisorsa}" onclick=errorLog()>${risorsa.like}
+									<span id="upFeed" class="glyphicon glyphicon-thumbs-up"></span>
+							</a></td>
+							<td><a id="dislikefeed" name="${risorsa.idRisorsa}" onclick=errorLog()>${risorsa.dislike}
+									<span id="downFeed" class="glyphicon glyphicon-thumbs-down"></span>
+							</a></td>
+
+							<%
+							}  
+							%>
 							<td>${risorsa.dataUpload}</td>
 							<td>${risorsa.dimensione}</td>
-							<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}"><span
+							<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}&dip=<%=dip%>&degree=<%=degree%>&corso=<%=corso%>&materiale=<%=materiale%>"><span
 									class="glyphicon glyphicon-save"></span></a></td>
 						</tr>
+						
 					</c:forEach>
 				</tbody>
 			</table>
-			<!-- /TabellaLibri -->
+			<!-- /TabellaRisorse  -->
 			<form id="uploadForm" action="GestoreUpload" method="post"
 				enctype="multipart/form-data">
-				<label class="btn btn-file btn-success" style="margin-bottom: 10px"><span
-					class="glyphicon glyphicon-open"></span> Upload file<input
-					type="file" name="uploadable" id="uploadable"
-					style="display: none;"> </label> 
-					<input type="hidden" value="GestoreRicerca?typeClicked=materiale&folderClicked=<%=materiale%>" id="visualizedPage" name="visualizedPage">
-			       <!-- <input type="hidden" value="<%=dip%>/<%=degree%>/<%=corso%>/<%=materiale%>/" id="path" name="path"> -->
+				<label class="btn btn-file btn-success" style="margin-bottom: 10px">
+					<input type="hidden"
+					value="res/uni/<%=dip%>/<%=degree%>/<%=corso%>/<%=materiale%>/"
+					id="path" name="path">
+					<input type="hidden" name="user" id="user" value="${user.email}"> <span
+					class="glyphicon glyphicon-open"></span>
+				<c:choose>
+						<c:when test="${empty user}">
+						Devi essere loggato
+							<input type="file" disabled="disabled" name="uploadable"
+								id="uploadable" style="display: none;">
+						</c:when>
+				<c:otherwise>
+						Upload file
+							<input type="file" name="uploadable" id="uploadable"
+						style="display: none;">
+				</c:otherwise>
+				</c:choose>
+				</label> 
+				<input type="hidden"
+					value="GestoreRicerca?typeClicked=materiale&folderClicked=<%=materiale%>"
+					id="visualizedPage" name="visualizedPage">
+
 			</form>
 
 		</div>
@@ -135,29 +176,50 @@
 
 	<script type="text/javascript">
 	
+	function errorLog(){
+		alert("Effettua L'accesso Per Rilasciare Un Feedback");
+	};
+	
 	var clicklike =false;
 	var clickdislike = false;
 	
-function jasonLike(obj){
 	
+	//var cars = new Array(); 
+	
+	var up   =document.getElementById("upFeed");	
+	var down =document.getElementById("downFeed");
+	var clickfeed= new Array();
+	
+	
+function jasonLike(obj){
+		
+	var index = $(obj).attr("indice");
+	var up   =document.getElementById("upFeed"+index);	
+	var down =document.getElementById("downFeed"+index);
+	
+	
+	
+		
 	//alert("in likejason ");	
 	
-	if(clicklike == true){
+	if(clickfeed[index] == true){
 		alert("Hai gia lasciato un Like");
 	}
 	
-	if(clicklike ==false){
-		
-		clickdislike = false;
-		clicklike =true;
+	if(clickfeed[index] ==false || clickfeed[index] === undefined){
+		clickfeed[index]=true;
+		//clickdislike = false;
+		//clicklike =true;
 	
-	var off =document.getElementById("likefeed");
+	var off =document.getElementById("likefeed"+index);
 	   	      
-	var on =document.getElementById("dislikefeed");
+	var on =document.getElementById("dislikefeed"+index);
 	 
 	// $(off).css({"background":"red"});
     // $(on).css({"background":"green"});
 		
+    alert("num like: "+$(obj).text()+"numdislike: "+$(on).text()+"like: "+"idRis: "+$(obj).attr("name"));
+    
 	  $.ajax({
 		  type:'GET',
 		 url:'GestoreFeedback?numlike='+$(obj).text()+'&numdislike='+$(on).text()+'&cliccato=like'+'&idRis='+$(obj).attr("name"),
@@ -169,9 +231,25 @@ function jasonLike(obj){
 		
 		success:function(result){			
 			var risultato = $.parseJSON(result);
-			
-			document.getElementById("likefeed").innerHTML = risultato[0];
-			document.getElementById("dislikefeed").innerHTML = risultato[1];
+						
+	var a =document.getElementById("likefeed"+index);
+	if(risultato[0]<=0)
+		a.innerHTML = 0;
+	else
+	a.innerHTML = risultato[0];
+	
+	//a.text( up);
+	a.appendChild(up);	
+	
+	var b =document.getElementById("dislikefeed"+index);
+	if(risultato[1]<=0)
+		b.innerHTML = 0;
+	else
+	b.innerHTML = risultato[1];
+	
+	//b.text( down);
+	b.appendChild(down);
+	
 			
 			
 			alert("Feedback inserito con successo !")
@@ -186,7 +264,7 @@ function jasonLike(obj){
 			     clickdislike = false;
 			        alert("C'è stato un problema con il server. Impossibile registrare il feedback");
 			    }	  
-	  })	 
+	  });
 	  
 	}
 };
@@ -195,22 +273,29 @@ function jasonLike(obj){
 function jasonDislike(obj){
 	
 	//alert("in dislike jason ");
+	var index = $(obj).attr("indice");
+	var up   =document.getElementById("upFeed"+index);	
+	var down =document.getElementById("downFeed"+index);
 	
-	if(clickdislike == true){
+	
+	
+	
+	if(clickfeed[index] == false){
 		alert("Hai gia lasciato un Dislike");
 	}
 	
-	if(clickdislike ==false){
-		
-		clicklike = false;
-		clickdislike =true;
+	
+	 if(clickfeed[index] ==true || clickfeed[index] === undefined){
+		clickfeed[index]=false;
+		//clickdislike = false;
+		//clicklike =true;
 
-	var off =document.getElementById("dislikefeed");
+	var off =document.getElementById("dislikefeed"+index);
     
-    var on =document.getElementById("likefeed");
+    var on =document.getElementById("likefeed"+index);
 
-     $(off).css({"background":"red"});
-     $(on).css({"background":"green"});
+    // $(off).css({"background":"red"});
+     //$(on).css({"background":"green"});
 	
 	
 	  $.ajax({
@@ -225,9 +310,22 @@ function jasonDislike(obj){
 		success:function(result){
 			
 			var risultato = $.parseJSON(result);
+						
+			var a =document.getElementById("likefeed"+index);
+			if(risultato[0]<=0)
+				a.innerHTML = 0;
+			else
+			a.innerHTML = risultato[0];
+			//a.text( up);
+			a.appendChild(up); 
 			
-			document.getElementById("likefeed").innerHTML = risultato[0];
-			document.getElementById("dislikefeed").innerHTML = risultato[1];
+			var b =document.getElementById("dislikefeed"+index);
+			if(risultato[1]<0)
+				b.innerHTML = 0;			
+			else
+			b.innerHTML = risultato[1];
+			//b.text( down);
+			b.appendChild(down);
 			
 			alert("feedback inserito con successo !")
 						
@@ -235,14 +333,14 @@ function jasonDislike(obj){
 				},
 		error : function (richiesta,stato,errori) {
 			
-			$(off).css({"background":"none"});
-			$(on).css({"background":"none"});
+			//$(off).css({"background":"none"});
+			//$(on).css({"background":"none"});
 			     clicklike =false;
 			     clickdislike = false;
 			     alert("C'è stato un problema con il server. Impossibile registrare il feedback");
 				    }	
 				
-	  })	
+	  });
 	  
 	}
 };

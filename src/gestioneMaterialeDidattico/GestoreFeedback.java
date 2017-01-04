@@ -38,9 +38,16 @@ public class GestoreFeedback extends HttpServlet {
 		String cliccato =request.getParameter("cliccato").trim();
 		int idRisorsa = Integer.parseInt(request.getParameter("idRis").trim());
 		
+		
+		if(numlike<0)
+			numlike=0;
+		
+		if(numdislike<0)
+			numdislike=0;
+		
+		
 		int likeAggiornati =numlike;
 		int dislikeAggiornati =numdislike;
-
 
 
 
