@@ -92,8 +92,8 @@ function hideLoadingPage(){            //NASCONDE LA LOADING GIF
 }
 
 $(document).ready(function(){
-	$('#checkAnnuncio').click(function(){
-		var titolo = $('#titolo').val();
+	$('#checkAnnuncio').click(function(){    //appena viene cliccato il pulsante "inserisci annuncio
+		var titolo = $('#titolo').val();	 //vengono presi i parametri dalla form
 		var autore = $('#autore').val();
 		var editore = $('#editore').val();
 		var anno = $('#anno').val();
@@ -107,8 +107,6 @@ $(document).ready(function(){
 		var email = document.getElementById('user').value;
 		
 		var path2 = document.getElementById('pr').value;
-		
-		
 		
 		//PATHFILE:http://localhost:8080/usu/res/imagesAnnuncio/...
 		var pathFile = document.getElementById('image').src;
@@ -124,7 +122,7 @@ $(document).ready(function(){
 										if (document.getElementById) {      //rende visibile la loading gif
 											document.getElementById('hidepage').style.visibility = 'visible'; 
 										} 
-										$.ajax({
+										$.ajax({            //chiamata ajax alla servlet
 											type:'POST',
 											data: {
 												"titolo-libro":titolo,
@@ -231,7 +229,7 @@ function checkCondizione(condizione){
 
 function checkPrezzo(prezzo){
 	var regex = /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/;
-	if(prezzo==""){
+	if(prezzo=="" || prezzo.length >19){
 		alert('Il campo prezzo è vuoto o non valido');
 		return false;
 	}

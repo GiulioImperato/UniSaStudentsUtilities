@@ -20,12 +20,14 @@ public class DatabaseGV {
 	private static String queryListAnnunciUtente;
 	private static String queryDettagliAnnunci;
 	private static String queryRicercaTitolo;
-	private static String queryRicercaAutore;
+	private static String queryRicercaTitoloAutore;
+	private static String queryRicercaByCorso;
 	static ArrayList<DettagliAnnuncio>listDettagli;
 	static ArrayList<Annuncio>listAnnunci;
-	static ArrayList<Annuncio>listAnnunciTitolo;
-	static ArrayList<Annuncio>listAnnunciAutore;
-	
+	static ArrayList<Annuncio>listAnnunciSearch;
+	static ArrayList<Annuncio>listAnnunciTitleAutore;
+	static ArrayList<Annuncio>listAnnunciCorso;
+
 	/**
 	 * @author Pasquale Settembre
 	 * <b>Permette l'inserimento di un annuncio nel database</b>
@@ -48,7 +50,7 @@ public class DatabaseGV {
 			psAddAnnuncio.setString(3, annuncio.getCorso());
 			psAddAnnuncio.setString(4, annuncio.getProprietario());
 			psAddAnnuncio.setString(5, annuncio.getCondizioneLibro().name());
-			psAddAnnuncio.setDouble(6, annuncio.getPrezzo());
+			psAddAnnuncio.setBigDecimal(6, annuncio.getPrezzo());
 			System.out.println(psAddAnnuncio.toString());
 			psAddAnnuncio.executeUpdate();
 			
@@ -101,7 +103,7 @@ public class DatabaseGV {
 	public static ArrayList<Annuncio>getListaAnnunciUtente(String email) throws SQLException{
 		Connection connection = null;
 		PreparedStatement psListAnnunciUtente= null;
-		listAnnunci = new ArrayList();
+		listAnnunci = new ArrayList<>();
 		listDettagli = new ArrayList<>();
 		try{
 			connection = Database.getConnection();
@@ -113,12 +115,11 @@ public class DatabaseGV {
 			while(rs.next()){
 				Annuncio ann = new Annuncio();
 				ann.setTitolo(rs.getString("Titolo"));
-				ann.setPrezzo(rs.getDouble("prezzo"));
-				//Date data = rs.getDate("Data");
-				//String foto = rs.getString("Foto");
+				ann.setPrezzo(rs.getBigDecimal("prezzo"));
 				listAnnunci.add(ann);
-				selectDettagliAnnuncio(rs.getInt("idAnnuncio"));
+				selectDettagliAnnuncio(rs.getInt("idAnnuncio"));    //chiamata al metodo, per effettuare la query su quel determinato annuncio
 			}
+			
 		}
 		finally {
 			try {
@@ -137,7 +138,12 @@ public class DatabaseGV {
 		return listAnnunci;
 	}
 	
-	
+	/**
+	 * @author Pasquale Settembre
+	 * <b>Effettua la query al db dei dettagli di un determinato annuncio</b>
+	 * @param id dell'annuncio
+	 * @throws SQLException
+	 */
 	public static void selectDettagliAnnuncio(int id) throws SQLException{
 		Connection connection = null;
 		PreparedStatement psListAnnunciUtente= null;
@@ -153,8 +159,6 @@ public class DatabaseGV {
 				DettagliAnnuncio dett = new DettagliAnnuncio();
 				dett.setData(rs.getDate("Data"));
 				dett.setFoto(rs.getString("Foto"));
-				//Date data = rs.getDate("Data");
-				//String foto = rs.getString("Foto");
 				listDettagli.add(dett);	
 			}
 		}
@@ -173,40 +177,50 @@ public class DatabaseGV {
 		}
 	}
 	
+	/**
+	 * @author Pasquale Settembre
+	 * <b>Restituisce la lista dei dettagli di un annuncio</b>
+	 * @return arraylist di tipo DettagliAnnuncio
+	 */
 	public static ArrayList<DettagliAnnuncio>getListaDettagli(){
 		return listDettagli;
 	}
 	
 	/**
 	 * @author Francesco Garofalo
-	 * <b>Permette di cercare nel database la lista degli annunci con il titolo desiderato</b>
+	 * <b>Permette di cercare nel database la lista degli annunci tramite il titolo o autore desiderato</b>
 	 * @param titolo dell'annuncio 
-	 * @return restituisce la lista degli annunci correlati al titolo inserito
+	 * @return restituisce la lista degli annunci correlati al titolo o l'autore inserito
 	 * @throws SQLException
 	 */
-	public static ArrayList<Annuncio>getListaAnnunciRicercaTitolo(String titolo) throws SQLException{
+	public static ArrayList<Annuncio>getListaAnnunciRicerca(String titolo,String autore) throws SQLException{
 		Connection connection = null;
 		PreparedStatement psListAnnunciTitolo = null;
-		listAnnunciTitolo = new ArrayList();
+		listAnnunciSearch = new ArrayList();
 		try{
 			connection = Database.getConnection();
 			psListAnnunciTitolo = connection.prepareStatement(queryRicercaTitolo);
 			
 			psListAnnunciTitolo.setString(1, titolo);
+			psListAnnunciTitolo.setString(2, autore);
 			ResultSet rs = psListAnnunciTitolo.executeQuery();
 			
 			while(rs.next()){
 				Annuncio ann = new Annuncio();
+				ann.setIdAnnuncio(Integer.parseInt(rs.getString("idAnnuncio")));
 				ann.setTitolo(rs.getString("Titolo"));
 				ann.setAutore(rs.getString("Autore"));
 				ann.setCorso(rs.getString("Corso"));
 				ann.setProprietario(rs.getString("Proprietario"));
-				//CONDIZIONE LIBRO ENUM VA CONVERTITO IN STRING
-				//ann.setCondizioneLibro(rs.getObject("Condizione"));
-				ann.setPrezzo(rs.getDouble("prezzo"));
+				String cond = rs.getString("CondizioneLibro");
+				String upperLetter=cond.substring(0, 1).toUpperCase();
+				cond = upperLetter+cond.substring(1);
+				ann.setCondizioneLibro(CondizioneLibro.valueOf(cond));
+				ann.setPrezzo(rs.getBigDecimal("prezzo"));
 				
-				listAnnunciTitolo.add(ann);
+				listAnnunciSearch.add(ann);
 			}
+			
 		}
 		finally {
 			try {
@@ -218,42 +232,45 @@ public class DatabaseGV {
 				e.printStackTrace();
 			}
 			 finally {
-				connection.close();
 				Database.releaseConnection(connection);
 			}
 		}
-		return listAnnunciTitolo;
+		return listAnnunciSearch;
 	}
 	
 	/**
 	 * @author Francesco Garofalo
-	 * <b>Permette di cercare nel database la lista degli annunci con l'autore desiderato</b>
+	 * <b>Permette di cercare nel database la lista degli annunci con il titolo e autore desiderato</b>
 	 * @param autore del libro 
-	 * @return restituisce la lista degli annunci correlati all'autore del libro inserito
+	 * @return restituisce la lista degli annunci correlati al titolo e autore inserito
 	 * @throws SQLException
 	 */
-	public static ArrayList<Annuncio>getListaAnnunciRicercaAutore(String autore) throws SQLException{
+	public static ArrayList<Annuncio>getListaAnnunciRicercaTitleAuthor(String titolo,String autore) throws SQLException{
 		Connection connection = null;
 		PreparedStatement psListAnnunciAutore = null;
-		listAnnunciAutore = new ArrayList();
+		listAnnunciTitleAutore = new ArrayList();
 		try{
 			connection = Database.getConnection();
-			psListAnnunciAutore = connection.prepareStatement(queryRicercaAutore);
+			psListAnnunciAutore = connection.prepareStatement(queryRicercaTitoloAutore);
 			
-			psListAnnunciAutore.setString(1, autore);
+			psListAnnunciAutore.setString(1, titolo);
+			psListAnnunciAutore.setString(2, autore);
 			ResultSet rs = psListAnnunciAutore.executeQuery();
 			
 			while(rs.next()){
 				Annuncio ann = new Annuncio();
+				ann.setIdAnnuncio(Integer.parseInt(rs.getString("idAnnuncio")));
 				ann.setTitolo(rs.getString("Titolo"));
 				ann.setAutore(rs.getString("Autore"));
 				ann.setCorso(rs.getString("Corso"));
 				ann.setProprietario(rs.getString("Proprietario"));
-				//CONDIZIONE LIBRO ENUM VA CONVERTITO IN STRING
-				//ann.setCondizioneLibro(rs.getObject("Condizione"));
-				ann.setPrezzo(rs.getDouble("prezzo"));
+				String cond = rs.getString("CondizioneLibro");
+				String upperLetter=cond.substring(0, 1).toUpperCase();
+				cond = upperLetter+cond.substring(1);
+				ann.setCondizioneLibro(CondizioneLibro.valueOf(cond));
+				ann.setPrezzo(rs.getBigDecimal("prezzo"));
 
-				listAnnunciAutore.add(ann);
+				listAnnunciTitleAutore.add(ann);
 			}
 		}
 		finally {
@@ -266,11 +283,60 @@ public class DatabaseGV {
 				e.printStackTrace();
 			}
 			 finally {
-				connection.close();
 				Database.releaseConnection(connection);
 			}
 		}
-		return listAnnunciAutore;
+		return listAnnunciTitleAutore;
+	}
+	
+	/**
+	 * @author Pasquale Settembre
+	 * <b>Effettua la ricerca di annunci in base al corso</b>
+	 * @param corso scelto per la ricerca
+	 * @return lista di annunci
+	 * @throws SQLException
+	 */
+	public static ArrayList<Annuncio>getListaAnnunciRicercaByCorso(String corso) throws SQLException{
+		Connection connection = null;
+		PreparedStatement psListAnnunciCorso = null;
+		listAnnunciCorso = new ArrayList();
+		try{
+			connection = Database.getConnection();
+			psListAnnunciCorso = connection.prepareStatement(queryRicercaByCorso);
+			
+			psListAnnunciCorso.setString(1, corso);
+			ResultSet rs = psListAnnunciCorso.executeQuery();
+			
+			while(rs.next()){
+				Annuncio ann = new Annuncio();
+				ann.setIdAnnuncio(Integer.parseInt(rs.getString("idAnnuncio")));
+				ann.setTitolo(rs.getString("Titolo"));
+				ann.setAutore(rs.getString("Autore"));
+				ann.setCorso(rs.getString("Corso"));
+				ann.setProprietario(rs.getString("Proprietario"));
+				String cond = rs.getString("CondizioneLibro");
+				String upperLetter=cond.substring(0, 1).toUpperCase();
+				cond = upperLetter+cond.substring(1);
+				ann.setCondizioneLibro(CondizioneLibro.valueOf(cond));
+				ann.setPrezzo(rs.getBigDecimal("prezzo"));
+
+				listAnnunciCorso.add(ann);
+			}
+		}
+		finally {
+			try {
+				if(psListAnnunciCorso != null)
+					psListAnnunciCorso.close();
+				if(psListAnnunciCorso !=null)
+					psListAnnunciCorso.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			 finally {
+				Database.releaseConnection(connection);
+			}
+		}
+		return listAnnunciCorso;
 	}
 	
 	static {
@@ -278,7 +344,9 @@ public class DatabaseGV {
 		queryDettagliAnnuncio = "INSERT INTO redteam.dettagliannuncio (id, Editore, Anno, Descrizione, Data, Foto) VALUES (?,?,?,?,?,?)";
 		queryDettagliAnnunci = "SELECT data,foto FROM dettagliannuncio WHERE id=?";
 		queryListAnnunciUtente = "SELECT a.idAnnuncio,a.titolo,a.prezzo,det.data,det.foto from Annuncio as a, Dettagliannuncio as det where a.proprietario=? and a.idAnnuncio=det.id;";
-		queryRicercaTitolo = "SELECT * FROM Annuncio WHERE titolo = ?";
-		queryRicercaAutore = "SELECT * FROM Annuncio WHERE autore = ?";
+		queryRicercaTitolo = "SELECT * FROM Annuncio WHERE titolo = ? or autore = ?";
+		queryRicercaTitoloAutore = "SELECT * FROM Annuncio WHERE titolo = ? and autore = ?";
+		queryRicercaByCorso = "SELECT * FROM Annuncio WHERE corso = ?";
+
 	}
 }
