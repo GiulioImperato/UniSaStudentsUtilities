@@ -34,8 +34,11 @@ public class GestoreDownload extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id=Integer.parseInt(request.getParameter("idRisorsa"));
-		String needle="res/uni/Informatica/Triennale/Programmazione_1/Slides/";
-		String path=request.getSession().getServletContext().getRealPath(needle);
+		String dip = (String) request.getParameter("dip");
+		String degree = (String) request.getParameter("degree");
+		String corso = (String) request.getParameter("corso");
+		String materiale = (String) request.getParameter("materiale");
+		String path=request.getSession().getServletContext().getRealPath("res/uni/"+dip+"/"+degree+"/"+corso+"/"+materiale+"/");
 		File f=new File(path+"/"+id);
 		
 		ServletContext ctx = getServletContext();

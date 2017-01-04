@@ -139,7 +139,7 @@
 
 							<td>${risorsa.dataUpload}</td>
 							<td>${risorsa.dimensione}</td>
-							<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}"><span
+							<td><a href="GestoreDownload?idRisorsa=${risorsa.idRisorsa}&dip=<%=dip%>&degree=<%=degree%>&corso=<%=corso%>&materiale=<%=materiale%>"><span
 									class="glyphicon glyphicon-save"></span></a></td>
 						</tr>
 					</c:forEach>
