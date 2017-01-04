@@ -102,6 +102,9 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
     <input type="submit" id="update" name="action" class="btn btn-success" value="Update">
     <input type="submit" id="elimina" name="action" class="btn btn-danger" value="Elimina">
   </div>
+	<div id="success" class="alert alert-success col-sm-6" style="display: none">
+    <strong>Password cambiata con successo!</strong>
+  </div>
   </form>
 </div>
 
@@ -147,6 +150,18 @@ Copyright 2014 Cyrus Creative Studio. All rights reserved.
 
 <!-- jquery -->
 <script src="assets/jquery.js"></script>
+<script>
+$( document ).ready(function() {
+    var data = ${flag};
+    if(data)
+    	{
+    		$("#success").show();
+    		
+    		setTimeout( "jQuery('#success').slideUp();",4000);
+    	}
+    
+});
+</script>
 
 <!-- wow script -->
 <script src="assets/wow/wow.min.js"></script>
