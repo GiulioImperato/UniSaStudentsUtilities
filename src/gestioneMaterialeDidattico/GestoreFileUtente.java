@@ -46,7 +46,7 @@ public class GestoreFileUtente extends HttpServlet {
 		} 
 		//fino a qua */ 
 		
-		String utenteMail = ((Utente)session.getAttribute("utente")).getEmail();	
+		String utenteMail = ((Utente)session.getAttribute("user")).getEmail();	
 
 		System.out.println("emil "+utenteMail);
 

@@ -31,7 +31,7 @@ public class GestoreEliminaRisorsa extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session=request.getSession();
-		String utente = ((Utente)session.getAttribute("utente")).getEmail();	
+		String utente = ((Utente)session.getAttribute("user")).getEmail();	
 
 
 		if((utente==null) || utente.equals("")){

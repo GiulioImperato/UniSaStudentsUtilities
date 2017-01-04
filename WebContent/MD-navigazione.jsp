@@ -11,7 +11,7 @@
   String materiale = (String)request.getAttribute("materiale"); 
 
 
-   Utente utente = (Utente)session.getAttribute("utente");
+   Utente utente = (Utente)session.getAttribute("user");
         if(utente==null){
         	// SIMULA LA SESSIONE
         	//utente = new Utente("a","a","a","a",true,true);

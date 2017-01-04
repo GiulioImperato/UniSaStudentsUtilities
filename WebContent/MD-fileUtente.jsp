@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
-	Utente utente = (Utente)session.getAttribute("utente");
+	Utente utente = (Utente)session.getAttribute("user");
     ArrayList<Risorsa> risorse ;
     
     risorse=(ArrayList<Risorsa>)request.getAttribute("listaRisorseUtente");
@@ -49,7 +49,7 @@
       
      <%  if(risorse==null) {  %>
      
-     <div> 
+     <div style="min-height: 350px;"> 
      
      <p> Non Hai Publcato Nessuna Risorsa</p>
      
@@ -57,7 +57,7 @@
      
      <% }else if(risorse.size()==0){ %>
      
-     <div> 
+     <div style="min-height: 350px;"> 
      
      <p> Non Hai Publcato Nessuna Risorsa</p>
      
@@ -90,8 +90,7 @@
             <td><%=risorse.get(i).getLike()%></td>
             <td><%=risorse.get(i).getDislike()%></td>
            <td><%=risorse.get(i).getDataUpload()%></td>
-            <td><%=risorse.get(i).getDimensione()%></td>
-            <td><%=risorse.get(i).getDimensione()%></td>
+            <td><%=risorse.get(i).getDimensione()%></td>            
             <td><%=risorse.get(i).getPathCaricamento()%></td>
            <!-- <td><a href="#"><span class="glyphicon glyphicon-save"></span></a></td> --> 
             <td><a href="GestoreEliminaRisorsa?action=one&idRis=<%=risorse.get(i).getIdRisorsa()%>"><span class="glyphicon glyphicon-trash"></span></a></td>
@@ -102,11 +101,13 @@
       </table>
       <!-- /TabellaRisorse -->
       
-       <%} %>
-      
-      <a href="GestoreEliminaRisorsa?action=all&idRis=all" class="btn btn-file btn-success" style="margin-bottom: 10px"><span class="glyphicon glyphicon-trash"></span>
+        <a href="GestoreEliminaRisorsa?action=all&idRis=all" class="btn btn-file btn-success" style="margin-bottom: 10px"><span class="glyphicon glyphicon-trash"></span>
         Elimina tutto<input type="file" style="display: none;">
       </a>
+      
+       <%} %>
+      
+    
     </div>
   </div>
 <!-- works -->
