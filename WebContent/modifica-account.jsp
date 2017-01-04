@@ -1,3 +1,11 @@
+<%@ page language="java"  contentType="text/html; charset=UTF-8"  
+import="java.util.*,gestioneUtente.*,storageLayer.*"%>
+<%@ taglib
+    prefix="c"
+    uri="http://java.sun.com/jsp/jstl/core" 
+%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,41 +43,15 @@
 <body>
 <div class="topbar animated fadeInLeftBig"></div>
 <!--NAVBAR-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header" style="margin-top:-10px">
-      <a class="navbar-brand" href="#"><img src="images/logo.png"></a>
-      <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Materiali didattico</a></li>
-        <li><a href="#">Vendita libri</a></li>
-        <li><a href="#">Mappa aule</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a> Benvenuto</a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-right:10px;">Giulio <span class="caret"></span></a>
-          <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
-            <li><a href="#">Modifica account</a></li>
-            <li><a href="#">I miei annunci</a></li>
-            <li><a href="#">I miei file</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<c:choose>
+  <c:when test="${empty user}">
+    <%@ include file="-menu.html"%>
+  </c:when>
+  <c:otherwise>
+    <%@ include file="-menuLogged.html"%>
+  </c:otherwise>
+</c:choose>
+
 <!--FINENAV-->
 
 
@@ -153,9 +135,9 @@ Copyright 2014 Cyrus Creative Studio. All rights reserved.
 <div class="slides"></div>
 <!-- Controls for the borderless lightbox -->
 <h3 class="title">Title</h3>
-<a class="prev">‹</a>
-<a class="next">›</a>
-<a class="close">×</a>
+<a class="prev">â¹</a>
+<a class="next">âº</a>
+<a class="close">Ã</a>
 <!-- The modal dialog, which will be used to wrap the lightbox content -->
 </div>
 
