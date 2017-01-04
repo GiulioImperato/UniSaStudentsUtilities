@@ -151,7 +151,7 @@ public class GestoreAuleServlet extends HttpServlet {
 				}
 			}
 		}
-		/*if(azione.equalsIgnoreCase("feedback")){
+		if(azione.equalsIgnoreCase("feedback")){
 			boolean status = Boolean.valueOf(feedStatus);
 			try {
 				boolean a = DatabaseGA.invioFeedback(status, emailUtente, nomeAula, giorno);
@@ -159,7 +159,7 @@ public class GestoreAuleServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			out.write(String.valueOf(status));
-		}*/
+		}
 		if(azione.equalsIgnoreCase("ricerca")){
 			String oraInizio = "09:00:00";
 			String oraFine = "10:00:00";
