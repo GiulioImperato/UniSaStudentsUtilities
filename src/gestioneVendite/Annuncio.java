@@ -1,4 +1,7 @@
 package gestioneVendite;
+
+import java.math.BigDecimal;
+
 /**
  * @author Pasquale Settembre
  */
@@ -9,7 +12,7 @@ public class Annuncio {
 	private String corso;
 	private String proprietario;
 	private CondizioneLibro condizioneLibro;
-	private double prezzo;
+	private BigDecimal prezzo;
 	private DettagliAnnuncio dettagliAnnuncio;
 	
 	/**
@@ -28,7 +31,7 @@ public class Annuncio {
 	 * @param dettagliAnnuncio oggetto dettagliAnnuncio collegato all'annuncio
 	 */
 	public Annuncio(String titolo, String autore, String corso, String proprietario,
-			CondizioneLibro condizioneLibro, double prezzo, DettagliAnnuncio dettagliAnnuncio) {
+			CondizioneLibro condizioneLibro, BigDecimal prezzo, DettagliAnnuncio dettagliAnnuncio) {
 		this.titolo = titolo;
 		this.autore = autore;
 		this.corso = corso;
@@ -74,10 +77,10 @@ public class Annuncio {
 	public void setCondizioneLibro(CondizioneLibro condizioneLibro) {
 		this.condizioneLibro = condizioneLibro;
 	}
-	public double getPrezzo() {
+	public BigDecimal getPrezzo() {
 		return prezzo;
 	}
-	public void setPrezzo(double prezzo) {
+	public void setPrezzo(BigDecimal prezzo) {
 		this.prezzo = prezzo;
 	}
 	public DettagliAnnuncio getDettagliAnnuncio() {

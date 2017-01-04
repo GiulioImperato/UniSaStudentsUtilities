@@ -41,43 +41,20 @@
 			<!-- TabellaLibri -->
 			<table class="table table-hover">
 				<tbody>
+					<c:forEach var="annuncio" varStatus="status" items="${requestScope.listaAnnunci}">
 					<tr>
-						<td><img src=""></td>
+						<td><img width="150" height="200" src=${listDettagli[status.index].foto}></td>
 						<td>
 							<ul id="dettagli-libro" class="list-unstyled li-left">
-								<li>Titolo libro</li>
-								<li>Prezzo</li>
-								<li>Data annuncio</li>
+								<li>Titolo: ${annuncio.titolo}</li>
+								<li>Prezzo: € ${annuncio.prezzo}</li>
+								<li>Data: ${listDettagli[status.index].data}</li>
 							</ul>
 						</td>
 						<td><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
 						<td><span class="glyphicon glyphicon-trash"></span></td>
 					</tr>
-					<tr>
-						<td><img src=""></td>
-						<td>
-							<ul id="dettagli-libro" class="list-unstyled li-left">
-								<li>Titolo libro</li>
-								<li>Prezzo</li>
-								<li>Data annuncio</li>
-							</ul>
-						</td>
-						<td><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
-						<td><span class="glyphicon glyphicon-trash"></span></td>
-					</tr>
-					<tr>
-						<td><img src=""></td>
-						<td>
-							<ul id="dettagli-libro" class="list-unstyled li-left">
-								<li>Titolo libro</li>
-								<li>Prezzo</li>
-								<li>Data annuncio</li>
-							</ul>
-						</td>
-						<td><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
-						<td><span class="glyphicon glyphicon-trash"></span></td>
-					</tr>
-
+					</c:forEach>
 				</tbody>
 			</table>
 			<a href="GV-InserisciAnnuncio.jsp"> <input type="button"

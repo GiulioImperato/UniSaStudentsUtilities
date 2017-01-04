@@ -1,10 +1,10 @@
-$(document).ready(function(){
-	$('#submit').click(function(){
+$(document).ready(function(){   
+ 	$('#submit').click(function(){             //appena viene cliccato il pulsante "carica"
 		$('#insertform').on('submit',uploadFile);
 	});
 });
 
-function uploadFile(event) {
+function uploadFile(event) {            //viene preso il file dalla form
 	event.stopPropagation();
 	event.preventDefault();
 	var form = document.getElementById('insertform');
@@ -13,7 +13,7 @@ function uploadFile(event) {
 }
 
 function postFilesData(data) {
-	$.ajax({
+	$.ajax({                     //chiamata alla servlet 
 		url :  'UploadImage',
 		type : 'POST',
 		data : data,
@@ -22,8 +22,8 @@ function postFilesData(data) {
 		processData : false,
 		contentType : false,
 		success : function(result) {
-			$("#pr").attr("value",result);
-			$("#image").attr("src",result);
+			$("#pr").attr("value",result);         //viene salvato il src dell'immagine
+			$("#image").attr("src",result);        //viene mostrata l'immagine
 		},
 		error : function(result) {
 			alert('ERRORS:');

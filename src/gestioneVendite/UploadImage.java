@@ -41,8 +41,8 @@ public class UploadImage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	/**<b>Effettua l'inserimento dell'immagine di un annuncio</b>
+	 * @author Pasquale Settembre
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -77,8 +77,6 @@ public class UploadImage extends HttpServlet {
 					File file = File.createTempFile("img",".jpg",uploadDir);
 					item.write(file);
 					String name = path+file.getName();
-
-					//String sourceImage = "res/imagesAnnunci/"+file.getName();
 
 					System.out.println(name);
 					out.println(name);

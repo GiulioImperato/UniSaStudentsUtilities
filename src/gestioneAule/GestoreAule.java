@@ -46,7 +46,7 @@ public class GestoreAule {
 	 * @return
 	 * @throws SQLException
 	 */
-	public OraAula visualizzaInfoAula(String nome, Giorno giorno) throws SQLException{
+	public ArrayList<OraAula> visualizzaInfoAula(String nome, Giorno giorno) throws SQLException{
 		return DatabaseGA.visualizzaInfoAula(nome, giorno);
 	}
 	

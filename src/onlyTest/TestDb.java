@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gestioneVendite.CondizioneLibro;
-import gestioneVendite.GestoreLibri;
 import storageLayer.DatabaseGA;
 import storageLayer.DatabaseGM;
 import storageLayer.DatabaseGU;
@@ -104,7 +103,7 @@ public class TestDb {
 		//System.out.println(b);
 				
 		//GestoreLibri gst = new GestoreLibri();
-			
+		//DatabaseGU.cambiaPassword("a.esposito164@studenti.unisa.it", "gigginbaccola");
 	
 		//if(gst.inserisciAnnuncio("qwe", "Something", CondizioneLibro.nuovo, "Prog Distribuita", 40, "Gigi", 2016, "Libro di prog distr", new Date(), "JavaEE", "pas@hotmail.it"))
 		//	System.out.println("inserimento avvenuto");
