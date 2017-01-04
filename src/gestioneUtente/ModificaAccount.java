@@ -1,23 +1,28 @@
 package gestioneUtente;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import storageLayer.DatabaseGU;
 
 /**
  * Servlet implementation class ChangePassword
  */
-@WebServlet("/ChangePassword")
-public class ChangePassword extends HttpServlet {
+@WebServlet("/ModificaAccount")
+public class ModificaAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangePassword() {
+    public ModificaAccount() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +32,41 @@ public class ChangePassword extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		//metodo per cambiare la password	
+		HttpSession session = request.getSession();
+		Utente user =(Utente) session.getAttribute("user");
+		
+		String action = request.getParameter("action");
+
+		if ("Update".equals(action)) {
+			
+			DatabaseGU.cambiaPassword(user.getEmail(), request.getParameter("confirmpassword"));
+			
+			request.getRequestDispatcher("modifica-account.jsp").forward(request, response);
+			//System.out.println("Update account");
+			
+		} else if ("Elimina".equals(action)) {
+		    
+			try {
+				
+				//System.out.println("Elimina account");
+				DatabaseGU.deleteUser(user.getEmail());
+				session.removeAttribute("user");
+				session.invalidate();
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+				
+				
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+
+		
+		
+		
+		
 		
 		
 	}
