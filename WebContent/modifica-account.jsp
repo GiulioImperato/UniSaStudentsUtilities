@@ -73,33 +73,33 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
       
       <tr>
         <td>Nome</td>
-        <td><input type="text" id="nome" class="form-control" value="${user.nome}" readonly></td>
+        <td><input type="text" id="nome" name="nome" class="form-control" value="${user.nome}" readonly></td>
       </tr>
       
       <tr>
         <td>Cognome</td>
-        <td><input type="text" id="cognome" class="form-control" value="${user.cognome }" readonly></td>
+        <td><input type="text" id="cognome" name="cognome" class="form-control" value="${user.cognome }" readonly></td>
       </tr>
       
       <tr>
         <td>Email</td>
-        <td><input type="text" id="email" class="form-control" value="${user.email }" readonly></td>
+        <td><input type="text" id="email" name="email" class="form-control" value="${user.email }" readonly></td>
       </tr>
       
       <tr>
         <td>Password</td>
-        <td><input type="password" id="password" class="form-control" value="${user.password }" placeholder="Password"></td>
+        <td><input type="password" id="password" name="password" class="form-control" value="${user.password }" placeholder="Password"></td>
       </tr>
       <tr>
       	<td>Conferma Password</td>
-      	<td><input type="password" id="password-confirm" class="form-control" placeholder="Conferma password"></td>
+      	<td><input type="password" id="confirmpassword" name="confirmpassword" class="form-control" placeholder="Conferma password"></td>
       </tr>
       
     </tbody>
   </table>
   <div class="form-group pull-right">
     <input type="button" id="update" name="update" class="btn btn-success" value="Update">
-    <input type="button" id="remove" name="remove" class="btn btn-danger" value="Elimina">
+    <input type="button" id="elimina" name="elimina" class="btn btn-danger" value="Elimina">
   </div>
 </div>
 
