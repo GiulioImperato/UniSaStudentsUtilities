@@ -52,7 +52,7 @@ public class DatabaseGU {
 	 * <b>Elimina un utente dal database</b>
 	 * 
 	 * @param email
-	 * @return {@code true} se l'eliminazione � ok, {@code false} altrimenti.
+	 * @return {@code true} se l'eliminazione e' ok, {@code false} altrimenti.
 	 * @throws SQLException
 	 * @author Domenico Tropeano
 	 */

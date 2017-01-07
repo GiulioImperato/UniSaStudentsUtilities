@@ -14,12 +14,14 @@ public class TestDatabaseGM {
 	public void TestGetRisorsaByID() {
 		assertNotNull(DatabaseGM.getRisorsaByID(7));
 	}
+	@Test
 	public void TestInsertRisorsa(){
 		Date d=new Date(System.currentTimeMillis());
 		Risorsa r=new Risorsa("For", "ang@hotmail.it", 100, d, 0, 0, "uelaa");
 		int i=DatabaseGM.insertRisorsa(r);
 		assertNotEquals(0, i);
 	}
+	@Test
 	public void TestDeleteRisorsa(){
 		int id=8;
 		try {
@@ -30,6 +32,11 @@ public class TestDatabaseGM {
 		}
 	}
 	public void TestDeleteRisorseOfUtente(){
-		
+		try {
+			assertEquals(DatabaseGM.deleteRisorseOfUtente("f.garofalo8@studenti.unisa.it"),true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
