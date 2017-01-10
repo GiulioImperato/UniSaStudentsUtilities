@@ -160,7 +160,7 @@ public class GestoreAuleServlet extends HttpServlet {
 			}
 			out.write(String.valueOf(status));
 		}
-		if(azione.equalsIgnoreCase("ricerca")){
+		/*if(azione.equalsIgnoreCase("ricerca")){
 			String oraInizio = "09:00:00";
 			String oraFine = "10:00:00";
 			Date now = new Date();
@@ -220,7 +220,7 @@ public class GestoreAuleServlet extends HttpServlet {
 					out.write(nome.get(i)+" ");
 				}
 			}
-		}
+		}*/
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
