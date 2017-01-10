@@ -13,7 +13,7 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Student Utilities</title>
-
+  <link href="assets/switch-style.css" rel="stylesheet">
 <%@ include file="-UPimport.html" %> 
 
 </head>
@@ -44,8 +44,7 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
 <br>
 <div class="container">
  <h2 class="text-center  wowload fadeInUp"> Lista utenti</h2>
- 
- <!-- I valori della tabella sono da cambiare poichÃ¨ saranno genererati dinamicamente in base alle query -->       
+      
  <c:choose>
  <c:when test="${user.isPrivilegioAdmin()}">
   <table class="table table-hover" >   
@@ -54,7 +53,7 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
         <th>Firstname</th>
         <th>Lastname</th>
         <th>Email</th>
-        <th>Disabilita</th>
+        <th>Disabilita/Abilita</th>
       </tr>
     </thead>
     <tbody>
@@ -63,14 +62,14 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
             <td>${dataItem.nome}</td>
             <td>${dataItem.cognome}</td>
             <td>${dataItem.email}</td>
-            <td><input checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" type="checkbox"></td>
+            <td><label class="switch"><input name="checkboxes" value="${dataItem.email }" type="checkbox"<c:if test="${dataItem.status}">checked</c:if> onchange="disabilitaAccount(this.value)" ><div class="slider round"></div></label></td>
         </tr>
         </c:forEach>
-       
     </tbody>
   </table>
   </c:when>
   </c:choose>
+  
 </div>
 
 <!-- works -->
@@ -88,5 +87,6 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
 <%@ include file="-footer.html" %> 
 
 <%@ include file="-DOWNimport.html" %>
+<script src="js/disabilitaAccount.js"></script>
 </body>
 </html>
