@@ -37,7 +37,7 @@ public class TestDatabaseGA {
 
 	public void testVisualizzaInfoAula() {
 		ArrayList<OraAula> array = null;
-		try {
+		try { 
 			array = DatabaseGA.visualizzaInfoAula("F1", Giorno.gio);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
