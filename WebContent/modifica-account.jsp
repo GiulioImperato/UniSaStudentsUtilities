@@ -89,18 +89,18 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
       
       <tr>
         <td>Password</td>
-        <td><input type="password" id="password" name="password" class="form-control" value="${user.password }" placeholder="Password"></td>
+        <td><input type="password" id="password_modifica" name="password" class="form-control" placeholder="Nuova password" onkeyup="validate()"></td>
       </tr>
       <tr>
       	<td>Conferma Password</td>
-      	<td><input type="password" id="confirmpassword" name="confirmpassword" class="form-control" placeholder="Conferma password"></td>
+      	<td><input type="password" id="confirmpassword_modifica" name="confirmpassword" class="form-control" placeholder="Conferma password"></td>
       </tr>
       
     </tbody>
   </table>
   <div class="form-group pull-right">
-    <input type="submit" id="update" name="action" class="btn btn-success" value="Update">
-    <input type="submit" id="elimina" name="action" class="btn btn-danger" value="Elimina">
+    <input type="submit" id="update" name="action" class="btn btn-success" style="background-color:#5cb85c" value="Update" disabled>
+    <input type="submit" id="elimina" name="action" class="btn btn-danger" style="background-color:#c9302c" value="Elimina">
   </div>
 	<div id="success" class="alert alert-success col-sm-6" style="display: none">
     <strong>Password cambiata con successo!</strong>
@@ -150,6 +150,7 @@ Copyright 2014 Cyrus Creative Studio. All rights reserved.
 
 <!-- jquery -->
 <script src="assets/jquery.js"></script>
+<script src="js/validation_modifica.js"></script>
 <script>
 $( document ).ready(function() {
     var data = ${flag};
@@ -162,7 +163,6 @@ $( document ).ready(function() {
     
 });
 </script>
-
 <!-- wow script -->
 <script src="assets/wow/wow.min.js"></script>
 
