@@ -1,4 +1,4 @@
-package storageLayer;
+package gestioneAule;
 
 import java.sql.SQLException;
 import java.sql.Time;
@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import gestioneAule.Aula;
-import gestioneAule.Giorno;
-import gestioneAule.OraAula;
+
+import storageLayer.DatabaseGA;
 
 public class TestDatabaseGA {
+	@Test
 	public void testGetListaAule() {
 		ArrayList<Aula> array = null;
 		try {
@@ -21,20 +21,7 @@ public class TestDatabaseGA {
 		}
 		assertNotNull(array);
 	}
-
-	public void testRicercaAule() {
-		Time i = new Time(10, 0, 0);
-		Time f = new Time(12, 0, 0);
-		ArrayList<Aula> array = null;
-		try {
-			array = DatabaseGA.ricercaAule(Giorno.lun, i, f);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		assertNotNull(array);
-	}
-
+	@Test
 	public void testVisualizzaInfoAula() {
 		ArrayList<OraAula> array = null;
 		try { 
@@ -45,22 +32,33 @@ public class TestDatabaseGA {
 		}
 		assertNotNull(array);
 	}
-
-	public void testInvioFeedback() {
+	@Test
+	public void testStatusAulaFuoriOrario(){
 		try {
-			assertEquals(true, DatabaseGA.invioFeedback(true, "ang@hotmail.it", "F4", Giorno.mar));
+			Time i = new Time(18, 0, 0);
+			Time f = new Time(8, 0, 0);
+			assertEquals(false, DatabaseGA.getStatusAula("F1", i, f, Giorno.lun));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
-
-	public void testResetFeedback() {
+	@Test
+	public void testStatusAulaLibera(){
 		try {
-			assertEquals(true, DatabaseGA.resetFeedback("F4", Giorno.mar));
+			Time i = new Time(16, 0, 0);
+			Time f = new Time(17, 0, 0);
+			assertEquals(false, DatabaseGA.getStatusAula("F1", i, f, Giorno.lun));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testStatusAulaOccupata(){
+		try {
+			Time i = new Time(17, 0, 0);
+			Time f = new Time(18, 0, 0);
+			assertEquals(true, DatabaseGA.getStatusAula("F1", i, f, Giorno.ven));
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
