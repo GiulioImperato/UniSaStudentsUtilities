@@ -59,6 +59,10 @@ public class Login extends HttpServlet {
 					request.getRequestDispatcher("errorlog.jsp").forward(request, response);
 				}
 			}
+			else
+			{
+				request.getRequestDispatcher("errorlog.jsp").forward(request, response);
+			}
 
 			
 		} catch (SQLException e) {
