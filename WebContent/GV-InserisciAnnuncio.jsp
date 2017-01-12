@@ -46,7 +46,7 @@
       <h2 style="text-align: left;">Inserisci annuncio</h2> 
       <!-- TabellaLibri -->
       
-      <form id="insertform" name="insertform" action="UploadImage" method="post" enctype="multipart/form-data">
+      <form id="insertform" name="insertform"  method="post" enctype="multipart/form-data">
       
       <table class="table">
         <tbody>
