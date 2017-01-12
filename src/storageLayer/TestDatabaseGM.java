@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -31,6 +32,7 @@ public class TestDatabaseGM {
 			e.printStackTrace();
 		}
 	}
+	@Test
 	public void TestDeleteRisorseOfUtente(){
 		try {
 			assertEquals(DatabaseGM.deleteRisorseOfUtente("f.garofalo8@studenti.unisa.it"),true);
