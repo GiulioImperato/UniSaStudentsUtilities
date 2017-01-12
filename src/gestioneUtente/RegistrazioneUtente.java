@@ -65,10 +65,10 @@ public class RegistrazioneUtente extends HttpServlet {
 			{
 				Utente u = new Utente(n,c,e,p,ss,pa);
 				DatabaseGU.addUser(u);
-				u.setStatus(true);
+				DatabaseGU.changeStatus(u.getEmail(), true);
 				//email link
 				
-				
+				request.getRequestDispatcher("regsuccess.jsp").forward(request, response);
 				
 				//response.sendRedirect("http://www.google.com");
 			} catch (SQLException e1) {
@@ -78,7 +78,7 @@ public class RegistrazioneUtente extends HttpServlet {
 		}
 		else
 		{
-			request.getRequestDispatcher("errorreg.jsp").forward(request, response);
+			System.out.println("errore registrazione");
 		}
 		
 		

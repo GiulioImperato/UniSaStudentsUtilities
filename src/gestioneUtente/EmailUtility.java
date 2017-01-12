@@ -49,7 +49,7 @@ public class EmailUtility {
 
 		// creates a new e-mail message
 		Message msg = new MimeMessage(session);
-		String url = "http://localhost:8080/usu/RegistrazioneUtente?nome="+nome+"&cognome="+cognome+"&email="+toAddress+"&password="+password;
+		String url = "http://localhost:8080/usu/RegistrazioneUtente?nome="+nome+"&cognome="+cognome+"&email="+toAddress+"&password="+passwordUtente;
 		msg.setFrom(new InternetAddress(userName));
 		InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
 		msg.setRecipients(Message.RecipientType.TO, toAddresses);

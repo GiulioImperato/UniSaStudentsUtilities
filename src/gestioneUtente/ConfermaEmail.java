@@ -43,6 +43,7 @@ public class ConfermaEmail extends HttpServlet {
 
 
 			EmailUtility.sendEmail(host, port, emailusu, passwordusu, email,nome,cognome,password);
+			request.getRequestDispatcher("alert.jsp").forward(request, response);
 
 
 		} catch (Exception e) {
