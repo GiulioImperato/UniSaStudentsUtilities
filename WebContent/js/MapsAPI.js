@@ -81,20 +81,46 @@ function handleAlterContent2() {
 		var contentString;
 		var border = '<div style="width:200px;height:100%;padding-bottom:10px;border:5px solid black;">'
 		var border_close = '</div>';
+		var stato ;
 
 //		Script load coordinates and name of the Aule on the map
 		for (i = 0; i<=30; i++) {
 			var aule = nomi_aule[i];
+			console.log(nomi_aule[i]);
+			console.log(aule);
 			item=responseTextVar.split(' ');
 			item = item[i].split(',');
 			lat[i] =item[0];
 			lng[i] = item[1];
-			marker = new google.maps.Marker({
-				position: new google.maps.LatLng(lat[i], lng[i]),
-				map: map,
-				title : aule,
-				icon: icon_red
-			});
+			$.ajax({
+				async:false,
+				type: 'GET',
+				data: {
+					"nomeAula":nomi_aule[i],
+					azione: "statusAula"
+				},
+				url:'gestoreAule',
+				success: function(result){
+					stato = result;
+					console.log(stato);
+					if(stato == "false"){
+						marker = new google.maps.Marker({
+							position: new google.maps.LatLng(lat[i], lng[i]),
+							map: map,
+							title : aule,
+							icon :icon_green
+						});
+						
+					}else{
+						marker = new google.maps.Marker({
+							position: new google.maps.LatLng(lat[i], lng[i]),
+							map: map,
+							title : aule,
+							icon : icon_red
+						});	
+					}
+				}
+			})
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {					
 					$.ajax({											//Richiesta alla servlet

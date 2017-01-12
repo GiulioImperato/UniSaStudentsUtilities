@@ -74,6 +74,28 @@ public class GestoreAuleServlet extends HttpServlet {
 				}
 			}
 		}
+		
+		if(azione.equalsIgnoreCase("statusAula")){
+			//nome
+			boolean stato = false;
+			Time oraAttuale = new Time(System.currentTimeMillis());
+			Time inizio = new Time(oraAttuale.getHours(),0,0);			//
+			Time fine = new Time(oraAttuale.getHours()+1,0,0);
+			Date now = new Date();
+
+			SimpleDateFormat simpleDateformat = new SimpleDateFormat("E"); // the day of the week abbreviated
+			giorno = Giorno.valueOf(simpleDateformat.format(now));
+			try {
+				stato = DatabaseGA.getStatusAula(nomeAula, inizio, fine, giorno);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println(stato+"AULA= "+nomeAula);
+			
+			out.write(String.valueOf(stato));
+		}
+		
 		if(azione.equalsIgnoreCase("infoAula")){
 			//VISUALIZZA INFO AULA
 			System.out.println("NOME:"+nomeAula);
