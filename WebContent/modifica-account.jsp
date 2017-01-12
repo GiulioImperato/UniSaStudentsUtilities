@@ -65,6 +65,7 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
   <div class="container col-lg-8 col-md-offset-2">
   <h2 style="text-align: left;">Impostazioni account</h2>
   <hr>
+  <form id="modifica_account" action="ModificaAccount" method="post">
     <table class="table table-striped">
      <tr>
       <th colspan="2"><span class="glyphicon glyphicon-cog"></span> <b>Impostazioni account</b></th>
@@ -73,34 +74,38 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
       
       <tr>
         <td>Nome</td>
-        <td><input type="text" id="nome" class="form-control" value="${user.nome}" readonly></td>
+        <td><input type="text" id="nome" name="nome" class="form-control" value="${user.nome}" readonly></td>
       </tr>
       
       <tr>
         <td>Cognome</td>
-        <td><input type="text" id="cognome" class="form-control" value="${user.cognome }" readonly></td>
+        <td><input type="text" id="cognome" name="cognome" class="form-control" value="${user.cognome }" readonly></td>
       </tr>
       
       <tr>
         <td>Email</td>
-        <td><input type="text" id="email" class="form-control" value="${user.email }" readonly></td>
+        <td><input type="text" id="email" name="email" class="form-control" value="${user.email }" readonly></td>
       </tr>
       
       <tr>
         <td>Password</td>
-        <td><input type="password" id="password" class="form-control" value="${user.password }" placeholder="Password"></td>
+        <td><input type="password" id="password_modifica" name="password" class="form-control" placeholder="Nuova password" onkeyup="validate()"></td>
       </tr>
       <tr>
       	<td>Conferma Password</td>
-      	<td><input type="password" id="password-confirm" class="form-control" placeholder="Conferma password"></td>
+      	<td><input type="password" id="confirmpassword_modifica" name="confirmpassword" class="form-control" placeholder="Conferma password"></td>
       </tr>
       
     </tbody>
   </table>
   <div class="form-group pull-right">
-    <input type="button" id="update" name="update" class="btn btn-success" value="Update">
-    <input type="button" id="remove" name="remove" class="btn btn-danger" value="Elimina">
+    <input type="submit" id="update" name="action" class="btn btn-success" style="background-color:#5cb85c" value="Update" disabled>
+    <input type="submit" id="elimina" name="action" class="btn btn-danger" style="background-color:#c9302c" value="Elimina">
   </div>
+	<div id="success" class="alert alert-success col-sm-6" style="display: none">
+    <strong>Password cambiata con successo!</strong>
+  </div>
+  </form>
 </div>
 
 </div>
@@ -145,7 +150,19 @@ Copyright 2014 Cyrus Creative Studio. All rights reserved.
 
 <!-- jquery -->
 <script src="assets/jquery.js"></script>
-
+<script src="js/validation_modifica.js"></script>
+<script>
+$( document ).ready(function() {
+    var data = ${flag};
+    if(data)
+    	{
+    		$("#success").show();
+    		
+    		setTimeout( "jQuery('#success').slideUp();",4000);
+    	}
+    
+});
+</script>
 <!-- wow script -->
 <script src="assets/wow/wow.min.js"></script>
 

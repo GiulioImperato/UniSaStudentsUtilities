@@ -36,6 +36,9 @@ public class GestoreUtente {
 		return DatabaseGU.doRetrieveAll();
 	}
 	
+	public boolean cambiaPassword(String Email, String newPassword) throws SQLException {
+		return DatabaseGU.cambiaPassword(Email, newPassword);
+	}
 	
 
 }

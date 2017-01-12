@@ -23,7 +23,7 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
 <body>
   <div class="topbar animated fadeInLeftBig"></div>
   
-  
+
 <c:choose>
   <c:when test="${empty user}">
     <%@ include file="-menu.html"%>
