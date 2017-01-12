@@ -334,7 +334,10 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static int aggiornaLike(int id, int like) throws SQLException {
+	public synchronized static int aggiornaLike(int id, int like) throws SQLException,Exception {
+		
+		if(like<0) throw new Exception();
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -377,7 +380,10 @@ public class DatabaseGM {
 	 * @throws SQLException
 	 * @author Antonio Corsuto
 	 */
-	public synchronized static int aggiornaDislike(int id, int like) throws SQLException {
+	public synchronized static int aggiornaDislike(int id, int like) throws SQLException,Exception {
+		
+		if(like<0) throw new Exception();
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
