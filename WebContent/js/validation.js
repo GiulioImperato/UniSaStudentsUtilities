@@ -35,7 +35,8 @@ $('#ajax-register-form').bootstrapValidator({
 					type:"POST",
 					message:"Email già usata"
 				}
-			}
+			},
+			message:" "
 		},
 		password : {
 			validators : {
