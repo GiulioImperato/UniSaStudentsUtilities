@@ -38,7 +38,6 @@ public class RegistrazioneUtente extends HttpServlet {
 		boolean pa = false;
 		
 		
-		
 		boolean flag=false;
 		try 
 		{
@@ -64,7 +63,9 @@ public class RegistrazioneUtente extends HttpServlet {
 		{
 			try 
 			{
-				DatabaseGU.addUser(new Utente(n,c,e,p,ss,pa));
+				Utente u = new Utente(n,c,e,p,ss,pa);
+				DatabaseGU.addUser(u);
+				u.setStatus(true);
 				//email link
 				
 				
@@ -77,7 +78,7 @@ public class RegistrazioneUtente extends HttpServlet {
 		}
 		else
 		{
-			System.out.println("Errore");
+			request.getRequestDispatcher("errorreg.jsp").forward(request, response);
 		}
 		
 		
