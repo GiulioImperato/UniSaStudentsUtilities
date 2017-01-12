@@ -34,6 +34,13 @@ public class RegistrazioneUtente extends HttpServlet {
 		String c = request.getParameter("cognome");
 		String e = request.getParameter("email");
 		String p = request.getParameter("password");
+		
+		System.out.println("nome "+n);
+		System.out.println("cognome "+c);
+		System.out.println("email "+e);
+		System.out.println("password "+p);
+		
+		
 		boolean ss = false;
 		boolean pa = false;
 		

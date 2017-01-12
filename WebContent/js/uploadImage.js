@@ -1,15 +1,13 @@
 $(document).ready(function(){   
- 	$('#submit').click(function(){             //appena viene cliccato il pulsante "carica"
-		$('#insertform').on('submit',uploadFile);
+ 	$('#file').change(function(){             //appena viene cliccato il pulsante "scegli_foto"
+ 		uploadFile();
 	});
 });
 
-function uploadFile(event) {            //viene preso il file dalla form
-	event.stopPropagation();
-	event.preventDefault();
+function uploadFile() {
 	var form = document.getElementById('insertform');
-	var data = new FormData(form);
-	postFilesData(data);
+	var data = new FormData(form);    	     //viene preso il file dalla form
+	postFilesData(data); 
 }
 
 function postFilesData(data) {
