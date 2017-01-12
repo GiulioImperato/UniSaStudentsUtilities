@@ -203,14 +203,51 @@ public class DatabaseGA {
 		}
 		return true;
 	}
+	
+	public static boolean getStatusAula(String nomeAula,Time oraInizio, Time oraFine, Giorno giorno) throws SQLException{
+		Connection connection = null;
+		PreparedStatement psStatusAula = null;
+		boolean stato = false ;
+		try {
+			connection = Database.getConnection();
+			psStatusAula = connection.prepareStatement(queryStatusMappa);
+			psStatusAula.setString(1, nomeAula);
+			psStatusAula.setString(2, giorno.name());
+			psStatusAula.setTime(3, oraInizio);
+			psStatusAula.setTime(4, oraFine);
+			System.out.println("SSSSS"+psStatusAula);
+			ResultSet rs = psStatusAula.executeQuery();
+			connection.commit();
+			while(rs.next()){
+				stato = rs.getBoolean("defaultStatus");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (psStatusAula != null)
+					psStatusAula.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				Database.releaseConnection(connection);
+			}
+		}
+		return stato;
+	}
 
 	private static String queryGetListaAule;
 	private static String queryRicercaAule;
+	private static String queryStatusMappa;
 	private static String queryVisualizzaInfoAule;
 	private static String queryInvioFeedback;
 	private static String queryResetFeedback;
 	static {
 		queryGetListaAule = "SELECT * FROM redteam.aula";
+		queryStatusMappa = "select oraaula.defaultStatus "
+				+ "from redteam.oraaula "
+				+ "where oraaula.nome=? and oraaula.giorno=? and oraaula.oraInizio>=? and oraaula.oraFine<=?";
 		queryRicercaAule = "SELECT distinct a.Nome,CoordinateX,CoordinateY "
 				+ "FROM redteam.aula as a,redteam.oraaula as oa "
 				+ "WHERE oa.giorno =?  and oa.oraInizio >= ? and oa.oraFine <= ? and oa.defaultStatus = false and a.nome = oa.nome";
