@@ -8,8 +8,14 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import storageLayer.DatabaseGA;
-
+/**
+ * Test sull'unità database per la gestione aule
+ */
 public class TestDatabaseGA {
+	/**
+	 * Test sul metodo che ritorna la lista delle aule con i nomi e le coordinate(x/y)
+	 * @author Angelo Settembre
+	 */
 	@Test
 	public void testGetListaAule() {
 		ArrayList<Aula> array = null;
@@ -21,6 +27,10 @@ public class TestDatabaseGA {
 		}
 		assertNotNull(array);
 	}
+	/**
+	 * Test sul metodo che ritorna la lista delle informazioni rispetto un'aula
+	 * @author Angelo Settembre
+	 */
 	@Test
 	public void testVisualizzaInfoAula() {
 		ArrayList<OraAula> array = null;
@@ -32,6 +42,11 @@ public class TestDatabaseGA {
 		}
 		assertNotNull(array);
 	}
+	/**
+	 * Test sul metodo getStatusAula dove in questo caso si testa un orario fuori dal range.
+	 * Il risultato aspettato è che sulla mappa risulteranno tutte le aule, libere (false).
+	 * @author Angelo Settembre
+	 */
 	@Test
 	public void testStatusAulaFuoriOrario(){
 		try {
@@ -42,6 +57,11 @@ public class TestDatabaseGA {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Test sul metodo getStatusAula dove in questo caso si testa un orario in cui è libera.
+	 * Il risultato aspettato è che il lunedi, l'aula testata sarà libera.
+	 * @author Angelo Settembre
+	 */
 	@Test
 	public void testStatusAulaLibera(){
 		try {
@@ -52,6 +72,11 @@ public class TestDatabaseGA {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Test sul metodo getStatusAula dove in questo caso si testa un orario in cui è occupata.
+	 * Il risultato aspettato è che il venerdi, l'aula testata sarà occupata.
+	 * @author Angelo Settembre
+	 */
 	@Test
 	public void testStatusAulaOccupata(){
 		try {
