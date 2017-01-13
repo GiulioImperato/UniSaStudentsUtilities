@@ -3,26 +3,26 @@ package gestioneUtente;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import storageLayer.DatabaseGU;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class AdminListaUtenti
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/AdminListaUtenti")
+public class AdminListaUtenti extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public AdminListaUtenti() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,44 +32,26 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String email = request.getParameter("emailLogin");
-		String password = request.getParameter("passwordLogin");
+		String email = request.getParameter("data");
 		
 		try {
 			
 			Utente u = DatabaseGU.getUtenteByID(email);
-			
-			if(u!=null)
+			if(u.isStatus())
 			{
-				if(u.getPassword().equals(password))
-				{
-					if(u.isStatus()==true)
-					{
-						HttpSession session = request.getSession();
-						session.setAttribute("user", u);
-						request.getRequestDispatcher("index.jsp").forward(request, response);
-					}
-					else
-					{
-						request.getRequestDispatcher("errorlog.jsp").forward(request, response);
-					}
-				}
-				else
-				{
-					request.getRequestDispatcher("errorlog.jsp").forward(request, response);
-				}
+				DatabaseGU.changeStatus(email, false);
 			}
 			else
 			{
-				request.getRequestDispatcher("errorlog.jsp").forward(request, response);
+				DatabaseGU.changeStatus(email, true);
 			}
-
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		request.getRequestDispatcher("listautentipage.jsp").forward(request, response);
 	}
 
 	/**

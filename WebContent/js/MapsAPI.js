@@ -81,20 +81,46 @@ function handleAlterContent2() {
 		var contentString;
 		var border = '<div style="width:200px;height:100%;padding-bottom:10px;border:5px solid black;">'
 		var border_close = '</div>';
+		var stato ;
 
 //		Script load coordinates and name of the Aule on the map
 		for (i = 0; i<=30; i++) {
 			var aule = nomi_aule[i];
+			console.log(nomi_aule[i]);
+			console.log(aule);
 			item=responseTextVar.split(' ');
 			item = item[i].split(',');
 			lat[i] =item[0];
 			lng[i] = item[1];
-			marker = new google.maps.Marker({
-				position: new google.maps.LatLng(lat[i], lng[i]),
-				map: map,
-				title : aule,
-				icon: icon_red
-			});
+			$.ajax({
+				async:false,
+				type: 'GET',
+				data: {
+					"nomeAula":nomi_aule[i],
+					azione: "statusAula"
+				},
+				url:'gestoreAule',
+				success: function(result){
+					stato = result;
+					console.log(stato);
+					if(stato == "false"){
+						marker = new google.maps.Marker({
+							position: new google.maps.LatLng(lat[i], lng[i]),
+							map: map,
+							title : aule,
+							icon :icon_green
+						});
+						
+					}else{
+						marker = new google.maps.Marker({
+							position: new google.maps.LatLng(lat[i], lng[i]),
+							map: map,
+							title : aule,
+							icon : icon_red
+						});	
+					}
+				}
+			})
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {					
 					$.ajax({											//Richiesta alla servlet
@@ -139,10 +165,9 @@ function handleAlterContent2() {
 							aula.splice(1,5);
 							console.log(aula);
 							var name = aula[0];
-							infowindow.setContent("<h2><b><u>"+name+"</u></b></h2>"+"<br><h5>Ore in cui è libera:</h5>"+border+contentString+border_close+'<br><button onclick="myFunction()">Click me</button>');
+							infowindow.setContent("<h2><b><u>"+name+"</u></b></h2>"+"<br><h5>Ore in cui è libera:</h5>"+border+contentString+border_close+'<br><button onclick="setLibera()">Libera</button><br><button onclick="setOccupata()">Occupata</button>');
 						}	
 					});
-					//marker.setIcon(icon_green);
 					infowindow.open(map, this);
 				}
 			})(marker, i));	
@@ -153,8 +178,13 @@ function handleAlterContent2() {
 google.maps.event.addDomListener(window, 'load', handleAlterContent2);
 
 
-function myFunction(){
+/*function setLibera(){
 	console.log(infowindow.getContent());
 	infowindow.setContent('<div>' + infowindow.getContent() +"<br>"+user+ "</div>");
 	marker.setIcon(icon_green);
 }
+function setOccupata(){
+	console.log(infowindow.getContent());
+	infowindow.setContent('<div>' + infowindow.getContent() +"<br>"+user+ "</div>");
+	marker.setIcon(icon_red);
+}*/

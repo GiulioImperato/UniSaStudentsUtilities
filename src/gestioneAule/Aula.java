@@ -1,7 +1,14 @@
 package gestioneAule;
 
 import java.util.ArrayList;
-
+/**
+ * Oggetto Aula che identifica un'aula
+ * @param nome indica il nome dell'aula
+ * @param coordinateX indica la latitudine
+ * @param coordinateY indica la longitudine
+ * @author Angelo Settembre
+ *
+ */
 public class Aula {
 	private String nome;
 	private double coordinateX;

@@ -2,6 +2,7 @@ package gestioneUtente;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +14,16 @@ import javax.servlet.http.HttpSession;
 import storageLayer.DatabaseGU;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class GetListaUtenti
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/GetListaUtenti")
+public class GetListaUtenti extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public GetListaUtenti() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,44 +33,18 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String email = request.getParameter("emailLogin");
-		String password = request.getParameter("passwordLogin");
+		ArrayList<Utente> lista = new ArrayList<>();
 		
 		try {
 			
-			Utente u = DatabaseGU.getUtenteByID(email);
-			
-			if(u!=null)
-			{
-				if(u.getPassword().equals(password))
-				{
-					if(u.isStatus()==true)
-					{
-						HttpSession session = request.getSession();
-						session.setAttribute("user", u);
-						request.getRequestDispatcher("index.jsp").forward(request, response);
-					}
-					else
-					{
-						request.getRequestDispatcher("errorlog.jsp").forward(request, response);
-					}
-				}
-				else
-				{
-					request.getRequestDispatcher("errorlog.jsp").forward(request, response);
-				}
-			}
-			else
-			{
-				request.getRequestDispatcher("errorlog.jsp").forward(request, response);
-			}
-
-			
+			lista=DatabaseGU.doRetrieveAll();
+			request.setAttribute("lista", lista);
+			request.getRequestDispatcher("listautentipage.jsp").forward(request, response);
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 	/**

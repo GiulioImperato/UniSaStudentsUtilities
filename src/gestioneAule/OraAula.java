@@ -1,7 +1,18 @@
 package gestioneAule;
 
 import java.sql.Time;
-
+/**
+ * Oggetto OraAula contiene tutte le informazioni di un'aula 
+ * @param nome indica il nome dell'aula
+ * @param giorno indica il giorno in cui l'aula è libera
+ * @param oraInizio indica l'orario di inizio in cui l'aula è libera
+ * @param oraFine indica l'orario di fine in cui l'aula risulta libera
+ * @param defaultStatus indica lo stato di default dell'aula
+ * @param feedStatus indica lo stato che l'utente sceglie per liberare/occupare un'aula
+ * @param emailUtente indica l'email dell'utente che ha inserito il feedback
+ * @author Angelo Settembre
+ *
+ */
 public class OraAula {
 	private String nome;
 	private Giorno giorno;

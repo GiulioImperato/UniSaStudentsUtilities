@@ -22,6 +22,17 @@
 <script src="assets/jquery.js"></script>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 <script src="js/validation.js"></script>
+<script>
+$(document).ready(function(){
+	
+	var data = ${user.isPrivilegioAdmin()};
+
+	if( data )
+		{
+			$("#admin").show();
+		}  
+});
+</script>
 
 <!-- wow script -->
 <script src="assets/wow/wow.min.js"></script>

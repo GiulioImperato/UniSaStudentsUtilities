@@ -30,10 +30,13 @@ $('#ajax-register-form').bootstrapValidator({
 					regexp : '^[a-zA-Z0-9.]+\@studenti\.unisa\.it',
 					message : 'Email non valida'
 				},
-				emailAddress : {
-					message : ' '
+				remote:{
+					url:"CheckEmail",
+					type:"POST",
+					message:"Email già usata"
 				}
-			}
+			},
+			message:" "
 		},
 		password : {
 			validators : {

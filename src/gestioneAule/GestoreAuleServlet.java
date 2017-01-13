@@ -37,8 +37,6 @@ public class GestoreAuleServlet extends HttpServlet {
 		ArrayList<Aula> arr = new ArrayList<Aula>();
 		ArrayList<Aula> auleLibere = new ArrayList<Aula>();
 		String nomeAula = request.getParameter("nomeAula");
-		String emailUtente = request.getParameter("emailUtente");
-		String feedStatus = request.getParameter("feedStatus");
 		String aulaName = "";
 		String azione = request.getParameter("azione");
 		Giorno giorno = null;
@@ -74,6 +72,28 @@ public class GestoreAuleServlet extends HttpServlet {
 				}
 			}
 		}
+		
+		if(azione.equalsIgnoreCase("statusAula")){
+			//nome
+			boolean stato = false;
+			Time oraAttuale = new Time(System.currentTimeMillis());
+			Time inizio = new Time(oraAttuale.getHours(),0,0);			//
+			Time fine = new Time(oraAttuale.getHours()+1,0,0);
+			Date now = new Date();
+
+			SimpleDateFormat simpleDateformat = new SimpleDateFormat("E"); // the day of the week abbreviated
+			giorno = Giorno.valueOf(simpleDateformat.format(now));
+			try {
+				stato = DatabaseGA.getStatusAula(nomeAula, inizio, fine, giorno);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println(stato+"AULA= "+nomeAula);
+			
+			out.write(String.valueOf(stato));
+		}
+		
 		if(azione.equalsIgnoreCase("infoAula")){
 			//VISUALIZZA INFO AULA
 			System.out.println("NOME:"+nomeAula);
@@ -148,76 +168,6 @@ public class GestoreAuleServlet extends HttpServlet {
 				for(int i=0;i<listOraAula.size();i++){
 					out.write(listOraAula.get(i).getOraInizio()+",");
 					out.write(listOraAula.get(i).getOraFine()+" ");
-				}
-			}
-		}
-		/*if(azione.equalsIgnoreCase("feedback")){
-			boolean status = Boolean.valueOf(feedStatus);
-			try {
-				boolean a = DatabaseGA.invioFeedback(status, emailUtente, nomeAula, giorno);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			out.write(String.valueOf(status));
-		}*/
-		if(azione.equalsIgnoreCase("ricerca")){
-			String oraInizio = "09:00:00";
-			String oraFine = "10:00:00";
-			Date now = new Date();
-
-			SimpleDateFormat simpleDateformat = new SimpleDateFormat("E"); // the day of the week abbreviated
-			System.out.println(simpleDateformat.format(now));
-			giorno = Giorno.valueOf(simpleDateformat.format(now));
-			try{
-				if(simpleDateformat.format(now).equals("lun")){
-					giorno = Giorno.valueOf(simpleDateformat.format(now));
-					auleLibere = DatabaseGA.ricercaAule(giorno, Time.valueOf(oraInizio), Time.valueOf(oraFine));
-					System.out.println(auleLibere);
-				}
-				if(simpleDateformat.format(now).equals("mar")){
-					giorno = Giorno.valueOf(simpleDateformat.format(now));
-					auleLibere = DatabaseGA.ricercaAule(giorno, Time.valueOf(oraInizio), Time.valueOf(oraFine));
-					System.out.println(auleLibere);
-				}
-				if(simpleDateformat.format(now).equals("mer")){
-					giorno = Giorno.valueOf(simpleDateformat.format(now));
-					auleLibere = DatabaseGA.ricercaAule(giorno, Time.valueOf(oraInizio), Time.valueOf(oraFine));
-					System.out.println(auleLibere);
-				}
-				if(simpleDateformat.format(now).equals("gio")){
-					giorno = Giorno.valueOf(simpleDateformat.format(now));
-					auleLibere = DatabaseGA.ricercaAule(giorno, Time.valueOf(oraInizio), Time.valueOf(oraFine));
-					System.out.println(auleLibere);
-				}
-				if(simpleDateformat.format(now).equals("ven")){
-					giorno = Giorno.valueOf(simpleDateformat.format(now));
-					auleLibere = DatabaseGA.ricercaAule(giorno, Time.valueOf(oraInizio), Time.valueOf(oraFine));
-					System.out.println(auleLibere);
-				}
-			}  catch (SQLException e) {
-				e.printStackTrace();
-				System.out.println("Errore"+ e.getMessage());
-			}
-			finally{
-				ArrayList<String> nome = new ArrayList<String>();
-				ArrayList<Double> x = new ArrayList<Double>();
-				ArrayList<Double> y = new ArrayList<Double>();
-				for(Aula a: auleLibere){
-					nome.add(a.getNome());
-				}
-				for(Aula a: auleLibere){
-					x.add(a.getCoordinateX());
-				}
-				for(Aula a: auleLibere){
-					y.add(a.getCoordinateY());
-				}
-
-				for(int i=0;i< auleLibere.size();i++){
-					out.write(String.valueOf(x.get(i))+",");
-					out.write(String.valueOf(y.get(i))+" ");
-				}
-				for(int i=0;i< auleLibere.size();i++){
-					out.write(nome.get(i)+" ");
 				}
 			}
 		}

@@ -23,6 +23,10 @@ ul.dropdown-lr {
 
 }
 
+table , td {
+	text-align:center;
+}
+
 .th-center th{
 	text-align: center;
 

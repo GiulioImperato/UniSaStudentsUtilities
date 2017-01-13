@@ -101,7 +101,10 @@ public class GestoreFeedback extends HttpServlet {
 
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("puo capitare nel caso si errori con il db!!");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("non dovrebbe capitare maii !!");
 			e.printStackTrace();
 		}
 

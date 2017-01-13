@@ -10,12 +10,13 @@ public class TestDatabase {
 	@Test
 	public void testGetConnection() {
 		try {
-			assertEquals(Database.getConnection(), null);
+			assertNotEquals(Database.getConnection(), null);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	@Test
 	public void TestReleaseConnection(){
 		assertEquals(true,true);
 	}

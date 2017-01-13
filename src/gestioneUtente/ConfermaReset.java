@@ -8,21 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import storageLayer.DatabaseGU;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class ConfermaReset
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/ConfermaReset")
+public class ConfermaReset extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public ConfermaReset() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,43 +31,48 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String email = request.getParameter("emailLogin");
-		String password = request.getParameter("passwordLogin");
+	
+		String email = request.getParameter("reset-email");
+		String host = "smtp.gmail.com";
+		String port = "587";
+		String emailusu = "studentutilitiesnoreply@gmail.com";
+		String passwordusu = "studentutilitiesnoreply123";
 		
-		try {
-			
+		try{
+		
 			Utente u = DatabaseGU.getUtenteByID(email);
 			
-			if(u!=null)
-			{
-				if(u.getPassword().equals(password))
-				{
-					if(u.isStatus()==true)
-					{
-						HttpSession session = request.getSession();
-						session.setAttribute("user", u);
-						request.getRequestDispatcher("index.jsp").forward(request, response);
-					}
-					else
-					{
-						request.getRequestDispatcher("errorlog.jsp").forward(request, response);
-					}
-				}
-				else
-				{
-					request.getRequestDispatcher("errorlog.jsp").forward(request, response);
-				}
-			}
-			else
-			{
-				request.getRequestDispatcher("errorlog.jsp").forward(request, response);
-			}
-
+			System.out.println(u.getEmail());
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			StringBuilder builder = new StringBuilder();
+			int count=8;
+			
+			String newPassword=null;
+			
+			while (count-- != 0) {
+
+			int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+
+			builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+			
+			newPassword = builder.toString();
+			}
+			
+		
+		if(u!=null)
+		{
+			System.out.println(u.getEmail());
+			EmailUtilityReset.sendEmail(host, port, emailusu, passwordusu, email,newPassword);
+			request.getRequestDispatcher("alert.jsp").forward(request, response);
 		}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		
+		
 		
 	}
 

@@ -4,13 +4,7 @@
 
 <%
 	Utente utente = (Utente) session.getAttribute("utente");
-	if (utente == null) {
-		// SIMULA LA SESSIONE
-		//utente = new Utente("a","a","a","a",true,true);
-
-	} else {
-
-	}
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +36,20 @@
 <body>
   <div class="topbar animated fadeInLeftBig"></div>
  	
+	<%
+		if (utente != null) {
+	%>
 	<%@ include file="-menuLogged.html"%>
+
+	<%
+		} else {
+	%>
+
+	<%@ include file="-menu.html"%>
+
+	<%
+		}
+	%>
 
 
   <!-- works -->
