@@ -63,7 +63,7 @@
   			width="600"
   			height="450"
   			frameborder="0" style="border:0"    
-  			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd1SnqQOoCKVRD8zVyiNYEttyPnxQSMnw&callback=initMap" onload="handleAlterContent2();" allowfullscreen>
+  			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd1SnqQOoCKVRD8zVyiNYEttyPnxQSMnw&callback=initMap" onload="costruzioneMappa();" allowfullscreen>
 			</iframe>
     </div>
    </div>
