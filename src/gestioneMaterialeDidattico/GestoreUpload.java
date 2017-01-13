@@ -53,8 +53,8 @@ public class GestoreUpload extends HttpServlet {
 			throws ServletException, IOException {
 		String visualizedPage = null;
 		String proprietario = "";
+		String path="";
 		if (ServletFileUpload.isMultipartContent(request)) {
-			String path = "res/uni/Informatica/Triennale/Programmazione_1/Slidesss";
 			// Create a factory for disk-based file items
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			// Configure a repository (to ensure a secure temp location is used)
@@ -83,9 +83,8 @@ public class GestoreUpload extends HttpServlet {
 						Date dataUpload = new java.sql.Date(System.currentTimeMillis());
 						int like = 0;
 						int dislike = 0;
-						String pathCaricamento = path;
 						Risorsa r = new Risorsa(name, proprietario, dimensione, dataUpload, like, dislike,
-								pathCaricamento);
+								path);
 
 						int idRisorsa = DatabaseGM.insertRisorsa(r);
 						String filePath = UPLOAD_DIRECTORY + File.separator + idRisorsa;
