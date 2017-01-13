@@ -30,15 +30,20 @@ public class RegistrazioneUtente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    
-		String n = request.getParameter("nome");
-		String c = request.getParameter("cognome");
-		String e = request.getParameter("email");
-		String p = request.getParameter("password");
+		String q = request.getParameter("q");
 		
-		System.out.println("nome "+n);
-		System.out.println("cognome "+c);
-		System.out.println("email "+e);
-		System.out.println("password "+p);
+		//decrypt
+		
+		String chipher = EncryptionUtil.decode(q);
+		
+		
+		String n = chipher.substring(5,chipher.indexOf("&"));
+		
+		String c = chipher.substring(chipher.indexOf("cognome=")+8,chipher.indexOf("email=")-1);
+		
+		String e = chipher.substring(chipher.indexOf("email=")+6,chipher.indexOf("password=")-1);
+		
+		String p = chipher.substring(chipher.indexOf("password=")+9);
 		
 		
 		boolean ss = false;

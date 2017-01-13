@@ -13,6 +13,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+
 public class EmailUtility {
 	/**
 	 * @author Pasquale Settembre
@@ -46,10 +47,12 @@ public class EmailUtility {
 				   }  
 				});
 			
+		//Crypt
+		String param = EncryptionUtil.encode("nome="+nome+"&cognome="+cognome+"&email="+toAddress+"&password="+passwordUtente);
 
 		// creates a new e-mail message
 		Message msg = new MimeMessage(session);
-		String url = "http://localhost:8080/usu/RegistrazioneUtente?nome="+nome+"&cognome="+cognome+"&email="+toAddress+"&password="+passwordUtente;
+		String url = "http://localhost:8080/usu/RegistrazioneUtente?q="+param;
 		msg.setFrom(new InternetAddress(userName));
 		InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
 		msg.setRecipients(Message.RecipientType.TO, toAddresses);

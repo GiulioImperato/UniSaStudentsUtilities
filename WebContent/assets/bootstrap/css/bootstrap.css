@@ -787,6 +787,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  min-height: 300px !important;
 }
 
 .container:before,
@@ -812,18 +813,21 @@ pre code {
 @media (min-width: 768px) {
   .container {
     width: 750px;
+    min-height: 300px !important;
   }
 }
 
 @media (min-width: 992px) {
   .container {
     width: 970px;
+    min-height: 300px !important;
   }
 }
 
 @media (min-width: 1200px) {
   .container {
     width: 1010px;
+    min-height: 300px !important;
   }
 }
 

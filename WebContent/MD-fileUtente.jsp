@@ -42,7 +42,7 @@
 	 <!-- works -->
 
   <div id="works"  class=" clearfix grid">
-    <div class="container col-lg-8 col-md-offset-2">
+    <div class="container col-lg-8 col-md-offset-2" style="min-height: 300px;">
     <h2 style="text-align: left;">I miei file</h2> 
 
       <hr> 
