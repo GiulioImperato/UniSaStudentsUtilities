@@ -45,7 +45,6 @@ public class RegistrazioneUtente extends HttpServlet {
 		boolean pa = false;
 		
 		
-		
 		boolean flag=false;
 		try 
 		{
@@ -71,10 +70,12 @@ public class RegistrazioneUtente extends HttpServlet {
 		{
 			try 
 			{
-				DatabaseGU.addUser(new Utente(n,c,e,p,ss,pa));
+				Utente u = new Utente(n,c,e,p,ss,pa);
+				DatabaseGU.addUser(u);
+				DatabaseGU.changeStatus(u.getEmail(), true);
 				//email link
 				
-				
+				request.getRequestDispatcher("regsuccess.jsp").forward(request, response);
 				
 				//response.sendRedirect("http://www.google.com");
 			} catch (SQLException e1) {
@@ -84,7 +85,7 @@ public class RegistrazioneUtente extends HttpServlet {
 		}
 		else
 		{
-			System.out.println("Errore");
+			System.out.println("errore registrazione");
 		}
 		
 		

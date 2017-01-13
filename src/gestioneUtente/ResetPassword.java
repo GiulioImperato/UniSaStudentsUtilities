@@ -3,6 +3,7 @@ package gestioneUtente;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +14,16 @@ import javax.servlet.http.HttpSession;
 import storageLayer.DatabaseGU;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class ResetPassword
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/ResetPassword")
+public class ResetPassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public ResetPassword() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,43 +33,23 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String email = request.getParameter("emailLogin");
-		String password = request.getParameter("passwordLogin");
-		
-		try {
-			
-			Utente u = DatabaseGU.getUtenteByID(email);
-			
-			if(u!=null)
-			{
-				if(u.getPassword().equals(password))
-				{
-					if(u.isStatus()==true)
-					{
-						HttpSession session = request.getSession();
-						session.setAttribute("user", u);
-						request.getRequestDispatcher("index.jsp").forward(request, response);
-					}
-					else
-					{
-						request.getRequestDispatcher("errorlog.jsp").forward(request, response);
-					}
-				}
-				else
-				{
-					request.getRequestDispatcher("errorlog.jsp").forward(request, response);
-				}
-			}
-			else
-			{
-				request.getRequestDispatcher("errorlog.jsp").forward(request, response);
-			}
 
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		
+		try
+		{
+			DatabaseGU.cambiaPassword(email, password);
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch (Exception e) {
+			// TODO: handle exception
 		}
+		
+		
+		
+		
+		
+		
 		
 	}
 
