@@ -18,6 +18,9 @@ var rcvReq2 = getXmlHttpRequestObject2();
 
 //Gets the current messages from the server
 function alterContent2() {
+	if (document.getElementById) {      //rende visibile la loading gif
+		document.getElementById('hidepage').style.visibility = 'visible'; 
+	} 
 	if (rcvReq2.readyState == 4 || rcvReq2.readyState == 0) {			//Se l'operazione è stata caricata oppure l'oggetto esiste ma ancora non è stato richiamato
 
 //		The servlet url is GestoreAuleServlet as configured in the XML file
@@ -176,7 +179,7 @@ function costruzioneMappa() {
 }
 //Load function
 google.maps.event.addDomListener(window, 'load', costruzioneMappa);
-
+document.getElementById('hidepage').style.visibility = 'hidden'; 
 
 /*function setLibera(){
 	console.log(infowindow.getContent());

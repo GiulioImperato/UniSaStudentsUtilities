@@ -56,6 +56,16 @@
 
   <div id="works"  class=" clearfix grid">
     <div class="container col-lg-8 col-md-offset-2">
+      	<!-- LOADING GIF -->
+                	<div id="hidepage" style="position: absolute; 
+					left:0px; top:0px; background-color: #FFFFF; height: 100%; width: 100%; visibility:hidden"> 
+						<table width="100%" height="100%"><tr><td align="center" valign="middle"> 
+						<table width="100%" align="center"><tr><td align="center" class="row1"> 
+						<p><img src="images/loading.png"></p>
+						</td></tr></table> 
+						</td></tr></table>
+					</div>
+        <!-- END LOADING GIF -->
       	<div id="map"></div>
       	<script>getXmlHttpRequestObject2()</script>			<!-- Verifica compatibilità del browser -->
       	<script>alterContent2()</script>
