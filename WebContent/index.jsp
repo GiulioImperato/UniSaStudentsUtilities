@@ -42,7 +42,7 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
     <figure class="effect-oscar  wowload fadeIn">
         <img src="images/portfolio/1.jpg" alt="img01"/>
         <figcaption>
-            <h2>Aula libera? <br></h2>
+            <h2>Aule libere</h2>
             <p>Trova un aula libera per studiare e confrontarti con i tuoi colleghi.<br>
             <a href="GA-Mappa.jsp">Consulta le aule libere</a></p>
         </figcaption>
@@ -50,7 +50,7 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
      <figure class="effect-oscar  wowload fadeInUp">
         <img src="images/portfolio/2.jpg" alt="img01"/>
         <figcaption>
-            <h2>Appunti?</h2>
+            <h2>Appunti</h2>
             <p>Consulta la nostra collezione di appunti e materiale didattico, a tua disposizione in modo completamente gratuito.<br>
             <a href="GestoreRicerca?typeClicked=home&&folderClicked=uni">Accedi al materiale didattico</a></p>
         </figcaption>
@@ -58,7 +58,7 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
      <figure class="effect-oscar  wowload fadeInUp">
         <img src="images/portfolio/3.jpg" alt="img01"/>
         <figcaption>
-            <h2>Libro?</h2>
+            <h2>Libri</h2>
             <p>Acquista un libro usato consultando i nostri annunci, risparmierai tempo e denaro.<br>
             <a href="GV-RicercaLibri.jsp">Accedi agli annunci dei libri</a></p>
         </figcaption>
