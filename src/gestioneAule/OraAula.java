@@ -75,7 +75,7 @@ public class OraAula {
 		this.oraFine = oraFine;
 	}
 
-	public boolean isDefaultStatus() {
+	public boolean getDefaultStatus() {
 		return defaultStatus;
 	}
 
