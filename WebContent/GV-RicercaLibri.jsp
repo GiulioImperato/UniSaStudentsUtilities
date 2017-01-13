@@ -124,8 +124,23 @@
 				<br> <label class="btn btn-file btn-success"><span
 					class="glyphicon glyphicon-search"></span> CERCA<input id="submit"
 					name="submit" type="submit" style="display: none;"> </label>
+					<br><br>
+				
 			</form>
 			
+			<%if(utente!=null){ %>
+			
+				<a href="GV-InserisciAnnuncio.jsp"> <input type="button"
+					class="btn btn-success" name="inserisci-annuncio"
+					value="Inserisci annuncio" style="margin-bottom: 10px;">
+				</a>
+				
+			<%}else{ %>
+				 <input type="button"
+					class="btn btn-success" name="inserisci-annuncio"
+					value="PER INSERIRE UN ANNUNCIO FAI IL LOGIN" style="margin-bottom: 10px;">
+				
+			<%} %>
 			<%if(request.getAttribute("noresult")!=null){ %>
 				<h3>NESSUNA CORRISPONDENZA TROVATA</h3>
 			<%} %>
