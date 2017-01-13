@@ -7,11 +7,14 @@ $("#password_modifica,#confirmpassword_modifica").keyup(function(){
 		if(s!="" && s1!="" )
 			{
 				$("#update").attr("disabled",false);
+				$("#danger").hide();
 			}
+		$("#danger").hide();
 	}
 	else
 		{
 			$("#update").attr("disabled",true);
+			$("#danger").show();
 		}
 	
 });

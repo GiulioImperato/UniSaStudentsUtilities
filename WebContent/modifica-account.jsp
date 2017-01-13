@@ -105,6 +105,9 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
 	<div id="success" class="alert alert-success col-sm-6" style="display: none">
     <strong>Password cambiata con successo!</strong>
   </div>
+  <div id="danger" class="alert alert-danger col-sm-6" style="display: none">
+    	<strong>Password diversa!</strong>
+   </div>
   </form>
 </div>
 
