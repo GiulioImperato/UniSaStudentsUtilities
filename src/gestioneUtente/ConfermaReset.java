@@ -64,7 +64,7 @@ public class ConfermaReset extends HttpServlet {
 		{
 			System.out.println(u.getEmail());
 			EmailUtilityReset.sendEmail(host, port, emailusu, passwordusu, email,newPassword);
-			request.getRequestDispatcher("alert.jsp").forward(request, response);
+			request.getRequestDispatcher("alertreset.jsp").forward(request, response);
 		}
 		}catch (Exception e) {
 			// TODO: handle exception
