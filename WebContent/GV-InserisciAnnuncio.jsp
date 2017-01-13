@@ -46,7 +46,7 @@
       <h2 style="text-align: left;">Inserisci annuncio</h2> 
       <!-- TabellaLibri -->
       
-      <form id="insertform" name="insertform" action="UploadImage" method="post" enctype="multipart/form-data">
+      <form id="insertform" name="insertform"  method="post" enctype="multipart/form-data">
       
       <table class="table">
         <tbody>
@@ -56,9 +56,6 @@
                <label class="btn btn-file btn-success"><span class="glyphicon glyphicon-open"></span>
                 Scegli foto...<input id="file" name="file" type="file" style="display: none;">
               </label><br><br>
-               <label class="btn btn-file btn-success"><span class="glyphicon glyphicon-open"></span>
-               Carica<input id="submit" name="submit" type="submit"  style="display: none;">
-               </label>
             </td>
             <td>
               <ul class="list-unstyled stylish-insert-ad">
