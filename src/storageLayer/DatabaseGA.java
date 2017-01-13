@@ -87,7 +87,16 @@ public class DatabaseGA {
 		return listaInfoAula;
 
 	}
-
+	/**
+	 * Metodo che ritorna un boolean che indica lo stato dell'aula (false = "libera", true = "occupata")
+	 * @param nomeAula nome dell'aula
+	 * @param oraInizio ora di inizio in cui l'aula è libera/occupata
+	 * @param oraFine ora di fine in cui l'aule è libera/occuppata
+	 * @param giorno giorno in cui l'aula è libera/occupata
+	 * @return stato dell'aula
+	 * @author Settembre Angelo
+	 * @throws SQLException 
+	 */
 	public static boolean getStatusAula(String nomeAula,Time oraInizio, Time oraFine, Giorno giorno) throws SQLException{
 		Connection connection = null;
 		PreparedStatement psStatusAula = null;

@@ -280,9 +280,7 @@ public class DatabaseGU {
 			}
 
 		}
-		System.out.println(feed);
-
-		return false;
+		return (feed!=0);
 	}
 
 	private static String queryAddUtente;

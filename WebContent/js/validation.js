@@ -33,7 +33,7 @@ $('#ajax-register-form').bootstrapValidator({
 				remote:{
 					url:"CheckEmail",
 					type:"POST",
-					message:"Email già usata"
+					message:"Email già usata."
 				}
 			},
 			message:" "
@@ -42,7 +42,13 @@ $('#ajax-register-form').bootstrapValidator({
 			validators : {
 				notEmpty : {
 					message : 'Inserisci la password'
-				}
+				},
+                stringLength: {
+                    enabled: true,
+                    min: 8,
+                    max: 8,
+                    message: 'La password deve essere 8 caratteri.'
+                }
 			}
 		},
 		confirmpassword : {
@@ -88,3 +94,33 @@ $('#ajax-login-form').bootstrapValidator({
 		}
 	}
 });
+
+$('#resetPassword').bootstrapValidator({
+	//        live: 'disabled',
+	message : 'This value is not valid',
+	feedbackIcons : {
+		valid : 'glyphicon glyphicon-ok',
+		invalid : 'glyphicon glyphicon-remove',
+		validating : 'glyphicon glyphicon-refresh'
+	},
+	fields : {
+		resetemail : {
+			validators : {
+				notEmpty : {
+					message : 'Inserisci l\'email.'
+				},
+				regexp : {
+					regexp : '^[a-zA-Z0-9.]+\@studenti\.unisa\.it',
+					message : 'Email non valida'
+				},
+				remote:{
+					url:"CheckEmailReset",
+					type:"POST",
+					message:"Account non presente."
+				}
+			},
+			message:" "
+		}
+	}
+});
+

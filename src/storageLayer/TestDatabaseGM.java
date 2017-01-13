@@ -38,7 +38,7 @@ public class TestDatabaseGM {
 	@Test
 	public void TestDeleteRisorseOfUtente() {
 		try {
-			assertEquals(DatabaseGM.deleteRisorseOfUtente("f.garofalo8@studenti.unisa.it"), true);
+			assertEquals(DatabaseGM.deleteRisorseOfUtente("'Domenico', 'Tropeano', 'd.tropeano@studenti.unisa.it', 'P@ssw0rd', '1', '0'"), true);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

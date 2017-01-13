@@ -1,29 +1,25 @@
 package gestioneUtente;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
-import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import storageLayer.DatabaseGU;
 
 /**
- * Servlet implementation class ResetPassword
+ * Servlet implementation class CheckEmailReset
  */
-@WebServlet("/ResetPassword")
-public class ResetPassword extends HttpServlet {
+@WebServlet("/CheckEmailReset")
+public class CheckEmailReset extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ResetPassword() {
+    public CheckEmailReset() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,31 +29,22 @@ public class ResetPassword extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
-		String q=request.getParameter("q");
-		
-		//decrypt
-		
-		String chipher = EncryptionUtil.decode(q);
-		String password = chipher.substring(9, chipher.indexOf("&"));
-		String email = chipher.substring(chipher.indexOf("email=")+6);
-		
+		String email = request.getParameter("resetemail");
 		
 		try
 		{
-			DatabaseGU.cambiaPassword(email, password);
-			request.getRequestDispatcher("resetsuccess.jsp").forward(request, response);
-			
+			Utente u = DatabaseGU.getUtenteByID(email);
+			if(u!=null)
+			{
+				response.getWriter().print("{\"valid\" : true}");
+			}
+			else
+			{
+				response.getWriter().print("{\"valid\" : false}");
+			}
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-		
-		
-		
-		
-		
-		
 	}
 
 	/**

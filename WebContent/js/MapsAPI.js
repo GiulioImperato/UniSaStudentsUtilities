@@ -22,7 +22,7 @@ function alterContent2() {
 
 //		The servlet url is GestoreAuleServlet as configured in the XML file
 		rcvReq2.open("GET", "gestoreAule?azione=viewMap", true);
-		rcvReq2.onreadystatechange = handleAlterContent2; 
+		rcvReq2.onreadystatechange = costruzioneMappa; 
 		rcvReq2.send("null");
 	} 
 }
@@ -42,7 +42,7 @@ var icon_green = {
 		scaledSize: new google.maps.Size(30, 30)
 };
 
-function handleAlterContent2() {
+function costruzioneMappa() {
 
 	user = document.getElementById('user').value;
 
@@ -175,7 +175,7 @@ function handleAlterContent2() {
 	}
 }
 //Load function
-google.maps.event.addDomListener(window, 'load', handleAlterContent2);
+google.maps.event.addDomListener(window, 'load', costruzioneMappa);
 
 
 /*function setLibera(){

@@ -32,7 +32,7 @@ public class ConfermaReset extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	
-		String email = request.getParameter("reset-email");
+		String email = request.getParameter("resetemail");
 		String host = "smtp.gmail.com";
 		String port = "587";
 		String emailusu = "studentutilitiesnoreply@gmail.com";

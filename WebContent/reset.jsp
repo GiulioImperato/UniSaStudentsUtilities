@@ -38,21 +38,27 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
 
 <!--Recupero dati Starts-->
 
-<div class="container contactform center" style="margin-top:20px">
+<div class="container contactform center" style="margin-top:20px;">
 <h2 class="text-center  wowload fadeInUp">Non ricordi più i dati per accedere a Student Utilities? </h2>
 <br>
   <div class="row wowload fadeInLeftBig">
-  <form action="ConfermaReset" method="post">
-      <div class="col-sm-6 col-sm-offset-3 col-xs-12">
-        <input type="text" id="reset-email" name="reset-email" placeholder="Immetti la tua email">
-        <input type="submit" class="btn btn-primary" value="Recupera password">
-      </div>
+   <div class="col-sm-6 col-sm-offset-3 col-xs-12">
+  <form id="resetPassword" action="ConfermaReset" method="post" role="form">
+ 
+      <div class="form-group">
+       <input type="text" name="resetemail" id="resetemail" tabindex="1" class="form-control" placeholder="Immetti la tua email" value="" style="height: 50px">
+                </div>
+        <div class="form-group">
+                  <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn-info" value="Recupera password" style="height: 50px">
+                </div>
+     
    </form>
+    </div>
   </div>
 
 </div>
-</div>
-<br> </a>
+
+<br> 
 <!--Recupero dati Ends-->
 
 
@@ -61,7 +67,7 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
 <%@ include file="-footer.html" %> 
 
 <%@ include file="-DOWNimport.html" %>
-
+<script src="js/validation.js"></script>
 
 
 </body>
