@@ -40,7 +40,6 @@ public class GestoreDownload extends HttpServlet {
 		String materiale = (String) request.getParameter("materiale");
 		String path=request.getSession().getServletContext().getRealPath("res/uni/"+dip+"/"+degree+"/"+corso+"/"+materiale+"/");
 		File f=new File(path+"/"+id);
-		
 		ServletContext ctx = getServletContext();
 		InputStream fis = new FileInputStream(f);
 		String mimeType = ctx.getMimeType(f.getAbsolutePath());
