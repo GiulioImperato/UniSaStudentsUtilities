@@ -94,3 +94,33 @@ $('#ajax-login-form').bootstrapValidator({
 		}
 	}
 });
+
+$('#resetPassword').bootstrapValidator({
+	//        live: 'disabled',
+	message : 'This value is not valid',
+	feedbackIcons : {
+		valid : 'glyphicon glyphicon-ok',
+		invalid : 'glyphicon glyphicon-remove',
+		validating : 'glyphicon glyphicon-refresh'
+	},
+	fields : {
+		resetemail : {
+			validators : {
+				notEmpty : {
+					message : 'Inserisci l\'email.'
+				},
+				regexp : {
+					regexp : '^[a-zA-Z0-9.]+\@studenti\.unisa\.it',
+					message : 'Email non valida'
+				},
+				remote:{
+					url:"CheckEmailReset",
+					type:"POST",
+					message:"Account non presente."
+				}
+			},
+			message:" "
+		}
+	}
+});
+

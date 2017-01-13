@@ -1,8 +1,6 @@
 package gestioneUtente;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import storageLayer.DatabaseGU;
 
 /**
- * Servlet implementation class ConfermaReset
+ * Servlet implementation class CheckEmailReset
  */
-@WebServlet("/ConfermaReset")
-public class ConfermaReset extends HttpServlet {
+@WebServlet("/CheckEmailReset")
+public class CheckEmailReset extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConfermaReset() {
+    public CheckEmailReset() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,49 +29,22 @@ public class ConfermaReset extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	
 		String email = request.getParameter("resetemail");
-		String host = "smtp.gmail.com";
-		String port = "587";
-		String emailusu = "studentutilitiesnoreply@gmail.com";
-		String passwordusu = "studentutilitiesnoreply123";
 		
-		try{
-		
-			Utente u = DatabaseGU.getUtenteByID(email);
-			
-			System.out.println(u.getEmail());
-			
-			String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-			StringBuilder builder = new StringBuilder();
-			int count=8;
-			
-			String newPassword=null;
-			
-			while (count-- != 0) {
-
-			int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
-
-			builder.append(ALPHA_NUMERIC_STRING.charAt(character));
-			
-			newPassword = builder.toString();
-			}
-			
-		
-		if(u!=null)
+		try
 		{
-			System.out.println(u.getEmail());
-			EmailUtilityReset.sendEmail(host, port, emailusu, passwordusu, email,newPassword);
-			request.getRequestDispatcher("alert.jsp").forward(request, response);
-		}
+			Utente u = DatabaseGU.getUtenteByID(email);
+			if(u!=null)
+			{
+				response.getWriter().print("{\"valid\" : true}");
+			}
+			else
+			{
+				response.getWriter().print("{\"valid\" : false}");
+			}
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-		
-		
-		
-		
 	}
 
 	/**
