@@ -33,7 +33,7 @@ $('#ajax-register-form').bootstrapValidator({
 				remote:{
 					url:"CheckEmail",
 					type:"POST",
-					message:"Email già usata"
+					message:"Email già usata."
 				}
 			},
 			message:" "
@@ -42,7 +42,13 @@ $('#ajax-register-form').bootstrapValidator({
 			validators : {
 				notEmpty : {
 					message : 'Inserisci la password'
-				}
+				},
+                stringLength: {
+                    enabled: true,
+                    min: 8,
+                    max: 8,
+                    message: 'La password deve essere 8 caratteri.'
+                }
 			}
 		},
 		confirmpassword : {

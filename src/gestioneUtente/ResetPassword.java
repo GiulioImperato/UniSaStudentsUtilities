@@ -34,12 +34,19 @@ public class ResetPassword extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 
-		String password = request.getParameter("password");
-		String email = request.getParameter("email");
+		String q=request.getParameter("q");
+		
+		//decrypt
+		
+		String chipher = EncryptionUtil.decode(q);
+		String password = chipher.substring(9, chipher.indexOf("&"));
+		String email = chipher.substring(chipher.indexOf("email=")+6);
+		
 		
 		try
 		{
 			DatabaseGU.cambiaPassword(email, password);
+			request.getRequestDispatcher("resetsuccess.jsp").forward(request, response);
 			
 		}catch (Exception e) {
 			// TODO: handle exception

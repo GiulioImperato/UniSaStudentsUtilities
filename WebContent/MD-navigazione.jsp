@@ -125,7 +125,7 @@
 	<!-- NavPath-->
 
 	<div id="works" class=" clearfix grid">
-		<div class="container col-lg-8 col-md-offset-2">
+		<div class="container col-lg-8 col-md-offset-2" style="min-height: 300px;">
 			<h2 style="text-align: left;"><%=successivo.toUpperCase()%></h2>
 
 			<!--  <a href="MD-DownloadUpload.jsp"><h2 style="text-align: left;">tabella materiale(esempio prova)</h2></a> onclick= bredCrumbs(this);  -->

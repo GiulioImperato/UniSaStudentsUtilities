@@ -1231,28 +1231,32 @@ pre code {
 	padding-right:15px;
 	padding-left:15px;
 	margin-right:auto;
-	margin-left:auto
+	margin-left:auto;
+	min-height: 300px !important;
 }
 @media (min-width:768px) {
 	.container {
-		width:750px
+		width:750px;
+		min-height: 300px !important;
 	}
 }
 @media (min-width:992px) {
 	.container {
-		width:970px
+		width:970px;
+		min-height: 300px !important;
 	}
 }
 @media (min-width:1200px) {
 	.container {
-		width:1170px
+		width:1170px;
+		min-height: 300px !important;
 	}
 }
 .container-fluid {
 	padding-right:15px;
 	padding-left:15px;
 	margin-right:auto;
-	margin-left:auto
+	margin-left:auto;
 }
 .row {
 	margin-right:-15px;

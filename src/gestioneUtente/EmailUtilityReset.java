@@ -35,9 +35,13 @@ public class EmailUtilityReset {
 				   }  
 				});
 			
+		//crypt
+		
+		
+		String param = EncryptionUtil.encode("password="+passwordUtente+"&email="+toAddress);
 
 		// creates a new e-mail message
-		String url = "http://localhost:8080/usu/ResetPassword?password="+passwordUtente+"&email="+toAddress;
+		String url = "http://localhost:8080/usu/ResetPassword?q="+param;
 		Message msg = new MimeMessage(session);
 		msg.setFrom(new InternetAddress(userName));
 		InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
