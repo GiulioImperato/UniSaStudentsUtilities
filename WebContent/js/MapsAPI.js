@@ -168,21 +168,6 @@ function handleAlterContent2() {
 							infowindow.setContent("<h2><b><u>"+name+"</u></b></h2>"+"<br><h5>Ore in cui è libera:</h5>"+border+contentString+border_close+'<br><button onclick="setLibera()">Libera</button><br><button onclick="setOccupata()">Occupata</button>');
 						}	
 					});
-					google.maps.event.addListener(marker, 'click', function(event) {
-						marker.setAnimation(google.maps.Animation.BOUNCE);
-						marker.setIcon(icon_green);
-						setTimeout(function () {
-					        marker.setAnimation(null);
-					    }, 1500);
-					  });
-					google.maps.event.addListener(marker, 'rightclick', function(event) {
-						marker.setAnimation(google.maps.Animation.DROP);
-						marker.setIcon(icon_red);
-						setTimeout(function () {
-					        marker.setAnimation(null);
-					    }, 2000);
-					  });
-					//marker.setIcon(icon_green);
 					infowindow.open(map, this);
 				}
 			})(marker, i));	
@@ -193,7 +178,7 @@ function handleAlterContent2() {
 google.maps.event.addDomListener(window, 'load', handleAlterContent2);
 
 
-function setLibera(){
+/*function setLibera(){
 	console.log(infowindow.getContent());
 	infowindow.setContent('<div>' + infowindow.getContent() +"<br>"+user+ "</div>");
 	marker.setIcon(icon_green);
@@ -202,4 +187,4 @@ function setOccupata(){
 	console.log(infowindow.getContent());
 	infowindow.setContent('<div>' + infowindow.getContent() +"<br>"+user+ "</div>");
 	marker.setIcon(icon_red);
-}
+}*/

@@ -46,48 +46,6 @@ public class DatabaseGA {
 		return listaAule;
 	}
 /**
- * Metodo che ritorna un arrayList di aule libere
- * @param giorno
- * @param oraInizio
- * @param oraFine
- * @return ArrayList di aule libere
- * @author Tropeano Domenico Antonio
- * @throws SQLException 
- */
-	public static ArrayList<Aula> ricercaAule(Giorno giorno, Time oraInizio, Time oraFine) throws SQLException {
-
-		Connection connection = null;
-		PreparedStatement psRicercaAula = null;
-		ArrayList<Aula> listaAuleLibere = new ArrayList<Aula>();
-		try {
-			connection = Database.getConnection();
-			psRicercaAula = connection.prepareStatement(queryRicercaAule);
-			psRicercaAula.setString(1, giorno.name());
-			psRicercaAula.setTime(2, oraInizio);
-			psRicercaAula.setTime(3, oraFine);
-			ResultSet rs = psRicercaAula.executeQuery();
-			while (rs.next()) {
-				Aula a = new Aula(rs.getString("Nome"), rs.getDouble("CoordinateX"), rs.getDouble("CoordinateY"));
-				listaAuleLibere.add(a);
-			}
-			connection.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (psRicercaAula != null)
-					psRicercaAula.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				Database.releaseConnection(connection);
-			}
-		}
-
-		return listaAuleLibere;
-
-	}
-/**
  * Metodo che ritorna un ArrayList di oreAula 
  * @param nome
  * @param giorno
@@ -129,81 +87,7 @@ public class DatabaseGA {
 		return listaInfoAula;
 
 	}
-/**
- * Metodo che invia un feedback per un'aula
- * @param status
- * @param emailUtente
- * @param nome (Il nome dell'aula)
- * @param giorno (In quale giorno si sta settando lo stato dell'aula)
- * @return {@code true} se e' ok, {@code false}  altrimenti.
- * @throws SQLException 
- */
-	public static boolean invioFeedback(boolean status, String emailUtente, String nome, Giorno giorno) throws SQLException {
-		Connection connection = null;
-		PreparedStatement psInvioFeedback = null;
-		
-		try {
-			connection = Database.getConnection();
-			psInvioFeedback = connection.prepareStatement(queryInvioFeedback);
 
-			psInvioFeedback.setBoolean(1, status);
-			psInvioFeedback.setString(2, emailUtente);
-			psInvioFeedback.setString(3, nome);
-			psInvioFeedback.setString(4, giorno.name());
-			
-			psInvioFeedback.executeUpdate();
-			connection.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (psInvioFeedback != null)
-					psInvioFeedback.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				Database.releaseConnection(connection);
-			}
-		}
-		return true;
-	}
-	
-	/**
-	 * Metodo che setta lo stato dell'aula di default dopo 1 ora
-	 * @param status
-	 * @param nome
-	 * @param giorno
-	 * @return
-	 * @throws SQLException
-	 */
-	public static boolean resetFeedback(String nome, Giorno giorno) throws SQLException {
-		Connection connection = null;
-		PreparedStatement psInvioFeedback = null;
-
-		try {
-			connection = Database.getConnection();
-			psInvioFeedback = connection.prepareStatement(queryResetFeedback);
-
-			psInvioFeedback.setString(1, nome);
-			psInvioFeedback.setString(2, giorno.name());
-			
-			psInvioFeedback.executeUpdate();
-			connection.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (psInvioFeedback != null)
-					psInvioFeedback.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				Database.releaseConnection(connection);
-			}
-		}
-		return true;
-	}
-	
 	public static boolean getStatusAula(String nomeAula,Time oraInizio, Time oraFine, Giorno giorno) throws SQLException{
 		Connection connection = null;
 		PreparedStatement psStatusAula = null;
@@ -215,7 +99,6 @@ public class DatabaseGA {
 			psStatusAula.setString(2, giorno.name());
 			psStatusAula.setTime(3, oraInizio);
 			psStatusAula.setTime(4, oraFine);
-			System.out.println("SSSSS"+psStatusAula);
 			ResultSet rs = psStatusAula.executeQuery();
 			connection.commit();
 			while(rs.next()){
@@ -238,25 +121,16 @@ public class DatabaseGA {
 	}
 
 	private static String queryGetListaAule;
-	private static String queryRicercaAule;
 	private static String queryStatusMappa;
 	private static String queryVisualizzaInfoAule;
-	private static String queryInvioFeedback;
-	private static String queryResetFeedback;
+
 	static {
 		queryGetListaAule = "SELECT * FROM redteam.aula";
 		queryStatusMappa = "select oraaula.defaultStatus "
 				+ "from redteam.oraaula "
 				+ "where oraaula.nome=? and oraaula.giorno=? and oraaula.oraInizio>=? and oraaula.oraFine<=?";
-		queryRicercaAule = "SELECT distinct a.Nome,CoordinateX,CoordinateY "
-				+ "FROM redteam.aula as a,redteam.oraaula as oa "
-				+ "WHERE oa.giorno =?  and oa.oraInizio >= ? and oa.oraFine <= ? and oa.defaultStatus = false and a.nome = oa.nome";
 		queryVisualizzaInfoAule = "SELECT Nome, Giorno ,OraInizio, OraFine, defaultStatus, feedStatus, emailUtente "
 				+ "FROM redteam.oraaula " + "WHERE nome = ?  and giorno = ? and defaultStatus = false";
-		queryInvioFeedback = "UPDATE redteam.oraaula " + "SET feedStatus = ?, emailUtente = ?"
-				+ "where nome = ? and giorno = ?";
-		queryResetFeedback = "UPDATE redteam.oraaula " + "SET feedStatus = defaultStatus, emailUtente = null"
-				+ "where nome = ? and giorno = ?";
 	}
 
 }
