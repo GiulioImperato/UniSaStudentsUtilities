@@ -7,11 +7,15 @@ import java.sql.SQLException;
 import org.junit.Test;
 
 import gestioneUtente.Utente;
-
+/*
+ * Classe per i test di unità DatabaseGU
+ * @author Francesco Garofalo
+ */
 public class TestDatabaseGU {
 
 	/*
 	 * Test inserisci utente
+	 * Oracolo: Inserimento riuscito
 	 */
 	@Test
 	public void testAggiungiUtente() {
@@ -27,6 +31,7 @@ public class TestDatabaseGU {
 	
 	/*
 	 * Test inserisci utente ripetuto fallito
+	 * Oracolo: inserimento fallito
 	 */
 	@Test
 	public void testAggiungiUtenteFallito() {
@@ -42,6 +47,7 @@ public class TestDatabaseGU {
 	
 	/*
 	 * Test elimina utente
+	 * Oracolo: Utente eliminato
 	 */
 	@Test
 	public void testEliminaUtente(){
@@ -55,6 +61,7 @@ public class TestDatabaseGU {
 	}
 	/*
 	 * Test abilita privilegi admin utente
+	 * Oracolo: Utente abilitato ad admin (1)
 	 */
 	@Test
 	public void testdaiPrivilegiAdmin(){
@@ -69,6 +76,7 @@ public class TestDatabaseGU {
 	
 	/*
 	 * Test disabilita privilegi admin utente
+	 * Oracolo: Utente registrato normale, admin (0)
 	 */
 	@Test
 	public void testtogliPrivilegiAdmin() {
@@ -82,6 +90,7 @@ public class TestDatabaseGU {
 	}
 	/*
 	 * Test abilita status account
+	 * Oracolo: Utente Abilitato (1)
 	 */
 	@Test
 	public void testabilitaUtente(){
@@ -97,6 +106,7 @@ public class TestDatabaseGU {
 	
 	/*
 	 * Test disabilita status account
+	 * Oracolo: Utente disabilitato (0)
 	 */
 	@Test
 	public void testdiabilitaUtente() {
@@ -110,6 +120,10 @@ public class TestDatabaseGU {
 		}
 	}
 	
+	/*
+	 * Test Visualizza dati utente
+	 * Oracolo: Visualizza i dati dell'utente
+	 */
 	@Test
 	public void testGetUtenteById(){
 		String email = "ciccio@studenti.unisa.it";

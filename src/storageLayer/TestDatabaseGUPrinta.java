@@ -5,7 +5,10 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 
 import org.junit.Test;
-
+/*
+ * Classe per i test di unità DatabaseGU
+ * @author Francesco Garofalo
+ */
 public class TestDatabaseGUPrinta {
 
 	/*
