@@ -31,7 +31,12 @@ public class GestoreAuleServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-
+	/**
+	 * <b>Permette di visualizzare la mappa con l'aggiunta delle aule (viewMap)</b>
+	 * <b>Permette di visualizzare la mappa con le aule che risultano libere e occupate (statusAula)</b>
+	 * <b>Permette di mostrare le informazioni di un'aula come nome e ore in cui l'aula risulta libera (infoAula)</b>
+	 * @author Angelo Settembre
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter(); 
 		ArrayList<Aula> arr = new ArrayList<Aula>();
