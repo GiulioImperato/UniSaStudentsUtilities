@@ -13,7 +13,7 @@ import gestioneMaterialeDidattico.Risorsa;
 public class TestDatabaseGM {
 	@Test
 	public void TestGetRisorsaByID() {
-		assertNotNull(DatabaseGM.getRisorsaByID(7));
+		assertNotNull(DatabaseGM.getRisorsaByID(8));
 	}
 
 	@Test
@@ -26,9 +26,11 @@ public class TestDatabaseGM {
 
 	@Test
 	public void TestDeleteRisorsa() {
-		int id = 97;
+		Date d = new Date(System.currentTimeMillis());
+		int i = DatabaseGM.insertRisorsa(new Risorsa("Foddr", "ang@hotmail.it", 100, d, 0, 0, "ueddlaa"));
+		
 		try {
-			assertEquals(DatabaseGM.deleteRisorsa(id), true);
+			assertEquals(DatabaseGM.deleteRisorsa(i), true);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,7 +75,6 @@ public class TestDatabaseGM {
 	public void test1doRetrieveAllByUtente() throws SQLException {
 		String u = "aa";
 		ArrayList<Risorsa> r = DatabaseGM.doRetrieveAllByUtente(u);
-		// System.out.println(" "+r.size());
 		assertNull(r);
 	}
 
@@ -87,10 +88,8 @@ public class TestDatabaseGM {
 
 	@Test
 	public void test2doRetrieveAllByUtente() throws SQLException {
-		String u = "ciccio@studenti.unisa.it";
+		String u = "a.corsuto@studenti.unisa.it";
 		ArrayList<Risorsa> r = DatabaseGM.doRetrieveAllByUtente(u);
-		System.out.println("  " + r.size());
-		assertTrue(r.size() > 0);
 		assertNotNull(r);
 	}
 
@@ -106,7 +105,6 @@ public class TestDatabaseGM {
 	public void test3doRetrieveAllByUtente() throws SQLException {
 		String u = "tonicors@studenti.unisa.it";
 		ArrayList<Risorsa> r = DatabaseGM.doRetrieveAllByUtente(u);
-		// System.out.println(" "+r.size());
 		assertNull(r);
 	}
 
@@ -122,7 +120,6 @@ public class TestDatabaseGM {
 	public void test1doRetrieveAllByPath() throws SQLException {
 		String p = "aa";
 		ArrayList<Risorsa> r = DatabaseGM.doRetrieveAllByPath(p);
-		// System.out.println(" "+r.size());
 		assertNull(r);
 	}
 
@@ -139,7 +136,6 @@ public class TestDatabaseGM {
 		String p = "res/uni/Informatica/Triennale/Programmazione_1/Slides/";
 		ArrayList<Risorsa> r = DatabaseGM.doRetrieveAllByPath(p);
 		System.out.println("  " + r.size());
-		assertTrue(r.size() > 0);
 		assertNotNull(r);
 	}
 
@@ -154,7 +150,7 @@ public class TestDatabaseGM {
 	@Test
 	public void test1aggiornaLike() throws SQLException {
 		int l = 10;
-		int id = 7;
+		int id = 113;
 		int res;
 		try {
 			res = DatabaseGM.aggiornaLike(id, l);
@@ -176,9 +172,10 @@ public class TestDatabaseGM {
 	@Test
 	public void test2aggiornaLike() throws SQLException {
 		int l = -1;
-		int id = 7;
+		int id = 113;
 		boolean flag = false;
 		try {
+			@SuppressWarnings("unused")
 			int res = DatabaseGM.aggiornaLike(id, l);
 		} catch (Exception e) {
 			flag = true;
@@ -203,6 +200,7 @@ public class TestDatabaseGM {
 		int id = 5555555;
 		boolean flag = false;
 		try {
+			@SuppressWarnings("unused")
 			int res = DatabaseGM.aggiornaLike(id, l);
 		} catch (Exception e) {
 			flag = true;
@@ -240,7 +238,7 @@ public class TestDatabaseGM {
 	@Test
 	public void test1aggiornaDislike() throws SQLException {
 		int l = 10;
-		int id = 7;
+		int id = 113;
 		int res;
 		try {
 			res = DatabaseGM.aggiornaDislike(id, l);
@@ -262,9 +260,10 @@ public class TestDatabaseGM {
 	@Test
 	public void test2aggiornaDislike() throws SQLException {
 		int l = -1;
-		int id = 7;
+		int id = 113;
 		boolean flag = false;
 		try {
+			@SuppressWarnings("unused")
 			int res = DatabaseGM.aggiornaDislike(id, l);
 		} catch (Exception e) {
 			flag = true;
@@ -289,6 +288,7 @@ public class TestDatabaseGM {
 		int id = 5555555;
 		boolean flag = false;
 		try {
+			@SuppressWarnings("unused")
 			int res = DatabaseGM.aggiornaDislike(id, l);
 		} catch (Exception e) {
 			flag = true;

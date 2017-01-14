@@ -218,7 +218,7 @@ function jasonLike(obj){
 	// $(off).css({"background":"red"});
     // $(on).css({"background":"green"});
 		
-    alert("num like: "+$(obj).text()+"numdislike: "+$(on).text()+"like: "+"idRis: "+$(obj).attr("name"));
+   // alert("num like: "+$(obj).text()+"numdislike: "+$(on).text()+"like: "+"idRis: "+$(obj).attr("name"));
     
 	  $.ajax({
 		  type:'GET',

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package onlyTest;
+package gestioneVendite;
 
 import static org.junit.Assert.*;
 
@@ -30,6 +30,7 @@ public class TestUnitaInserisciAnnuncio {
 	 */
 	@Test
 	public void testInserimentoSuccesso(){
+		@SuppressWarnings("deprecation")
 		Date data=new Date(2016, 12, 16);
 		
 		DettagliAnnuncio dt = new DettagliAnnuncio("editore", 1950, "descrizione", data, "path");
@@ -51,6 +52,7 @@ public class TestUnitaInserisciAnnuncio {
 	 */
 	@Test
 	public void testInserimentoFallito(){
+		@SuppressWarnings("deprecation")
 		Date data=new Date(2016, 12, 16);
 		
 		DettagliAnnuncio dt = new DettagliAnnuncio("editore", 1950, "descrizione", data, "path");

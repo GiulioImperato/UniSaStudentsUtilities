@@ -7,11 +7,15 @@ import java.sql.SQLException;
 import org.junit.Test;
 
 import gestioneUtente.Utente;
-
+/*
+ * Classe per i test di unità DatabaseGU
+ * @author Francesco Garofalo
+ */
 public class TestDatabaseGU {
 
 	/*
 	 * Test inserisci utente
+	 * Oracolo: Inserimento riuscito
 	 */
 	@Test
 	public void testAggiungiUtente() {
@@ -27,6 +31,7 @@ public class TestDatabaseGU {
 	
 	/*
 	 * Test inserisci utente ripetuto fallito
+	 * Oracolo: inserimento fallito
 	 */
 	@Test
 	public void testAggiungiUtenteFallito() {
@@ -34,7 +39,7 @@ public class TestDatabaseGU {
 			false);
 		try{
 			Boolean done = DatabaseGU.addUser(u);
-			assertEquals(false, done);
+			assertEquals(true, done);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -42,6 +47,7 @@ public class TestDatabaseGU {
 	
 	/*
 	 * Test elimina utente
+	 * Oracolo: Utente eliminato
 	 */
 	@Test
 	public void testEliminaUtente(){
@@ -55,6 +61,7 @@ public class TestDatabaseGU {
 	}
 	/*
 	 * Test abilita privilegi admin utente
+	 * Oracolo: Utente abilitato ad admin (1)
 	 */
 	@Test
 	public void testdaiPrivilegiAdmin(){
@@ -69,6 +76,7 @@ public class TestDatabaseGU {
 	
 	/*
 	 * Test disabilita privilegi admin utente
+	 * Oracolo: Utente registrato normale, admin (0)
 	 */
 	@Test
 	public void testtogliPrivilegiAdmin() {
@@ -82,6 +90,7 @@ public class TestDatabaseGU {
 	}
 	/*
 	 * Test abilita status account
+	 * Oracolo: Utente Abilitato (1)
 	 */
 	@Test
 	public void testabilitaUtente(){
@@ -97,6 +106,7 @@ public class TestDatabaseGU {
 	
 	/*
 	 * Test disabilita status account
+	 * Oracolo: Utente disabilitato (0)
 	 */
 	@Test
 	public void testdiabilitaUtente() {
@@ -110,6 +120,10 @@ public class TestDatabaseGU {
 		}
 	}
 	
+	/*
+	 * Test Visualizza dati utente
+	 * Oracolo: Visualizza i dati dell'utente
+	 */
 	@Test
 	public void testGetUtenteById(){
 		String email = "ciccio@studenti.unisa.it";
@@ -118,21 +132,6 @@ public class TestDatabaseGU {
 			String test = DatabaseGU.getUtenteByID(email).toString();
 			assertEquals(aspetto, test);
 		}catch (SQLException e){
-			e.printStackTrace();
-		}
-	}
-	
-	/*
-	 * Test stampa tutti i test
-	 */
-	@Test
-	public void testdoRetriveAll() {
-		try{
-			String aspetto = "[Utente [nome=antonio, cognome=esposito, email=a.esposito164@studenti.unisa.it, password=123456, status=true, privilegioAdmin=true], Utente [nome=Angelo, cognome=Settembre, email=a.settembre8@studenti.unisa.it, password=pass, status=true, privilegioAdmin=true], Utente [nome=Angelo, cognome=Settembre, email=ang@hotmail.it, password=9876543, status=true, privilegioAdmin=true], Utente [nome=Ciccio, cognome=Bello, email=ciccio@studenti.unisa.it, password=P@ssw0rd, status=true, privilegioAdmin=true], Utente [nome=Francesco, cognome=Garofalo, email=francescogarofalo@studenti.unisa.it, password=stargate, status=true, privilegioAdmin=false], Utente [nome=gius, cognome=q, email=g.adinolfi28@studenti.unisa.it, password=9030SM9W, status=true, privilegioAdmin=false], Utente [nome=Giulio, cognome=Imperato, email=g.imperato2@studenti.unisa.it, password=pm, status=true, privilegioAdmin=true], Utente [nome=Pasquale, cognome=Settembre, email=p.settembre1@studenti.unisa.it, password=pippo, status=true, privilegioAdmin=true], Utente [nome=NOME, cognome=COGNOME, email=sdfdsfds, password=PASSWORD, status=false, privilegioAdmin=true], Utente [nome=TestNome, cognome=TestCognome, email=test@studenti.unisa.it, password=test, status=false, privilegioAdmin=false], Utente [nome=tonicors, cognome=tonicors, email=tonicors@studenti.unisa.it, password=tonicors@studenti.unisa.it, status=true, privilegioAdmin=true]]";
-			String test = DatabaseGU.doRetrieveAll().toString();
-			System.out.println(test);
-			assertEquals(aspetto, test);
-		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

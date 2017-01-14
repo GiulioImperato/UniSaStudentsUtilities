@@ -3,7 +3,6 @@ package gestioneUtente;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +13,9 @@ import storageLayer.DatabaseGU;
 
 /**
  * Servlet implementation class AdminListaUtenti
+ * Questa servlet abilita e disabilita l'account di un utente.
+ *
+ * @author AntonioEsposito
  */
 @WebServlet("/AdminListaUtenti")
 public class AdminListaUtenti extends HttpServlet {
@@ -29,6 +31,7 @@ public class AdminListaUtenti extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

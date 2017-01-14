@@ -2,7 +2,6 @@ package gestioneMaterialeDidattico;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import gestioneUtente.Utente;
 
@@ -27,6 +26,9 @@ public class GestoreEliminaRisorsa extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Con il doGet di questa classe è possibile eliminare le risorse
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -43,31 +45,13 @@ public class GestoreEliminaRisorsa extends HttpServlet {
 			String elimina = (String) request.getParameter("idRis").trim();
 			ArrayList<Risorsa> risorse = null;
 
-//			if (azione.equals("all")) {
-//
-//				try {
-//					System.out.println("elimina tutto");
-//					boolean b = DatabaseGM.deleteRisorseOfUtente(utente);
-//					// risorse =DatabaseGM.doRetrieveAllByUtente(utente);
-//					risorse = null;
-//					/// System.out.println("result "+b);
-//
-//				} catch (Exception e) {
-//					request.getRequestDispatcher("ErrorPage1.jsp").forward(request, response);
-//				}
-//				request.removeAttribute("listaRisorseUtente");
-//				request.setAttribute("listaRisorseUtente", risorse);
-//				request.getRequestDispatcher("MD-fileUtente.jsp").forward(request, response);
-//
-//			}
-
 			if (azione.equals("one")) {
 
 				try {
 					int id = Integer.parseInt(elimina);
 					Risorsa risorsa = DatabaseGM.getRisorsaByID(id);
 					String path = risorsa.getPathCaricamento();
-					File f = new File(getServletContext().getRealPath(path)+"/"+id);
+					File f = new File(getServletContext().getRealPath(path) + "/" + id);
 					System.out.println(f.delete());
 					DatabaseGM.deleteRisorsa(id);
 					risorse = DatabaseGM.doRetrieveAllByUtente(utente);

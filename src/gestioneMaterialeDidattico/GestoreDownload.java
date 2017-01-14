@@ -20,35 +20,40 @@ import storageLayer.DatabaseGM;
 @WebServlet("/GestoreDownload")
 public class GestoreDownload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GestoreDownload() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id=Integer.parseInt(request.getParameter("idRisorsa"));
+	public GestoreDownload() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 * @author Domenico Antonio Tropeano Tramite la get di questa servlet è
+	 *         possibile avviare il download
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("idRisorsa"));
 		String dip = (String) request.getParameter("dip");
 		String degree = (String) request.getParameter("degree");
 		String corso = (String) request.getParameter("corso");
 		String materiale = (String) request.getParameter("materiale");
-		String path=request.getSession().getServletContext().getRealPath("res/uni/"+dip+"/"+degree+"/"+corso+"/"+materiale+"/");
-		File f=new File(path+"/"+id);
+		String path = request.getSession().getServletContext()
+				.getRealPath("res/uni/" + dip + "/" + degree + "/" + corso + "/" + materiale + "/");
+		File f = new File(path + "/" + id);
 		ServletContext ctx = getServletContext();
 		InputStream fis = new FileInputStream(f);
 		String mimeType = ctx.getMimeType(f.getAbsolutePath());
-		Risorsa r=DatabaseGM.getRisorsaByID(id);
-		String estensione=r.getNome().substring(r.getNome().lastIndexOf(".") + 1);
-		String nome=r.getNome().substring(0, r.getNome().lastIndexOf(".") + 1);
+		Risorsa r = DatabaseGM.getRisorsaByID(id);
+		String estensione = r.getNome().substring(r.getNome().lastIndexOf(".") + 1);
+		String nome = r.getNome().substring(0, r.getNome().lastIndexOf(".") + 1);
 		response.setContentType(mimeType != null ? mimeType : "application/octet-stream");
 		response.setContentLength((int) f.length());
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + nome+estensione + "\"");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + nome + estensione + "\"");
 
 		ServletOutputStream os = response.getOutputStream();
 		byte[] bufferData = new byte[1024];
@@ -56,12 +61,15 @@ public class GestoreDownload extends HttpServlet {
 		while ((read = fis.read(bufferData)) != -1) {
 			os.write(bufferData, 0, read);
 		}
+		fis.close();
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
