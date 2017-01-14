@@ -14,6 +14,10 @@ import storageLayer.DatabaseGU;
 
 /**
  * Servlet implementation class Login
+ * 
+ * Gestisce il login dell'utente.
+ * @author AntonioEsposito GiuseppeAdinolfi
+ * 
  */
 @WebServlet("/Login")
 public class Login extends HttpServlet {

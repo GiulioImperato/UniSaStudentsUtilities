@@ -14,6 +14,21 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailUtilityReset {
 	
+	/**
+	 * 
+	 * Invia un'email per il reset
+	 * 
+	 * @author AntonioEsposito GiuseppeAdinolfi
+	 * @param host
+	 * @param port
+	 * @param userName
+	 * @param password
+	 * @param toAddress
+	 * @param passwordUtente
+	 * @throws AddressException
+	 * @throws MessagingException
+	 */
+	
 	
 	public static void sendEmail(String host, String port,
 			final String userName, final String password, String toAddress,String passwordUtente) throws AddressException,MessagingException {

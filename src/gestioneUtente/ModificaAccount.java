@@ -14,6 +14,11 @@ import storageLayer.DatabaseGU;
 
 /**
  * Servlet implementation class ChangePassword
+ * 
+ * Gestisce il cambio della password e l'eliminzaione dell'account utente.
+ * 
+ * @author AntonioEsposito
+ * 
  */
 @WebServlet("/ModificaAccount")
 public class ModificaAccount extends HttpServlet {

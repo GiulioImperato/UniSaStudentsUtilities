@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import storageLayer.DatabaseGU;
 
 /**
- * Servlet implementation class ConfermaReset
+ * Servlet implementation class ConfermaReset	 
+ * Questa servlet crea una password alfanumerica nuova per il reset e la invia per email all'utente.
+ * Nell'email sarà presente il link di conferma reset.
+ * 
+ * @author AntonioEsposito
  */
 @WebServlet("/ConfermaReset")
 public class ConfermaReset extends HttpServlet {
@@ -28,6 +32,8 @@ public class ConfermaReset extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

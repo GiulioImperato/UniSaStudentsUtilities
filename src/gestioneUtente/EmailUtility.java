@@ -16,8 +16,9 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailUtility {
 	/**
-	 * @author Pasquale Settembre
-	 * <b>Permette l'invio di una email</b>
+	 * @author AntonioEsposito GiuseppeAdinolfi
+	 * Permette l'invio di una email
+	 * 
 	 * @param host
 	 * @param port
 	 * @param userName

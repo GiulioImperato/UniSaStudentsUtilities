@@ -11,6 +11,14 @@ import javax.crypto.spec.PBEParameterSpec;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 
+/**
+ * Permette il criptaggio di dati.
+ * 
+ * @author AntonioEsposito
+ * 
+ * 
+ *
+ */
 
 public class EncryptionUtil
 {
