@@ -175,6 +175,7 @@ public class TestDatabaseGM {
 		int id = 113;
 		boolean flag = false;
 		try {
+			@SuppressWarnings("unused")
 			int res = DatabaseGM.aggiornaLike(id, l);
 		} catch (Exception e) {
 			flag = true;
@@ -199,6 +200,7 @@ public class TestDatabaseGM {
 		int id = 5555555;
 		boolean flag = false;
 		try {
+			@SuppressWarnings("unused")
 			int res = DatabaseGM.aggiornaLike(id, l);
 		} catch (Exception e) {
 			flag = true;
@@ -261,6 +263,7 @@ public class TestDatabaseGM {
 		int id = 113;
 		boolean flag = false;
 		try {
+			@SuppressWarnings("unused")
 			int res = DatabaseGM.aggiornaDislike(id, l);
 		} catch (Exception e) {
 			flag = true;
@@ -285,6 +288,7 @@ public class TestDatabaseGM {
 		int id = 5555555;
 		boolean flag = false;
 		try {
+			@SuppressWarnings("unused")
 			int res = DatabaseGM.aggiornaDislike(id, l);
 		} catch (Exception e) {
 			flag = true;

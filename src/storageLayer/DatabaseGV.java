@@ -3,7 +3,6 @@ package storageLayer;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -196,7 +195,7 @@ public class DatabaseGV {
 	public static ArrayList<Annuncio>getListaAnnunciRicerca(String titolo,String autore) throws SQLException{
 		Connection connection = null;
 		PreparedStatement psListAnnunciTitolo = null;
-		listAnnunciSearch = new ArrayList();
+		listAnnunciSearch = new ArrayList<>();
 		try{
 			connection = Database.getConnection();
 			psListAnnunciTitolo = connection.prepareStatement(queryRicercaTitolo);
@@ -248,7 +247,7 @@ public class DatabaseGV {
 	public static ArrayList<Annuncio>getListaAnnunciRicercaTitleAuthor(String titolo,String autore) throws SQLException{
 		Connection connection = null;
 		PreparedStatement psListAnnunciAutore = null;
-		listAnnunciTitleAutore = new ArrayList();
+		listAnnunciTitleAutore = new ArrayList<>();
 		try{
 			connection = Database.getConnection();
 			psListAnnunciAutore = connection.prepareStatement(queryRicercaTitoloAutore);
@@ -299,7 +298,7 @@ public class DatabaseGV {
 	public static ArrayList<Annuncio>getListaAnnunciRicercaByCorso(String corso) throws SQLException{
 		Connection connection = null;
 		PreparedStatement psListAnnunciCorso = null;
-		listAnnunciCorso = new ArrayList();
+		listAnnunciCorso = new ArrayList<>();
 		try{
 			connection = Database.getConnection();
 			psListAnnunciCorso = connection.prepareStatement(queryRicercaByCorso);
