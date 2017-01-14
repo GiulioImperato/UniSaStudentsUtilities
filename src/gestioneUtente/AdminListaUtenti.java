@@ -14,6 +14,9 @@ import storageLayer.DatabaseGU;
 
 /**
  * Servlet implementation class AdminListaUtenti
+ * Questa servlet abilita e disabilita l'account di un utente.
+ *
+ * @author AntonioEsposito
  */
 @WebServlet("/AdminListaUtenti")
 public class AdminListaUtenti extends HttpServlet {
@@ -29,6 +32,7 @@ public class AdminListaUtenti extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

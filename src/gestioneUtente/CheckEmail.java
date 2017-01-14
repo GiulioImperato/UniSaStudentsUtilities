@@ -11,6 +11,10 @@ import storageLayer.DatabaseGU;
 
 /**
  * Servlet implementation class CheckEmail
+ * Questa servlet gestisce il validation per il field email della registrazione utente.
+ * Mostra se l'email è gia presente nel db per una corretta registrazione dell'utente.
+ *  
+ * @author AntonioEsposito
  */
 @WebServlet("/CheckEmail")
 public class CheckEmail extends HttpServlet {
@@ -26,6 +30,7 @@ public class CheckEmail extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

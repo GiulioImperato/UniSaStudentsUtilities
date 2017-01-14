@@ -15,6 +15,10 @@ import storageLayer.DatabaseGU;
 
 /**
  * Servlet implementation class ResetPassword
+ * Gestisce il reset della password per l'account utente.
+ * 
+ * @author AntonioEsposito GiuseppeAdinolfi
+ * 
  */
 @WebServlet("/ResetPassword")
 public class ResetPassword extends HttpServlet {

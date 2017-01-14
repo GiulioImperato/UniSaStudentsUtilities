@@ -15,6 +15,10 @@ import storageLayer.DatabaseGU;
 
 /**
  * Servlet implementation class GetListaUtenti
+ * 
+ * Permette di avere la lista degli utenti resgistrati.
+ * 
+ * @author AntonioEsposito GiuseppeAdinolfi
  */
 @WebServlet("/GetListaUtenti")
 public class GetListaUtenti extends HttpServlet {
@@ -30,6 +34,7 @@ public class GetListaUtenti extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
