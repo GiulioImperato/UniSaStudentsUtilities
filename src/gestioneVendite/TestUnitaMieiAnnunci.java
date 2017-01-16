@@ -1,4 +1,4 @@
-package onlyTest;
+package gestioneVendite;
 
 import static org.junit.Assert.*;
 
