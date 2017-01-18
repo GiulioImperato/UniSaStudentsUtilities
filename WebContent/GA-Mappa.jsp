@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
-	Utente utente = (Utente) session.getAttribute("utente");
+	Utente utente = (Utente) session.getAttribute("user");
 	
 %>
 <!DOCTYPE html>
