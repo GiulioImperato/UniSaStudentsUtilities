@@ -3,7 +3,6 @@ package gestioneMaterialeDidattico;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -45,6 +44,8 @@ public class GestoreUpload extends HttpServlet {
 	}
 
 	/**
+	 * Tramite questa servlet è possibile effettuare l'upload
+	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 * @author Tropeano Domenico Antonio
@@ -53,7 +54,7 @@ public class GestoreUpload extends HttpServlet {
 			throws ServletException, IOException {
 		String visualizedPage = null;
 		String proprietario = "";
-		String path="";
+		String path = "";
 		if (ServletFileUpload.isMultipartContent(request)) {
 			// Create a factory for disk-based file items
 			DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -73,7 +74,6 @@ public class GestoreUpload extends HttpServlet {
 			}
 			if (multiparts != null) { // && multiparts.size() > 0
 				// iterates over form's fields
-				Iterator<FileItem> parameters = multiparts.iterator();
 				for (FileItem item : multiparts) {
 					// processes only fields that are not form fields
 					if (!item.isFormField()) {
@@ -83,8 +83,7 @@ public class GestoreUpload extends HttpServlet {
 						Date dataUpload = new java.sql.Date(System.currentTimeMillis());
 						int like = 0;
 						int dislike = 0;
-						Risorsa r = new Risorsa(name, proprietario, dimensione, dataUpload, like, dislike,
-								path);
+						Risorsa r = new Risorsa(name, proprietario, dimensione, dataUpload, like, dislike, path);
 
 						int idRisorsa = DatabaseGM.insertRisorsa(r);
 						String filePath = UPLOAD_DIRECTORY + File.separator + idRisorsa;
@@ -104,7 +103,7 @@ public class GestoreUpload extends HttpServlet {
 							visualizedPage = item.getString();
 						} else if (item.getFieldName().equals("user")) {
 							proprietario = item.getString();
-							System.out.println("questo è il proprietario"+proprietario);
+							System.out.println("questo è il proprietario" + proprietario);
 						}
 					}
 				}

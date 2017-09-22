@@ -38,7 +38,7 @@ import="java.util.*,gestioneUtente.*,storageLayer.*"%>
 <div class="panel panel-default" style="padding:15px">
   <h2 style="text-align: left;">Student Utilities</h2>
   <hr>
-    <div class="panel-body" style="padding:10%; font-size:25px; color:#5cb85c"><strong></strong> Riceverà a breve un'email per completare la<br><br> registrazione. 
+    <div class="panel-body" style="padding:10%; font-size:25px; color:#5cb85c"><strong></strong> Riceverà a breve un'email per completare il<br><br> reset della password. 
    </div>
   </div>
 </div>

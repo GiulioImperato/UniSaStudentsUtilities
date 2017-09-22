@@ -5,6 +5,15 @@ public class Utente {
 	public Utente() {
 	}
 
+	/**
+	 * Costruttore utente
+	 * @param nome
+	 * @param cognome
+	 * @param email
+	 * @param password
+	 * @param status
+	 * @param privilegioAdmin
+	 */
 	public Utente( String nome, String cognome, String email, String password,boolean status,
 			boolean privilegioAdmin) {
 		super();

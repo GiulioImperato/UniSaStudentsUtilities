@@ -11,6 +11,10 @@ import storageLayer.DatabaseGU;
 
 /**
  * Servlet implementation class CheckEmailReset
+ * Questa servlet gestisce il validation per il field email del reset password.
+ * Mostra se l'email è presente nel db per poter fare il reset.
+ * 
+ * @author AntonioEsposito
  */
 @WebServlet("/CheckEmailReset")
 public class CheckEmailReset extends HttpServlet {

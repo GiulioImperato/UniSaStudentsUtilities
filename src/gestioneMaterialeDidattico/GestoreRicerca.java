@@ -18,10 +18,10 @@ import storageLayer.DatabaseGM;
 @WebServlet("/GestoreRicerca")
 public class GestoreRicerca extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String previousPath="";
-	static ArrayList<Item> listItem=null;
-	static ArrayList<Risorsa>listRisorse=null;
-	static boolean lastLeaf=false;
+	private String previousPath = "";
+	static ArrayList<Item> listItem = null;
+	static ArrayList<Risorsa> listRisorse = null;
+	static boolean lastLeaf = false;
 
 	private String home = "";
 	private String dip = "";
@@ -39,6 +39,8 @@ public class GestoreRicerca extends HttpServlet {
 	}
 
 	/**
+	 * Tramite questa servlet viene effettuare la navigazione in cartelle
+	 * 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 * @author Antonio Corsuto & Domenico Antonio Tropeano
@@ -117,10 +119,10 @@ public class GestoreRicerca extends HttpServlet {
 			listRisorse = null;
 		}
 
-		else{
+		else {
 			System.out.println("imput error");
 			request.getRequestDispatcher("ErrorPage1.jsp").forward(request, response);
-			//response.sendRedirect("ErrorPage1.jsp");
+			// response.sendRedirect("ErrorPage1.jsp");
 		}
 
 		String folderPath;
@@ -138,10 +140,10 @@ public class GestoreRicerca extends HttpServlet {
 		previousPath = folderPath + "/";
 
 		System.out.println(" folderPath = " + folderPath);
-		System.out.println("previousPath "+previousPath);
+		System.out.println("previousPath " + previousPath);
 
-		File folderPointer=new File(folderPath+"/");
-		
+		File folderPointer = new File(folderPath + "/");
+
 		request.setAttribute("home", home);
 		request.setAttribute("dip", dip);
 		request.setAttribute("degree", degree);
@@ -150,12 +152,12 @@ public class GestoreRicerca extends HttpServlet {
 
 		try {
 			displayDirectoryContents(folderPointer);
-		} catch (Throwable e) {	
-			System.out.println("Catturato "+ e.getClass());
-			request.getRequestDispatcher("ErrorPage1.jsp").forward(request, response);			
-			//e.printStackTrace();
+		} catch (Throwable e) {
+			System.out.println("Catturato " + e.getClass());
+			request.getRequestDispatcher("ErrorPage1.jsp").forward(request, response);
+			// e.printStackTrace();
 		}
-		if(!lastLeaf){
+		if (!lastLeaf) {
 			request.setAttribute("folderArray", listItem);
 			request.setAttribute("tiposuccessivo", tipoSuccessivo);
 			request.getRequestDispatcher("MD-navigazione.jsp").forward(request, response);
@@ -183,18 +185,18 @@ public class GestoreRicerca extends HttpServlet {
 	 */
 	public static void displayDirectoryContents(File dir) throws Exception {
 		File[] files = null;
-			files = dir.listFiles();
-			for (File file : files) {
-				if (file.isDirectory()) {
-					Item f = new Item(file.getName());
-					listItem.add(f);
-				} else {
-					int id = Integer.parseInt(file.getName());
-					Risorsa r = DatabaseGM.getRisorsaByID(id);
-					listRisorse.add(r);
-					lastLeaf = true;
-				}
+		files = dir.listFiles();
+		for (File file : files) {
+			if (file.isDirectory()) {
+				Item f = new Item(file.getName());
+				listItem.add(f);
+			} else {
+				int id = Integer.parseInt(file.getName());
+				Risorsa r = DatabaseGM.getRisorsaByID(id);
+				listRisorse.add(r);
+				lastLeaf = true;
 			}
+		}
 	}
 
 }

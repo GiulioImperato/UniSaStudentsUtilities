@@ -13,6 +13,10 @@ import storageLayer.DatabaseGU;
 
 /**
  * Servlet implementation class RegistrazioneUtente
+ * Gestisce la registrazione dell'utente.
+ * 
+ * @author AntonioEsposito GiuseppeAdinolfi
+ * 
  */
 @WebServlet("/RegistrazioneUtente")
 public class RegistrazioneUtente extends HttpServlet {

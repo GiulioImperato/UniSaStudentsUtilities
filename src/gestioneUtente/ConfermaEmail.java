@@ -2,7 +2,7 @@ package gestioneUtente;
 
 import java.io.IOException;
 
-import javax.mail.MessagingException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class ConfermaEmail
+ * 
+ * Questa servlet invia un'email all'utente per l'attivazione dell'account.
+ * 
+ * @author AntonioEsposito
  */
 @WebServlet("/ConfermaEmail")
 public class ConfermaEmail extends HttpServlet {
@@ -26,6 +30,8 @@ public class ConfermaEmail extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

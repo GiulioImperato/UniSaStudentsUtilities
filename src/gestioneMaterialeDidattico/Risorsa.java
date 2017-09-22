@@ -13,12 +13,11 @@ public class Risorsa {
 	private int dislike;
 	private String pathCaricamento;
 
-
 	/**
 	 * Costruttore vuoto
+	 * 
 	 * @author Antonio Corsuto
 	 */
-
 
 	public Risorsa() {
 		super();
@@ -26,19 +25,28 @@ public class Risorsa {
 
 	/**
 	 * Costurttore con parmaetri :
-	 * @param idRisorsa indica l'identificativo della risorsa
-	 * @param nome indica il nome della risorsa
-	 * @param proprietaio indica chi ha publicato la risorsa
-	 * @param dimensione indicala le dimensioni della risorsa
-	 * @param dataUpload indiaca la data dell upload
-	 * @param like indica il numero di like
-	 * @param dislike indica il numero di dislike
-	 * @param pathCaricamento indica il path dove è stata ccaricata
+	 * 
+	 * @param idRisorsa
+	 *            indica l'identificativo della risorsa
+	 * @param nome
+	 *            indica il nome della risorsa
+	 * @param proprietaio
+	 *            indica chi ha publicato la risorsa
+	 * @param dimensione
+	 *            indicala le dimensioni della risorsa
+	 * @param dataUpload
+	 *            indiaca la data dell upload
+	 * @param like
+	 *            indica il numero di like
+	 * @param dislike
+	 *            indica il numero di dislike
+	 * @param pathCaricamento
+	 *            indica il path dove è stata ccaricata
 	 * @author Antonio Corsuto
 	 */
 
-	public Risorsa( String nome, String proprietario, double dimensione, Date dataUpload, int like,
-			int dislike, String pathCaricamento) {
+	public Risorsa(String nome, String proprietario, double dimensione, Date dataUpload, int like, int dislike,
+			String pathCaricamento) {
 		super();
 		this.nome = nome;
 		this.proprietario = proprietario;
@@ -49,24 +57,23 @@ public class Risorsa {
 		this.pathCaricamento = pathCaricamento;
 	}
 
-
-
-
 	/**
 	 * Restituisce il path della risorsa
+	 * 
 	 * @return il path della risorsa
-	 * @author Antonio Corsuto 
+	 * @author Antonio Corsuto
 	 */
 
 	public String getPathCaricamento() {
 		return pathCaricamento;
 	}
 
-
 	/**
 	 * Setta il path della risorsa
-	 * @param pathCaricamento indica il nuovo path
-	 * @author Antonio Corsuto 
+	 * 
+	 * @param pathCaricamento
+	 *            indica il nuovo path
+	 * @author Antonio Corsuto
 	 */
 
 	public void setPathCaricamento(String pathCaricamento) {
@@ -75,10 +82,10 @@ public class Risorsa {
 
 	/**
 	 * Restitusce l' ID della risorsa
+	 * 
 	 * @return id risorsa
-	 * @author Antonio Corsuto  
+	 * @author Antonio Corsuto
 	 */
-
 
 	public int getIdRisorsa() {
 		return idRisorsa;
@@ -86,8 +93,10 @@ public class Risorsa {
 
 	/**
 	 * Setta l' ID della risorsa
-	 * @param idRisorsa indica il nuovo ID
-	 * @author Antonio Corsuto  
+	 * 
+	 * @param idRisorsa
+	 *            indica il nuovo ID
+	 * @author Antonio Corsuto
 	 */
 
 	public void setIdRisorsa(int idRisorsa) {
@@ -96,11 +105,10 @@ public class Risorsa {
 
 	/**
 	 * Restituisce il nome della risorsa
+	 * 
 	 * @return nome risorsa
-	 * @author Antonio Corsuto  
+	 * @author Antonio Corsuto
 	 */
-
-
 
 	public String getNome() {
 		return nome;
@@ -108,8 +116,10 @@ public class Risorsa {
 
 	/**
 	 * Setta il nome della risorsa
-	 * @param nome indica il nuovo nome 
-	 * @author Antonio Corsuto  
+	 * 
+	 * @param nome
+	 *            indica il nuovo nome
+	 * @author Antonio Corsuto
 	 */
 
 	public void setNome(String nome) {
@@ -118,8 +128,9 @@ public class Risorsa {
 
 	/**
 	 * Restituisce l'identificativo del proprietario
+	 * 
 	 * @return
-	 * @author Antonio Corsuto 
+	 * @author Antonio Corsuto
 	 */
 
 	public String getProprietario() {
@@ -128,20 +139,21 @@ public class Risorsa {
 
 	/**
 	 * Setta un nuovo proprietario
-	 * @param proprietaio indica il nuovo proprietario
-	 * @author Antonio Corsuto 
+	 * 
+	 * @param proprietaio
+	 *            indica il nuovo proprietario
+	 * @author Antonio Corsuto
 	 */
-
 
 	public void setProprietario(String proprietario) {
 		this.proprietario = proprietario;
 	}
 
-
 	/**
 	 * Restituisce le dimensioni della risorsa
+	 * 
 	 * @return dimensioni risorsa
-	 * @author Antonio Corsuto 
+	 * @author Antonio Corsuto
 	 */
 
 	public double getDimensione() {
@@ -150,8 +162,10 @@ public class Risorsa {
 
 	/**
 	 * Setta le dimensioni della risorsa
-	 * @param dimensione indica le nuove dimensioni
-	 * @author Antonio Corsuto  
+	 * 
+	 * @param dimensione
+	 *            indica le nuove dimensioni
+	 * @author Antonio Corsuto
 	 */
 
 	public void setDimensione(double dimensione) {
@@ -160,10 +174,10 @@ public class Risorsa {
 
 	/**
 	 * Restituisce la data di upload
+	 * 
 	 * @return data upload
-	 * @author Antonio Corsuto 
+	 * @author Antonio Corsuto
 	 */
-
 
 	public Date getDataUpload() {
 		return dataUpload;
@@ -171,8 +185,10 @@ public class Risorsa {
 
 	/**
 	 * Setta la data di upload
-	 * @param dataUpload indica la nuova data
-	 * @author Antonio Corsuto 
+	 * 
+	 * @param dataUpload
+	 *            indica la nuova data
+	 * @author Antonio Corsuto
 	 */
 
 	public void setDataUpload(Date dataUpload) {
@@ -181,8 +197,9 @@ public class Risorsa {
 
 	/**
 	 * Restituisce il numero di like della risorsa
+	 * 
 	 * @return numero like risorsa
-	 * @author Antonio Corsuto 
+	 * @author Antonio Corsuto
 	 */
 
 	public int getLike() {
@@ -191,10 +208,11 @@ public class Risorsa {
 
 	/**
 	 * Setta il numero di like della Risorsa
-	 * @param like indica il nuovo numero di like
-	 * @author Antonio Corsuto  
+	 * 
+	 * @param like
+	 *            indica il nuovo numero di like
+	 * @author Antonio Corsuto
 	 */
-
 
 	public void setLike(int like) {
 		this.like = like;
@@ -202,11 +220,12 @@ public class Risorsa {
 
 	/**
 	 * Incrementa il numero dei like
+	 * 
 	 * @return il numero dei like aggiornato
-	 * @author Antonio Corsuto  
+	 * @author Antonio Corsuto
 	 */
-	
-	public synchronized int addLike(){		
+
+	public synchronized int addLike() {
 		like++;
 		return like;
 
@@ -214,8 +233,9 @@ public class Risorsa {
 
 	/**
 	 * Restituisce il numero di dislike della risorsa
+	 * 
 	 * @return numero dislike risorsa
-	 * @author Antonio Corsuto 
+	 * @author Antonio Corsuto
 	 */
 	public int getDislike() {
 		return dislike;
@@ -223,10 +243,11 @@ public class Risorsa {
 
 	/**
 	 * Setta il numero di dislike della Risorsa
-	 * @param dislike indica il nuovo numero di dislike
-	 * @author Antonio Corsuto  
+	 * 
+	 * @param dislike
+	 *            indica il nuovo numero di dislike
+	 * @author Antonio Corsuto
 	 */
-
 
 	public void setDislike(int dislike) {
 		this.dislike = dislike;
@@ -234,11 +255,12 @@ public class Risorsa {
 
 	/**
 	 * Incrementa il numero di dislike
+	 * 
 	 * @return il numero dei dislike aggiornato
-	 * @author Antonio Corsuto 
+	 * @author Antonio Corsuto
 	 */
-	
-	public synchronized int addDisike(){		
+
+	public synchronized int addDisike() {
 		dislike++;
 		return dislike;
 	}
@@ -249,5 +271,5 @@ public class Risorsa {
 				+ dimensione + ", dataUpload=" + dataUpload + ", like=" + like + ", dislike=" + dislike
 				+ ", pathCaricamento=" + pathCaricamento + "]";
 	}
-	
+
 }
